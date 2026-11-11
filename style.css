@@ -21,6 +21,10 @@ button:disabled { opacity: .55; cursor: not-allowed; }
 .secondary { background: #edf5f1; border-color: #bdd2c6; color: #145e55; flex-shrink: 0; }
 .secondary:hover:not(:disabled) { background: #dceee4; }
 .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.urgency-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+.urgency-filters button { flex: 1; background: #fff; color: #145e55; border-color: #bdd2c6; padding: 10px 14px; }
+.urgency-filters button:hover { background: #edf5f1; }
+.urgency-filters button[aria-pressed="true"] { background: #145e55; color: #fff; border-color: #145e55; box-shadow: inset 0 -3px 0 #083c35; font-weight: 800; }
 .message { padding: 12px 14px; background: #edf3f6; border-radius: 10px; overflow-wrap: anywhere; }
 .message[data-kind="error"] { color: #8a2828; background: #fff0ee; }
 .message[data-kind="success"] { color: #145e42; background: #e7f5ec; }

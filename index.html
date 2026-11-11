@@ -33,6 +33,13 @@
     </section>
     <section class="panel" aria-labelledby="list-title">
       <div class="section-heading"><div><h2 id="list-title">最近報修</h2><p class="hint">最近 20 筆，依登記時間由新到舊排列。</p></div><button id="refresh-button" type="button" class="secondary" disabled>重新整理</button></div>
+      <div class="urgency-filters" role="group" aria-label="依緊急程度篩選">
+        <button type="button" data-urgency="全部" aria-pressed="true">全部</button>
+        <button type="button" data-urgency="高" aria-pressed="false">高</button>
+        <button type="button" data-urgency="中" aria-pressed="false">中</button>
+        <button type="button" data-urgency="低" aria-pressed="false">低</button>
+      </div>
+      <p id="filter-message" class="hint" role="status" aria-live="polite" hidden></p>
       <p id="list-message" class="message" role="status" aria-live="polite">正在準備清單…</p>
       <ul id="repair-list" class="repair-list" aria-label="報修清單"></ul>
     </section>
