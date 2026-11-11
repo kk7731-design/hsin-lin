@@ -1,0 +1,37 @@
+:root { color-scheme: light; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; color: #203b38; background: #f2f6f3; line-height: 1.6; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { width: min(880px, 100%); margin: auto; padding: 40px 20px; }
+header { padding: 8px 4px 24px; }
+h1 { font-size: clamp(2rem, 6vw, 2.8rem); letter-spacing: .06em; margin: 4px 0; }
+h2 { font-size: 1.3rem; margin: 0 0 8px; }
+p { margin: 8px 0; }
+.eyebrow { color: #36776a; font-weight: 600; }
+.panel { background: white; border: 1px solid #dce7df; border-radius: 20px; padding: 28px; margin-bottom: 24px; box-shadow: 0 6px 24px #173e3006; }
+.hint, footer { color: #566c66; font-size: .9rem; }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+label { display: block; font-weight: 600; margin: 16px 0; }
+input, select, textarea { display: block; width: 100%; margin-top: 6px; border: 1px solid #a9bfb4; border-radius: 10px; padding: 12px; font: inherit; font-weight: 400; color: inherit; background: #fff; min-height: 48px; }
+textarea { resize: vertical; }
+button { background: #145e55; color: #fff; font: inherit; font-weight: 600; border: 1px solid transparent; border-radius: 10px; padding: 12px 20px; min-height: 48px; cursor: pointer; }
+button:hover:not(:disabled) { background: #0c4841; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+:focus-visible { outline: 3px solid #c28118; outline-offset: 3px; }
+.secondary { background: #edf5f1; border-color: #bdd2c6; color: #145e55; flex-shrink: 0; }
+.secondary:hover:not(:disabled) { background: #dceee4; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.message { padding: 12px 14px; background: #edf3f6; border-radius: 10px; overflow-wrap: anywhere; }
+.message[data-kind="error"] { color: #8a2828; background: #fff0ee; }
+.message[data-kind="success"] { color: #145e42; background: #e7f5ec; }
+.repair-list { list-style: none; padding: 0; margin: 16px 0 0; }
+.repair-card { border-top: 1px solid #e1e9e3; padding: 20px 0; overflow-wrap: anywhere; }
+.repair-card h3 { font-size: 1rem; margin: 8px 0; }
+.repair-card .description { white-space: pre-wrap; }
+.meta { color: #566c66; font-size: .9rem; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.badge { background: #edf3ef; padding: 3px 10px; border-radius: 20px; font-size: .85rem; }
+.badge.high { color: #8a2828; background: #fff0ee; }
+footer { text-align: center; padding: 8px; }
+[hidden] { display: none !important; }
+@media (max-width: 600px) { main { padding: 24px 14px; } .panel { padding: 20px 16px; border-radius: 16px; } .grid { grid-template-columns: 1fr; } .section-heading { align-items: flex-start; flex-wrap: wrap; } #submit-button { width: 100%; } }
