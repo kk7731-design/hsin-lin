@@ -7,6 +7,11 @@
   const list = document.querySelector('#repair-list');
   const formMessage = document.querySelector('#form-message');
   const listMessage = document.querySelector('#list-message');
+  const filterButtons = document.querySelectorAll('[data-urgency]');
+  const filterMessage = document.querySelector('#filter-message');
+  let requests = [];
+  let selectedUrgency = '全部';
+  let hasLoaded = false;
   let client;
   let saving = false;
 
@@ -40,6 +45,27 @@
     }
   }
 
+  // 篩選僅使用已讀取的最近 20 筆，不發出額外資料庫請求。
+  function renderFilteredRequests() {
+    const visible = selectedUrgency === '全部'
+      ? requests
+      : requests.filter(row => row.urgency === selectedUrgency);
+    render(visible);
+    for (const button of filterButtons) {
+      button.setAttribute('aria-pressed', String(button.dataset.urgency === selectedUrgency));
+    }
+    message(filterMessage, hasLoaded && selectedUrgency !== '全部'
+      ? (visible.length ? `最近 ${requests.length} 筆中，緊急程度「${selectedUrgency}」共 ${visible.length} 筆。` : `最近 ${requests.length} 筆中沒有緊急程度「${selectedUrgency}」的報修。`)
+      : '');
+  }
+
+  for (const button of filterButtons) {
+    button.addEventListener('click', () => {
+      selectedUrgency = button.dataset.urgency;
+      renderFilteredRequests();
+    });
+  }
+
   async function loadRequests() {
     refresh.disabled = true;
     list.setAttribute('aria-busy', 'true');
@@ -49,7 +75,9 @@
         .select('id,created_at,reporter_name,location,category,description,urgency,status')
         .order('created_at', { ascending: false }).order('id', { ascending: false }).limit(20);
       if (error) throw error;
-      render(data || []);
+      requests = data || [];
+      hasLoaded = true;
+      renderFilteredRequests();
       message(listMessage, data?.length ? '' : '目前沒有報修紀錄，歡迎新增第一筆。');
     } catch (error) {
       message(listMessage, `清單載入失敗，請重新整理再試。${list.children.length ? '下方保留上次載入的資料。' : ''} 原因：${error.message || '連線異常'}`, 'error');
