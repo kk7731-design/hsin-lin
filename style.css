@@ -39,3 +39,6 @@ button:disabled { opacity: .55; cursor: not-allowed; }
 footer { text-align: center; padding: 8px; }
 [hidden] { display: none !important; }
 @media (max-width: 600px) { main { padding: 24px 14px; } .panel { padding: 20px 16px; border-radius: 16px; } .grid { grid-template-columns: 1fr; } .section-heading { align-items: flex-start; flex-wrap: wrap; } #submit-button { width: 100%; } }
+.pwa-bar { margin: 0 4px 24px; }
+.pwa-bar button { margin: 8px 0; }
+#connection-message { border-left: 4px solid #b04a36; padding: 10px 14px; background: #fff0ee; border-radius: 8px; color: #8a2828; }

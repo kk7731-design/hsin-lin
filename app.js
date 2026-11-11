@@ -66,7 +66,21 @@
     });
   }
 
+  function updateConnection() {
+    const offline = !navigator.onLine;
+    message(document.querySelector('#connection-message'), offline ? '目前離線：可填寫表單，但無法送出或更新清單；未送出的內容不會自動儲存，請勿關閉或重新整理。' : '', 'error');
+    submit.disabled = offline || saving || !client;
+    refresh.disabled = offline || !client;
+  }
+  window.addEventListener('online', updateConnection);
+  window.addEventListener('offline', updateConnection);
+  updateConnection();
+
   async function loadRequests() {
+    if (!navigator.onLine) {
+      message(listMessage, '目前離線，無法讀取最新報修；已顯示的清單可能不是最新資料。');
+      return;
+    }
     refresh.disabled = true;
     list.setAttribute('aria-busy', 'true');
     message(listMessage, '正在載入報修清單…');
@@ -82,13 +96,17 @@
     } catch (error) {
       message(listMessage, `清單載入失敗，請重新整理再試。${list.children.length ? '下方保留上次載入的資料。' : ''} 原因：${error.message || '連線異常'}`, 'error');
     } finally {
-      refresh.disabled = false;
+      updateConnection();
       list.setAttribute('aria-busy', 'false');
     }
   }
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (!navigator.onLine) {
+      message(formMessage, '目前離線，報修尚未送出；請恢復連線後再按送出。', 'error');
+      return;
+    }
     if (!client || saving || !form.reportValidity()) return;
     const values = new FormData(form);
     // 僅送出有 INSERT 權限的五個欄位，status、id、created_at 使用資料庫預設值。
@@ -113,6 +131,7 @@
       saving = false;
       fields.disabled = false;
       submit.textContent = '送出報修';
+      updateConnection();
     }
   });
   refresh.addEventListener('click', loadRequests);
@@ -124,9 +143,10 @@
     if (!window.supabase?.createClient) throw new Error('Supabase 程式庫未載入，請檢查網路後重試');
     client = window.supabase.createClient(url.href, config.supabasePublishableKey, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
     fields.disabled = false;
+    updateConnection();
     loadRequests();
   } catch (error) {
-    message(document.querySelector('#config-message'), '目前尚未連上服務。請在 config.js 設定正確的 Supabase HTTPS 網址及 sb_publishable_ 公開金鑰，並確認 CDN 可正常載入。', 'error');
+    message(document.querySelector('#config-message'), '目前尚未連上服務。請恢復網路後重新開啟；若仍失敗，請聯絡維護者確認服務設定與程式庫載入。', 'error');
     message(listMessage, '服務設定完成後即可查看報修清單。');
   }
 })();
