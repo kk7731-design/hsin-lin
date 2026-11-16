@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#2f6b3a">
-  <title>登山步道</title>
+  <title>台灣一日登山步道</title>
   <style>
     :root {
       --bg: #f3f7f1; --card: #ffffff; --text: #1f2a1f; --muted: #607060;
@@ -53,8 +53,8 @@
 <body>
   <main>
     <header>
-      <h1>⛰️ 登山步道</h1>
-      <p>依難度與時間挑一條適合的路線。（步道名稱與地點皆為虛構示範）</p>
+      <h1>⛰️ 台灣一日登山步道</h1>
+      <p>當天來回的熱門路線，從郊山到百岳都有。依地區、難度與時間挑一條適合你的步道。</p>
     </header>
 
     <div class="toolbar">
@@ -66,6 +66,7 @@
         <option value="climb">爬升：少到多</option>
       </select>
     </div>
+    <div class="toolbar" id="regions" role="group" aria-label="地區篩選"></div>
     <div class="toolbar" id="filters" role="group" aria-label="難度篩選"></div>
 
     <section class="grid" id="list" aria-live="polite"></section>
@@ -77,27 +78,52 @@
         <li>查看天氣預報，午後雷陣雨季節建議早出早歸。</li>
         <li>攜帶足夠飲水、雨具、頭燈與簡單急救用品。</li>
         <li>告知家人朋友路線與預計下山時間。</li>
-        <li>垃圾帶下山，不餵食野生動物。</li>
+        <li>3000 公尺以上的高山步道可能出現高山症，出發前一晚可先在山區住宿適應。</li>
+        <li>雪山東峰須事先申請雪霸國家公園入園；其他步道也可能因颱風、地震或維修而封閉，出發前請查詢管理單位公告。</li>
+        <li>垃圾帶下山，不餵食野生動物（例如柴山獼猴）。</li>
       </ul>
     </section>
 
-    <footer>示範頁面・路線資料僅供參考，實際狀況請以現場公告為準</footer>
+    <footer>距離、時間與爬升皆為來回概略值，會因登山口與個人腳程而不同，實際狀況請以管理單位公告為準</footer>
   </main>
 
   <script>
     const trails = [
-      { name: "晨曦湖畔步道", area: "虛構市・北湖區", level: "easy", km: 2.4, hours: 1, climb: 60, desc: "環湖木棧道，平緩好走，清晨常有薄霧。", tags: ["親子", "環狀", "木棧道"] },
-      { name: "竹影古道", area: "虛構縣・竹溪鄉", level: "easy", km: 3.8, hours: 1.5, climb: 180, desc: "穿越孟宗竹林的石階古道，夏天也涼爽。", tags: ["林蔭", "古道"] },
-      { name: "楓紅稜線", area: "虛構縣・霜嶺村", level: "mid", km: 6.5, hours: 3.5, climb: 520, desc: "秋冬楓葉轉紅，稜線段視野開闊。", tags: ["季節限定", "展望"] },
-      { name: "雲海觀景台", area: "虛構市・高原里", level: "mid", km: 5.2, hours: 3, climb: 430, desc: "登頂可遠眺雲海，日出時段最熱門。", tags: ["日出", "展望"] },
-      { name: "瀑布溪谷線", area: "虛構縣・清水鄉", level: "mid", km: 7.1, hours: 4, climb: 380, desc: "沿溪而行，終點是三段式瀑布，雨後溪石濕滑。", tags: ["溪谷", "瀑布"] },
-      { name: "老鷹岩縱走", area: "虛構縣・鷹峰村", level: "hard", km: 11.3, hours: 7, climb: 1150, desc: "連續陡上並有拉繩攀岩段，需具備經驗。", tags: ["縱走", "拉繩", "體力挑戰"] },
-      { name: "星宿山主峰", area: "虛構縣・星野鄉", level: "hard", km: 14.8, hours: 9, climb: 1480, desc: "百岳級長程路線，建議清晨四點前出發。", tags: ["高山", "長程"] },
-      { name: "茶園小徑", area: "虛構市・南坡區", level: "easy", km: 1.9, hours: 0.8, climb: 90, desc: "繞行茶園的產業道路，終點有涼亭可休息。", tags: ["親子", "茶園"] },
-      { name: "松濤森林線", area: "虛構縣・松林村", level: "mid", km: 8.0, hours: 4.5, climb: 610, desc: "柳杉與松林夾道，芬多精滿滿。", tags: ["森林浴", "林蔭"] }
+      { name: "象山步道", area: "臺北市信義區", region: "北部", level: "easy", km: 2, hours: 1, climb: 150, desc: "從市區走幾分鐘就到登山口，六巨石俯瞰台北101與信義區夜景。", tags: ["夜景", "城市郊山", "捷運可達"] },
+      { name: "七星山主峰・東峰", area: "臺北市北投區（陽明山）", region: "北部", level: "mid", km: 5, hours: 3.5, climb: 400, desc: "台北市最高峰，海拔 1120 公尺。常見走法是小油坑上、冷水坑下，沿途有硫磺噴氣孔。", tags: ["火山地形", "展望", "公車可達"] },
+      { name: "觀音山硬漢嶺", area: "新北市八里區", region: "北部", level: "easy", km: 3, hours: 1.5, climb: 370, desc: "石階一路向上，登頂可眺望淡水河口與台北盆地。", tags: ["石階", "河口景觀"] },
+      { name: "無耳茶壺山", area: "新北市瑞芳區", region: "北部", level: "mid", km: 3, hours: 2, climb: 300, desc: "從勸濟堂出發，山頂巨岩像一把沒有把手的茶壺，可遠眺陰陽海。", tags: ["海景", "岩石", "金瓜石"] },
+      { name: "加里山", area: "苗栗縣南庄鄉", region: "中部", level: "hard", km: 9, hours: 7, climb: 950, desc: "小百岳中的難關，從鹿場登山口沿舊鐵道與森林上切，最後一段需拉繩。", tags: ["小百岳", "森林", "拉繩"] },
+      { name: "火炎山", area: "苗栗縣三義鄉", region: "中部", level: "mid", km: 6, hours: 3.5, climb: 450, desc: "礫石崩崖形成的特殊地景，稜線兩側是陡峭的紅土峭壁，碎石易滑。", tags: ["特殊地形", "稜線"] },
+      { name: "鳶嘴山", area: "臺中市和平區", region: "中部", level: "mid", km: 4, hours: 3, climb: 400, desc: "沿大雪山林道上山，岩稜連續拉繩攀爬，山頂展望雪山與中央山脈。", tags: ["岩稜", "拉繩", "展望"] },
+      { name: "雪山東峰", area: "臺中市和平區", region: "中部", level: "hard", km: 11, hours: 8, climb: 1100, desc: "從雪山登山口經七卡山莊與「哭坡」，登上海拔 3201 公尺的百岳。", tags: ["百岳", "高山", "需申請入園"] },
+      { name: "合歡山主峰", area: "南投縣仁愛鄉", region: "中部", level: "easy", km: 5, hours: 2, climb: 270, desc: "沿舊公路緩上，就能抵達海拔 3417 公尺的百岳，適合第一次挑戰高山。", tags: ["百岳", "高山", "入門"] },
+      { name: "合歡北峰", area: "南投縣仁愛鄉", region: "中部", level: "mid", km: 4, hours: 3.5, climb: 450, desc: "坡度較陡但路程短，山頂草原遼闊，可欣賞日出與雲海。", tags: ["百岳", "高山", "雲海"] },
+      { name: "麟趾山", area: "南投縣信義鄉（塔塔加）", region: "中部", level: "mid", km: 5, hours: 3, climb: 300, desc: "塔塔加地區的入門路線，山頂可近看玉山主峰與前峰。", tags: ["玉山國家公園", "展望"] },
+      { name: "玉山前峰", area: "南投縣信義鄉（塔塔加）", region: "中部", level: "hard", km: 5.5, hours: 5, climb: 630, desc: "路程不長但非常陡，後段碎石坡需手腳並用，登頂海拔 3239 公尺。", tags: ["高山", "陡坡", "碎石"] },
+      { name: "柴山", area: "高雄市鼓山區", region: "南部", level: "easy", km: 4, hours: 2, climb: 250, desc: "珊瑚礁石灰岩地形，林間常見台灣獼猴，可眺望高雄港與西子灣。", tags: ["獼猴", "城市郊山", "海景"] },
+      { name: "里龍山", area: "屏東縣獅子鄉／車城鄉", region: "南部", level: "hard", km: 8, hours: 6, climb: 950, desc: "恆春半島最具代表性的山，一路陡上，山頂可同時望見台灣海峽與太平洋。", tags: ["小百岳", "陡坡", "海景"] },
+      { name: "太平山見晴懷古步道", area: "宜蘭縣大同鄉", region: "東部", level: "easy", km: 1.8, hours: 1, climb: 50, desc: "沿舊林業鐵道而行，霧氣與苔蘚交織，被稱為最美的森林步道之一。", tags: ["森林", "鐵道", "需購門票"] },
+      { name: "抹茶山（聖母登山步道）", area: "宜蘭縣礁溪鄉", region: "東部", level: "mid", km: 9, hours: 5, climb: 600, desc: "終點聖母山莊後方的山稜長滿箭竹，綠意如抹茶冰淇淋，雨後泥濘。", tags: ["草原稜線", "石階", "熱門"] },
+      { name: "鯉魚山", area: "花蓮縣壽豐鄉", region: "東部", level: "mid", km: 4, hours: 2.5, climb: 470, desc: "從鯉魚潭畔上山，林蔭充足，山頂可俯瞰鯉魚潭與花東縱谷。", tags: ["小百岳", "湖景", "林蔭"] },
+      { name: "都蘭山", area: "臺東縣東河鄉", region: "東部", level: "hard", km: 9, hours: 6, climb: 1000, desc: "阿美族的聖山，海拔 1190 公尺，登頂可遠眺綠島與東海岸。", tags: ["小百岳", "海景", "陡坡"] }
     ];
-    const levelText = { all: "全部", easy: "輕鬆", mid: "中等", hard: "困難" };
+    const levelText = { all: "全部難度", easy: "輕鬆", mid: "中等", hard: "困難" };
+    const regionList = ["全部", "北部", "中部", "南部", "東部"];
     let current = "all";
+    let region = "全部";
+    const regions = document.getElementById("regions");
+    regionList.forEach(r => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = r;
+      b.setAttribute("aria-pressed", r === region);
+      b.addEventListener("click", () => {
+        region = r;
+        regions.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.textContent === r));
+        render();
+      });
+      regions.appendChild(b);
+    });
 
     const filters = document.getElementById("filters");
     const list = document.getElementById("list");
@@ -126,6 +152,7 @@
       const q = search.value.trim();
       let shown = trails.filter(t =>
         (current === "all" || t.level === current) &&
+        (region === "全部" || t.region === region) &&
         (!q || t.name.includes(q) || t.area.includes(q) || t.tags.some(tag => tag.includes(q))));
       const key = { distance: "km", time: "hours", climb: "climb" }[sort.value];
       if (key) shown = [...shown].sort((a, b) => a[key] - b[key]);
