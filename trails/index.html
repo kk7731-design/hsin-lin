@@ -55,6 +55,7 @@
     dt { color: var(--muted); font-weight: 600; }
     dd { margin: 0; }
     dd.caution { color: var(--hard); }
+    dd a { color: var(--accent); }
     .empty { color: var(--muted); text-align: center; padding: 32px 0; }
     .tips { margin-top: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
     .tips h2 { margin: 0 0 6px; font-size: 1.1rem; }
@@ -79,6 +80,7 @@
       </select>
     </div>
     <div class="toolbar" id="regions" role="group" aria-label="地區篩選"></div>
+    <div class="toolbar"><select id="county" aria-label="選擇縣市"><option value="">全部縣市</option></select></div>
     <div class="toolbar" id="filters" role="group" aria-label="難度篩選"></div>
     <div class="toolbar">
       <button type="button" class="chip shop-toggle" id="shop-toggle" aria-pressed="false">🛍️ 只看可順遊吃買</button>
@@ -222,13 +224,13 @@
       { name: "頭嵙山", area: "臺中市北屯區（大坑）", region: "中部", level: "mid", km: 6, hours: 3.5, climb: 500, shop: false,
         desc: "大坑風景區最高點，從 1 號步道上山，可眺望台中盆地。", tags: ["小百岳", "城市郊山", "展望"],
         start: "大坑 1 號步道登山口", transport: "臺中市區搭公車到大坑",
-        route: "1 號步道登山口 → 石階與山徑 → 頭嵙山頂 → 原路或接其他步道下山", nearby: "大坑泡溫泉，或到新社賞花",
-        season: "秋冬涼爽", caution: "石階陡長，夏天悶熱，多帶水" },
-      { name: "馬拉邦山", area: "苗栗縣大湖鄉", region: "中部", level: "mid", km: 7, hours: 4.5, climb: 700, shop: true,
-        desc: "以秋冬楓紅聞名，山頂可看雪山山脈，曾是泰雅族的古戰場。", tags: ["小百岳", "楓紅", "展望"],
-        start: "大湖鄉的馬拉邦山登山口", transport: "需自行開車",
-        route: "登山口 → 林間山徑 → 楓林區 → 馬拉邦山頂 → 原路返回", nearby: "大湖採草莓、吃草莓冰淇淋",
-        season: "11–12 月楓紅", caution: "坡度陡，雨後濕滑" },
+        route: "1 號步道（約 1.6 公里，木梯陡上）→ 接 5 號步道 → 頭嵙山頂（海拔 859 公尺）→ 原路或接其他步道下山", nearby: "大坑泡溫泉，或到新社賞花",
+        season: "秋冬涼爽", caution: "1 號步道屬挑戰級木梯段，夏天悶熱，多帶水", source: "https://travel.yam.com/article/121381" },
+      { name: "馬那邦山", area: "苗栗縣大湖鄉", region: "中部", level: "mid", km: 8.4, hours: 4, climb: 700, shop: true,
+        desc: "以秋冬楓紅聞名，山頂可看雪山山脈，曾是泰雅族抗日的古戰場。", tags: ["小百岳", "楓紅", "展望"],
+        start: "珠湖登山口", transport: "需自行開車",
+        route: "珠湖登山口 → 林間山徑（單程約 4.2 公里）→ 楓林區 → 馬那邦山頂 → 原路返回", nearby: "大湖採草莓、吃草莓冰淇淋",
+        season: "11–12 月楓紅", caution: "坡度陡，雨後濕滑", source: "https://travel.yam.com/article/132886" },
       { name: "獨立山", area: "嘉義縣竹崎鄉", region: "南部", level: "mid", km: 5, hours: 3, climb: 400, shop: false,
         desc: "阿里山林業鐵路在此以螺旋方式繞山爬升，步道可看鐵道奇景。", tags: ["小百岳", "鐵道", "森林"],
         start: "樟腦寮車站一帶", transport: "搭阿里山林業鐵路到樟腦寮站，或自行開車",
@@ -239,6 +241,91 @@
         start: "古坑華山的大尖山登山口", transport: "需自行開車",
         route: "華山登山口 → 連續陡上 → 大尖山頂 → 原路返回", nearby: "華山咖啡街喝古坑咖啡",
         season: "秋冬，夏天悶熱", caution: "坡陡且長，攜帶足量飲水" },
+      // ---- 中部・臺中市 ----
+      { name: "竹坑南寮登山步道", area: "臺中市龍井區", region: "中部", level: "easy", km: 5.5, hours: 2.5, climb: 150, shop: false,
+        desc: "大肚山西側的環狀步道，竹林與相思林交錯，可組合多種走法不走回頭路。", tags: ["環狀", "大肚山", "親子"],
+        start: "國道 3 號高架橋下的竹坑南寮登山古道停車場（龍井區中沙路南寮巷）", transport: "台鐵龍井站轉市區公車到「深水」或「村內入口」站，步行約 10 分鐘",
+        route: "主步道（2.4 公里）→ A 步道（0.3 公里）→ C 步道（2 公里）繞回停車場，形成 O 型環狀", nearby: "龍井、沙鹿市區吃在地小吃",
+        season: "秋冬到春天", caution: "部分路段缺少遮蔭，夏天注意防曬", source: "https://gofunit.com/%E7%AB%B9%E5%9D%91%E5%8D%97%E5%AF%AE%E6%AD%A5%E9%81%93/" },
+      { name: "大坑 4 號步道（蝴蝶步道）", area: "臺中市北屯區（大坑）", region: "中部", level: "mid", km: 1.9, hours: 2, climb: 300, shop: false,
+        desc: "以原木階梯為特色，沿途常見多種蝴蝶，可接其他步道登頭嵙山。", tags: ["大坑", "蝴蝶", "木階梯"],
+        start: "大坑 4 號步道登山口", transport: "臺中市區搭公車到大坑風景區",
+        route: "4 號步道登山口 → 原木階梯 → 稜線 → 原路或接其他號步道下山", nearby: "大坑泡溫泉",
+        season: "春夏蝴蝶多", caution: "原木階梯連續陡上，雨後濕滑", source: "https://taichung.travel/file/1599" },
+      { name: "咬人狗坑步道・三汀山", area: "臺中市太平區", region: "中部", level: "easy", km: 3.3, hours: 1.5, climb: 300, shop: false,
+        desc: "三汀山又稱望高寮，海拔約 486 公尺，步道完善、視野遼闊，適合新手。", tags: ["城市郊山", "展望", "公車可達"],
+        start: "東平路 2 巷的咬人狗坑登山口", transport: "臺中火車站搭 75 或 280 號公車到「一江橋」站",
+        route: "登山口 → 咬人狗坑步道 → 三汀山頂 → 原路返回", nearby: "太平市區、坪林森林公園",
+        season: "全年皆宜", caution: "步道支線多（5+1 條），建議先看地圖以免迷路", source: "https://travel.yam.com/article/124097" },
+      { name: "新田登山步道・聚興山", area: "臺中市太平區", region: "中部", level: "easy", km: 2.9, hours: 2, climb: 250, shop: false,
+        desc: "登上小百岳聚興山，路線單純，許多人走成環狀路線。", tags: ["小百岳", "城市郊山", "環狀"],
+        start: "興豐路二段龍興巷，過小西湖橋後的新田登山步道入口", transport: "建議自行開車或騎車",
+        route: "登山口 → 林間步道 → 聚興山三角點 → 環狀或原路返回", nearby: "太平市區",
+        season: "全年皆宜", caution: "夏天悶熱，攜帶飲水", source: "https://travel.taichung.gov.tw/file/1599/" },
+      { name: "鰲峰山步道", area: "臺中市清水區", region: "中部", level: "easy", km: 1.3, hours: 0.5, climb: 50, shop: true,
+        desc: "清水市區旁的休閒步道，全長約 0.65 公里，飯後散步就能走完。", tags: ["散步", "親子", "城市郊山"],
+        start: "鰲峰山公園", transport: "台鐵清水站轉公車或計程車",
+        route: "鰲峰山公園 → 步道 → 觀景台 → 原路返回", nearby: "清水市區吃米糕、筒仔米糕",
+        season: "傍晚看夕陽", caution: "路程短，傍晚人多", source: "https://taichung.travel/file/1599" },
+      // ---- 中部・彰化縣 ----
+      { name: "員林藤山步道", area: "彰化縣員林市", region: "中部", level: "easy", km: 4, hours: 2, climb: 130, shop: true,
+        desc: "員林人氣最高的步道，水泥鋪面坡度平緩，沿途有台語俚語小木牌，適合親子與長輩。", tags: ["親子", "八卦山脈", "假日市集"],
+        start: "員南路過縣立員林運動公園約 1 公里的「藤山園停車場」", transport: "彰化客運 6925 路線到「六分寮」站",
+        route: "藤山園 → 平緩水泥步道（單程約 2 公里）→ 三星宮折返；可續行到鳳鳴社區接 139 縣道、望高寮觀景平台", nearby: "假日有藤山市集；回員林市區吃肉圓",
+        season: "全年皆宜，清晨傍晚較涼", caution: "假日停車位有限，可停員南路旁白線車位", source: "https://gofunit.com/%E8%97%A4%E5%B1%B1%E6%AD%A5%E9%81%93/" },
+      { name: "八卦山天空步道", area: "彰化縣彰化市", region: "中部", level: "easy", km: 2, hours: 1, climb: 30, shop: true,
+        desc: "一期全長約 1 公里，在樹冠層間穿梭，可俯瞰彰化市區；二期延伸約 0.7 公里。", tags: ["散步", "親子", "樹冠步道"],
+        start: "八卦山大佛風景區", transport: "台鐵彰化站搭公車或計程車到八卦山",
+        route: "大佛風景區 → 天空步道一期 → 二期延伸段 → 原路返回", nearby: "下山吃彰化肉圓、爌肉飯",
+        season: "傍晚看夕陽與夜景", caution: "2026 年 3 月起封閉維修（原定至 8 月底），出發前請查詢是否已重新開放；地板孔洞大，不建議輪椅、嬰兒車、細跟鞋", source: "https://udn.com/news/story/7266/9343457" },
+      { name: "清水岩十八彎古道", area: "彰化縣社頭鄉", region: "中部", level: "mid", km: 4, hours: 2.5, climb: 300, shop: false,
+        desc: "早年彰化與南投之間運送農產與挑鹽的古道，林蔭濃密。", tags: ["古道", "八卦山脈", "森林"],
+        start: "清水岩寺遊憩區", transport: "台鐵社頭站轉計程車，或自行開車",
+        route: "清水岩 → 十八彎古道 → 中央嶺造林步道 → 可續接田中森林步道", nearby: "社頭清水岩生態展示中心看昆蟲標本；社頭以芭樂聞名",
+        season: "全年皆宜", caution: "古道彎多坡陡，雨後濕滑", source: "https://travel.yam.com/article/127554" },
+      { name: "田中森林登山步道", area: "彰化縣田中鎮", region: "中部", level: "mid", km: 3, hours: 2, climb: 250, shop: false,
+        desc: "鼓山寺旁出發的環狀步道，頂端早覺亭天氣好時可看濁水溪與台灣海峽。", tags: ["環狀", "八卦山脈", "展望"],
+        start: "鼓山寺旁步道入口", transport: "台鐵田中站轉計程車，或自行開車",
+        route: "鼓山寺 → 環狀步道 → 早覺亭 → 繞回入口", nearby: "田中市區；可接社頭清水岩",
+        season: "秋冬天晴", caution: "石階較多，請量力而行", source: "https://travel.yam.com/article/127554" },
+      // ---- 中部・南投縣 ----
+      { name: "猴探井步道", area: "南投縣南投市", region: "中部", level: "easy", km: 3.9, hours: 1.5, climb: 200, shop: false,
+        desc: "林蔭多的步道，山頂觀景台與遊憩區眺望塔可俯瞰彰化平原，黃昏又稱「夕陽谷」。", tags: ["夕陽", "展望", "親子"],
+        start: "猴探井遊憩區", transport: "需自行開車",
+        route: "遊憩區 → 花園步道 → 林間步道 → 觀景台 → 返回", nearby: "遊憩區另有「微笑天梯」吊橋（與竹山天梯不同）",
+        season: "傍晚看夕陽", caution: "傍晚下山請帶頭燈", source: "https://edh.tw/articles/VCoiIoD/2" },
+      { name: "竹山天梯", area: "南投縣竹山鎮", region: "中部", level: "mid", km: 4, hours: 3, climb: 300, shop: false,
+        desc: "大鞍竹海中的斜張階梯式吊橋，全台第一座、世界第二座，沿途竹林壯觀。", tags: ["吊橋", "竹林", "熱門"],
+        start: "大鞍竹海風景區的天梯入口", transport: "需自行開車",
+        route: "停車場 → 竹林步道 → 竹山天梯吊橋 → 原路返回", nearby: "竹山市區吃竹筍料理、地瓜",
+        season: "全年，假日人多", caution: "上坡段較陡；吊橋可能有人數管制，出發前請查詢", source: "https://edh.tw/articles/VCoiIoD/2" },
+      { name: "瑞龍瀑布", area: "南投縣竹山鎮", region: "中部", level: "easy", km: 2, hours: 1, climb: 60, shop: false,
+        desc: "停車場到瀑布約 1 公里，平緩好走，另有無障礙觀景步道。", tags: ["瀑布", "親子", "無障礙"],
+        start: "瑞龍瀑布停車場", transport: "需自行開車",
+        route: "停車場 → 平緩步道 → 瀑布觀景台 → 原路返回", nearby: "可順遊竹山天梯",
+        season: "雨後水量大", caution: "瀑布周邊岩石濕滑", source: "https://edh.tw/articles/VCoiIoD/2" },
+      { name: "澀水森林步道", area: "南投縣魚池鄉", region: "中部", level: "easy", km: 4.2, hours: 2, climb: 150, shop: true,
+        desc: "魚池鄉的森林步道，林相豐富，周邊是日月潭紅茶產區。", tags: ["森林", "茶園", "親子"],
+        start: "澀水社區的步道入口", transport: "需自行開車，或從日月潭轉計程車",
+        route: "入口 → 森林步道 → 觀景台 → 返回", nearby: "魚池鄉買日月潭紅茶、喝茶",
+        season: "全年皆宜", caution: "林間潮濕，注意蚊蟲", source: "https://edh.tw/articles/VCoiIoD/2" },
+      // ---- 中部・苗栗縣 ----
+      { name: "獅山古道", area: "苗栗縣南庄鄉／三灣鄉", region: "中部", level: "easy", km: 5, hours: 2.5, climb: 300, shop: true,
+        desc: "獅頭山的古道，沿途串連多座古廟，春末夏初桐花盛開。", tags: ["古道", "古廟", "桐花"],
+        start: "獅頭山勸化堂", transport: "需自行開車，或從南庄搭計程車",
+        route: "勸化堂 → 獅頭段 → 沿途古廟 → 獅尾段（可原路返回或請人接駁）", nearby: "南庄老街吃桂花湯圓、客家菜",
+        season: "4–5 月桐花", caution: "古廟周邊石階多", source: "https://travel.yam.com/article/132886" },
+      { name: "鳴鳳古道", area: "苗栗縣頭屋鄉", region: "中部", level: "easy", km: 3, hours: 1.5, climb: 200, shop: false,
+        desc: "單程約 1.5 公里，沿途有木吊橋與茂密蕨類，輕鬆好走。", tags: ["古道", "吊橋", "親子"],
+        start: "鳴鳳古道登山口", transport: "需自行開車",
+        route: "登山口 → 木吊橋 → 蕨類步道 → 終點 → 原路返回", nearby: "可順遊明德水庫",
+        season: "全年皆宜", caution: "雨後木棧道濕滑", source: "https://travel.yam.com/article/132886" },
+      // ---- 中部・雲林縣 ----
+      { name: "石壁木馬古道", area: "雲林縣古坑鄉（草嶺）", region: "中部", level: "easy", km: 4.6, hours: 2.5, climb: 200, shop: false,
+        desc: "全長約 2.3 公里的運木材古棧道，穿過全台知名的孟宗竹林，可見竹炭窯遺址。", tags: ["古道", "竹林", "棧道"],
+        start: "石壁風景區", transport: "山區大眾運輸不便，建議自行開車",
+        route: "孟宗竹林步道 → 木馬古道 → 樟木林、九芎神木 → 石壁仙谷", nearby: "草嶺一帶看瀑布、峭壁地景",
+        season: "全年，竹林四季皆美", caution: "2026 年 1 月石壁飯店後方曾發生火燒山，出發前請確認步道是否開放", source: "https://smiletaiwan.cw.com.tw/article/322" },
       { name: "合歡山主峰", area: "南投縣仁愛鄉", region: "中部", level: "easy", km: 5, hours: 2, climb: 270, shop: false,
         desc: "沿舊公路緩上，就能抵達海拔 3417 公尺的百岳，適合第一次挑戰高山。", tags: ["百岳", "高山", "入門"],
         start: "合歡山主峰登山口（台14甲線武嶺附近）", transport: "需自行開車或參加旅行團",
@@ -330,6 +417,17 @@
     const $ = id => document.getElementById(id);
     const list = $("list"), empty = $("empty"), search = $("search"), sort = $("sort"), count = $("count");
 
+    const countyOf = t => t.area.slice(0, 3);
+    const countySel = $("county");
+    function fillCounties() {
+      const keep = countySel.value;
+      const list = [...new Set(trails.filter(t => region === "全部" || t.region === region).map(countyOf))];
+      countySel.innerHTML = '<option value="">全部縣市</option>';
+      list.forEach(c => { const o = document.createElement("option"); o.value = c; o.textContent = c; countySel.appendChild(o); });
+      countySel.value = list.includes(keep) ? keep : "";
+    }
+    countySel.addEventListener("change", () => render());
+
     function chipGroup(container, items, getActive, setActive) {
       items.forEach(([key, text]) => {
         const b = document.createElement("button");
@@ -343,7 +441,8 @@
         container.appendChild(b);
       });
     }
-    chipGroup($("regions"), regionList.map(r => [r, r]), () => region, v => region = v);
+    chipGroup($("regions"), regionList.map(r => [r, r]), () => region, v => { region = v; fillCounties(); });
+    fillCounties();
     chipGroup($("filters"), Object.entries(levelText), () => level, v => level = v);
     $("shop-toggle").addEventListener("click", e => {
       shopOnly = !shopOnly; e.currentTarget.setAttribute("aria-pressed", shopOnly); render();
@@ -364,6 +463,7 @@
       let shown = trails.filter(t =>
         (level === "all" || t.level === level) &&
         (region === "全部" || t.region === region) &&
+        (!countySel.value || countyOf(t) === countySel.value) &&
         (!shopOnly || t.shop) &&
         (!smallOnly || t.tags.includes("小百岳")) &&
         (!q || [t.name, t.area, t.desc, t.nearby, ...t.tags].some(s => s.includes(q))));
@@ -403,6 +503,12 @@
           if (f === "caution") dd.className = "caution";
           dl.append(dt, dd);
         });
+        if (t.source) {
+          const dt = document.createElement("dt"); dt.textContent = "參考資料";
+          const dd = document.createElement("dd"); const a = document.createElement("a");
+          a.href = t.source; a.target = "_blank"; a.rel = "noopener"; a.textContent = "查看來源";
+          dd.appendChild(a); dl.append(dt, dd);
+        }
         list.appendChild(card);
       });
       count.textContent = `共 ${shown.length} 條步道`;
