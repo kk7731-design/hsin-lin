@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="page-version" content="2026-11-16-1">
   <meta name="theme-color" content="#b4451f">
   <title>各縣市特色小吃與伴手禮</title>
   <style>
@@ -255,6 +256,33 @@
     search.addEventListener("input", render);
     countySel.addEventListener("change", render);
     render();
+  </script>
+  <script>
+    // 自動更新：手機瀏覽器可能顯示暫存的舊頁面，這裡向伺服器確認最新版本，有新版就重新載入。
+    // 修改此頁內容時，請一併更新上方 <meta name="page-version"> 的版本字串。
+    (() => {
+      const current = document.querySelector('meta[name="page-version"]')?.content;
+      if (!current || !window.fetch) return;
+      let lastCheck = 0;
+      async function checkUpdate() {
+        if (Date.now() - lastCheck < 60000) return;
+        lastCheck = Date.now();
+        try {
+          const url = location.pathname + "?_=" + Date.now();
+          const res = await fetch(url, { cache: "no-store" });
+          if (!res.ok) return;
+          const latest = (await res.text()).match(/<meta name="page-version" content="([^"]+)"/)?.[1];
+          if (!latest || latest === current) return;
+          const params = new URLSearchParams(location.search);
+          if (params.get("v") === latest) return; // 已嘗試載入這個版本，避免重複重新整理
+          params.set("v", latest);
+          location.replace(location.pathname + "?" + params + location.hash);
+        } catch { /* 離線或連線失敗時維持目前頁面 */ }
+      }
+      checkUpdate();
+      document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") checkUpdate(); });
+      window.addEventListener("pageshow", e => { if (e.persisted) checkUpdate(); });
+    })();
   </script>
 </body>
 </html>
