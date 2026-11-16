@@ -40,7 +40,9 @@
            padding: 0 8px; font-size: .8rem; margin-top: 4px; }
     .must { display: inline-block; background: var(--accent); color: #fff; border-radius: 6px;
             padding: 0 8px; font-size: .8rem; margin: 4px 0 0 6px; }
-    .must[hidden] { display: none; }
+    .shop { display: inline-block; background: var(--text); color: var(--bg); border-radius: 6px;
+            padding: 0 8px; font-size: .8rem; margin: 4px 0 0 6px; }
+    .must[hidden], .shop[hidden] { display: none; }
     .card p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
     .where { margin-top: 8px; font-size: .9rem; }
     .empty { color: var(--muted); text-align: center; padding: 32px 0; }
@@ -51,7 +53,7 @@
   <main>
     <header>
       <h1>🍢 各縣市特色小吃與伴手禮</h1>
-      <p>走訪台灣 22 個縣市，看看每個地方最有名的在地味道，順便帶點伴手禮回家。標示「⭐ 必吃特色」的是各縣市最具代表性的特色小吃。</p>
+      <p>走訪台灣 22 個縣市，看看每個地方最有名的在地味道，順便帶點伴手禮回家。標示「⭐ 必吃特色」的是各縣市最具代表性的特色小吃，「🏠 在地名店」則是當地人常推薦的老字號店家。</p>
     </header>
 
     <div class="toolbar">
@@ -62,13 +64,14 @@
     <div class="toolbar" id="types" role="group" aria-label="類型篩選"></div>
     <div class="toolbar">
       <button type="button" class="chip" id="must-toggle" aria-pressed="false">⭐ 只看必吃特色小吃</button>
+      <button type="button" class="chip" id="shop-toggle" aria-pressed="false">🏠 只看在地名店</button>
     </div>
 
     <p class="count" id="count" aria-live="polite"></p>
     <div id="list"></div>
     <p class="empty" id="empty" hidden>找不到符合的小吃，換個關鍵字試試看。</p>
 
-    <footer>資料為各地常見代表小吃的整理，僅供參考；店家營業時間與價格請以現場為準</footer>
+    <footer>資料為各地常見代表小吃與名店的整理，僅供參考；店家地址、營業時間與價格可能變動，出發前請先確認</footer>
   </main>
 
   <script>
@@ -160,6 +163,16 @@
       { county: "澎湖縣", name: "小管麵線", emoji: "🦑", type: "主食", desc: "新鮮小卷與麵線一起煮，湯頭鮮甜，是澎湖最具海味的一碗。", where: "馬公市區", must: true },
       { county: "金門縣", name: "石蚵麵線", emoji: "🦪", type: "主食", desc: "金門潮間帶石頭上養殖的石蚵個頭小、味道鮮，和麵線一起煮最常見。", where: "金城鎮、金寧鄉" },
       { county: "連江縣", name: "魚麵", emoji: "🐟", type: "主食", desc: "魚漿和麵粉揉製再曬乾的麵條，帶魚鮮味，煮湯或炒都好吃。", where: "南竿、北竿" },
+      // ---- 在地名店 ----
+      { county: "新竹市", name: "鴨肉許", emoji: "🦆", type: "主食", shop: true, desc: "城隍廟口的人氣鴨肉飯，鴨胸片鋪在飯上再淋油蔥肉燥，營業到深夜。", where: "北門街（城隍廟口）" },
+      { county: "苗栗縣", name: "賴新魁麵館", emoji: "🍜", type: "主食", shop: true, desc: "1945 年開業的客家麵館，早年叫「新新飲食店」，招牌是餛飩粄條，湯頭鹹香。", where: "三義鄉中正路" },
+      { county: "臺中市", name: "康家阿媽ㄟ粉腸", emoji: "🌭", type: "點心", shop: true, desc: "大甲的手工粉腸攤，粉腸Q彈有嚼勁，也賣香腸，逛完鎮瀾宮可以順路吃。", where: "大甲區蔣公路（裕珍馨蔣公店旁）" },
+      { county: "彰化縣", name: "阿璋肉圓", emoji: "🟤", type: "點心", shop: true, desc: "經營七十多年的肉圓老店，曾入選國宴小吃，大骨湯可以免費喝。", where: "彰化市長安街" },
+      { county: "嘉義市", name: "林聰明沙鍋魚頭", emoji: "🍲", type: "主食", shop: true, desc: "1953 年從攤車起家，招牌沙鍋魚頭湯頭濃郁，配一碗飯最對味。", where: "嘉義市中正路" },
+      { county: "臺南市", name: "度小月擔仔麵", emoji: "🍜", type: "主食", shop: true, desc: "1895 年由洪芋頭創立，是擔仔麵的源頭，小碗湯麵加肉燥與鮮蝦。", where: "中西區" },
+      { county: "屏東縣", name: "海鴻飯店", emoji: "🍖", type: "主食", shop: true, desc: "萬巒豬腳街的老店，1981 年蔣經國到訪後，萬巒豬腳從此聲名大噪。", where: "萬巒鄉民和路" },
+      { county: "花蓮縣", name: "液香扁食", emoji: "🥟", type: "點心", shop: true, desc: "只賣扁食的老店，皮薄餡鮮、湯頭清爽，只營業到中午過後。", where: "花蓮市信義街" },
+      { county: "臺東縣", name: "榕樹下米苔目", emoji: "🍜", type: "主食", shop: true, desc: "三代經營的米苔目老店，湯上撒滿柴魚片，是臺東人的家常味。", where: "臺東市大同路" },
       // ---- 伴手禮補充 ----
       { county: "臺北市", name: "牛軋糖", emoji: "🍬", type: "伴手禮", desc: "奶香濃郁的軟糖包著花生或堅果，常和鳳梨酥一起當台灣伴手禮。", where: "迪化街與市區糕餅店" },
       { county: "新北市", name: "坪林包種茶", emoji: "🍵", type: "伴手禮", desc: "輕發酵的清香烏龍茶，花香明顯，坪林老街還有茶業博物館。", where: "坪林老街" },
@@ -195,7 +208,7 @@
 
     const regionList = ["全部", "北部", "中部", "南部", "東部", "離島"];
     const typeList = ["全部類型", "主食", "點心", "甜品", "伴手禮"];
-    let region = "全部", type = "全部類型", mustOnly = false;
+    let region = "全部", type = "全部類型", mustOnly = false, shopOnly = false;
 
     const $ = id => document.getElementById(id);
     const list = $("list"), empty = $("empty"), search = $("search"), countySel = $("county"), count = $("count");
@@ -231,6 +244,12 @@
       mustToggle.setAttribute("aria-pressed", mustOnly);
       render();
     });
+    const shopToggle = $("shop-toggle");
+    shopToggle.addEventListener("click", () => {
+      shopOnly = !shopOnly;
+      shopToggle.setAttribute("aria-pressed", shopOnly);
+      render();
+    });
 
     function render() {
       const q = search.value.trim();
@@ -239,6 +258,7 @@
         (!countySel.value || f.county === countySel.value) &&
         (type === "全部類型" || f.type === type) &&
         (!mustOnly || f.must) &&
+        (!shopOnly || f.shop) &&
         (!q || [f.name, f.county, f.desc, f.where].some(s => s.includes(q))));
 
       list.innerHTML = "";
@@ -257,13 +277,14 @@
           card.className = "card";
           card.innerHTML = `
             <div class="top"><h3></h3><span class="emoji" aria-hidden="true"></span></div>
-            <span class="tag"></span><span class="must" hidden>⭐ 必吃特色</span>
+            <span class="tag"></span><span class="must" hidden>⭐ 必吃特色</span><span class="shop" hidden>🏠 在地名店</span>
             <p></p>
             <div class="where"></div>`;
           card.querySelector("h3").textContent = f.name;
           card.querySelector(".emoji").textContent = f.emoji;
           card.querySelector(".tag").textContent = f.type;
           card.querySelector(".must").hidden = !f.must;
+          card.querySelector(".shop").hidden = !f.shop;
           card.querySelector("p").textContent = f.desc;
           card.querySelector(".where").textContent = "📍 " + f.where;
           grid.appendChild(card);
