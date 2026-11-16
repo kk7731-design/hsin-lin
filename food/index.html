@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b4451f">
+  <title>美食小吃</title>
+  <style>
+    :root {
+      --bg: #fdf6ec; --card: #ffffff; --text: #2b2118; --muted: #7a6a5c;
+      --accent: #b4451f; --accent-soft: #f7dfcf; --line: #eadccb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #1d1814; --card: #2a231d; --text: #f3e9dd; --muted: #b9a896;
+              --accent: #f08a5d; --accent-soft: #4a2e20; --line: #3d332a; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text);
+           font-family: system-ui, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; }
+    main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+    header h1 { margin: 0; font-size: 2rem; }
+    header p { margin: 4px 0 0; color: var(--muted); }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; align-items: center; }
+    .toolbar input { flex: 1 1 200px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+                     background: var(--card); color: var(--text); font-size: 1rem; }
+    .chip { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px;
+            padding: 8px 14px; font-size: .95rem; cursor: pointer; }
+    .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+    .card .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+    .card h2 { margin: 0; font-size: 1.2rem; }
+    .emoji { font-size: 2rem; }
+    .tag { display: inline-block; background: var(--accent-soft); color: var(--accent); border-radius: 6px;
+           padding: 0 8px; font-size: .8rem; margin-top: 6px; }
+    .card p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
+    .meta { display: flex; justify-content: space-between; margin-top: 10px; font-size: .9rem; }
+    .price { color: var(--accent); font-weight: 700; }
+    .empty { color: var(--muted); text-align: center; padding: 32px 0; }
+    footer { margin-top: 32px; color: var(--muted); font-size: .85rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>🍢 美食小吃</h1>
+      <p>巷口夜市的好味道，一頁看完。（店家名稱與地點皆為虛構示範）</p>
+    </header>
+
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="搜尋小吃名稱…" aria-label="搜尋小吃">
+    </div>
+    <div class="toolbar" id="filters" role="group" aria-label="分類篩選"></div>
+
+    <section class="grid" id="list" aria-live="polite"></section>
+    <p class="empty" id="empty" hidden>找不到符合的小吃，換個關鍵字試試看。</p>
+
+    <footer>示範頁面・價格僅供參考</footer>
+  </main>
+
+  <script>
+    const foods = [
+      { name: "滷肉飯", emoji: "🍚", type: "飯麵", price: 40, shop: "阿福飯桶", place: "虛構市・東門巷", desc: "肥瘦相間的滷肉淋在白飯上，配黃蘿蔔最對味。" },
+      { name: "牛肉麵", emoji: "🍜", type: "飯麵", price: 160, shop: "老陳麵館", place: "虛構市・河堤路", desc: "紅燒湯頭濃郁，牛腱軟嫩，麵條Q彈。" },
+      { name: "蚵仔煎", emoji: "🍳", type: "鹹食", price: 70, shop: "海口小攤", place: "虛構市・星光夜市", desc: "鮮蚵加蛋與地瓜粉漿煎香，淋上甜辣醬。" },
+      { name: "鹽酥雞", emoji: "🍗", type: "炸物", price: 80, shop: "香脆鋪", place: "虛構市・星光夜市", desc: "外酥內嫩，撒上胡椒鹽和九層塔。" },
+      { name: "臭豆腐", emoji: "🧆", type: "炸物", price: 60, shop: "香飄十里", place: "虛構市・南橋口", desc: "炸得金黃酥脆，配台式泡菜解膩。" },
+      { name: "小籠包", emoji: "🥟", type: "點心", price: 120, shop: "蒸籠坊", place: "虛構市・中央街", desc: "皮薄餡多，一咬就爆出鮮甜湯汁。" },
+      { name: "刈包", emoji: "🥪", type: "點心", price: 55, shop: "包好吃", place: "虛構市・西市場", desc: "滷五花肉夾酸菜與花生粉，又稱虎咬豬。" },
+      { name: "肉圓", emoji: "🟤", type: "鹹食", price: 50, shop: "圓仔伯", place: "虛構市・老街口", desc: "透明Q皮包豬肉筍丁，淋上甜鹹醬汁。" },
+      { name: "大腸包小腸", emoji: "🌭", type: "鹹食", price: 65, shop: "雙腸記", place: "虛構市・星光夜市", desc: "糯米腸夾香腸，加蒜片與酸菜。" },
+      { name: "珍珠奶茶", emoji: "🧋", type: "飲品", price: 55, shop: "黑糖圓圓", place: "虛構市・車站前", desc: "黑糖珍珠熬煮入味，奶茶香濃。" },
+      { name: "豆花", emoji: "🍮", type: "甜品", price: 45, shop: "古早味豆花", place: "虛構市・廟前埕", desc: "綿密豆花配花生、粉圓與薑汁糖水。" },
+      { name: "芒果冰", emoji: "🍧", type: "甜品", price: 130, shop: "夏天冰室", place: "虛構市・河堤路", desc: "整顆芒果鋪滿雪花冰，再加一球冰淇淋。" },
+      { name: "雞蛋糕", emoji: "🧁", type: "甜品", price: 40, shop: "蛋蛋香", place: "虛構市・西市場", desc: "現烤小雞蛋糕，外脆內軟帶奶香。" },
+      { name: "冬瓜茶", emoji: "🥤", type: "飲品", price: 30, shop: "老井茶舖", place: "虛構市・老街口", desc: "古法熬煮的冬瓜糖，清涼退火。" }
+    ];
+
+    const types = ["全部", ...new Set(foods.map(f => f.type))];
+    let current = "全部";
+    const filters = document.getElementById("filters");
+    const list = document.getElementById("list");
+    const empty = document.getElementById("empty");
+    const search = document.getElementById("search");
+
+    types.forEach(t => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = t;
+      b.setAttribute("aria-pressed", t === current);
+      b.addEventListener("click", () => {
+        current = t;
+        filters.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.textContent === t));
+        render();
+      });
+      filters.appendChild(b);
+    });
+
+    function render() {
+      const q = search.value.trim();
+      const shown = foods.filter(f =>
+        (current === "全部" || f.type === current) &&
+        (!q || f.name.includes(q) || f.shop.includes(q) || f.desc.includes(q)));
+      list.innerHTML = "";
+      shown.forEach(f => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="top"><h2></h2><span class="emoji" aria-hidden="true"></span></div>
+          <span class="tag"></span>
+          <p class="desc"></p>
+          <div class="meta"><span class="shop"></span><span class="price"></span></div>`;
+        card.querySelector("h2").textContent = f.name;
+        card.querySelector(".emoji").textContent = f.emoji;
+        card.querySelector(".tag").textContent = f.type;
+        card.querySelector(".desc").textContent = f.desc;
+        card.querySelector(".shop").textContent = `${f.shop}｜${f.place}`;
+        card.querySelector(".price").textContent = `NT$ ${f.price}`;
+        list.appendChild(card);
+      });
+      empty.hidden = shown.length > 0;
+    }
+
+    search.addEventListener("input", render);
+    render();
+  </script>
+</body>
+</html>
