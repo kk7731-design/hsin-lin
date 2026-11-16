@@ -66,7 +66,7 @@
   <main>
     <header>
       <h1>⛰️ 台灣一日登山步道</h1>
-      <p>從逛老街順便走的散步路線，到當天來回的百岳都有。點開「詳細資訊」查看登山口、交通、路線與附近吃買。</p>
+      <p>從逛老街順便走的散步路線、各地小百岳，到當天來回的百岳都有。點開「詳細資訊」查看登山口、交通、路線與附近吃買。</p>
     </header>
 
     <div class="toolbar">
@@ -82,6 +82,7 @@
     <div class="toolbar" id="filters" role="group" aria-label="難度篩選"></div>
     <div class="toolbar">
       <button type="button" class="chip shop-toggle" id="shop-toggle" aria-pressed="false">🛍️ 只看可順遊吃買</button>
+      <button type="button" class="chip" id="small-toggle" aria-pressed="false">⛰️ 只看小百岳</button>
     </div>
 
     <p class="count" id="count" aria-live="polite"></p>
@@ -123,7 +124,7 @@
         route: "淡水站 → 河岸步道 → 淡水老街 → 紅毛城（可繞行） → 漁人碼頭情人橋（可搭船回）", nearby: "淡水老街的阿給、魚丸湯、魚酥、鐵蛋",
         season: "全年皆宜，秋冬傍晚夕陽最美", caution: "平坦好走，假日人潮擁擠，注意隨身物品" },
       { name: "觀音山硬漢嶺", area: "新北市八里區", region: "北部", level: "easy", km: 3, hours: 1.5, climb: 370, shop: true,
-        desc: "石階一路向上，登頂可眺望淡水河口與台北盆地。", tags: ["石階", "河口景觀"],
+        desc: "石階一路向上，登頂可眺望淡水河口與台北盆地。", tags: ["小百岳", "石階", "河口景觀"],
         start: "觀音山遊客中心或凌雲寺登山口", transport: "捷運蘆洲站或關渡站轉乘公車到凌雲寺／遊客中心",
         route: "遊客中心 → 硬漢嶺步道 → 硬漢嶺（觀音山主峰）→ 原路下山", nearby: "下山到八里左岸吃孔雀蛤、雙胞胎，可搭渡輪到淡水",
         season: "秋冬較涼爽", caution: "石階陡且長，夏季日曬強，多帶水" },
@@ -143,7 +144,7 @@
         route: "平溪站 → 登山口 → 慈母峰 → 孝子山（可再接普陀山）→ 下山", nearby: "平溪老街吃香腸、放天燈，可搭平溪線到十分瀑布",
         season: "全年皆宜，雨天鐵梯濕滑不建議", caution: "頂端鐵梯陡直且只容一人，懼高者請量力" },
       { name: "七星山主峰・東峰", area: "臺北市北投區（陽明山）", region: "北部", level: "mid", km: 5, hours: 3.5, climb: 400, shop: false,
-        desc: "台北市最高峰，海拔 1120 公尺。常見走法是小油坑上、冷水坑下，沿途有硫磺噴氣孔。", tags: ["火山地形", "展望", "公車可達"],
+        desc: "台北市最高峰，海拔 1120 公尺。常見走法是小油坑上、冷水坑下，沿途有硫磺噴氣孔。", tags: ["小百岳", "火山地形", "展望", "公車可達"],
         start: "小油坑遊客服務站", transport: "搭陽明山遊園公車（108）到小油坑",
         route: "小油坑 → 七星山主峰 → 東峰 → 夢幻湖 → 冷水坑", nearby: "冷水坑可泡足湯；春天可到竹子湖賞海芋",
         season: "秋冬芒花季最美，冬季東北季風強時風大", caution: "山頂風大濕冷，帶防風外套；硫磺區勿離開步道" },
@@ -153,18 +154,63 @@
         route: "勸濟堂 → 石階 → 茶壺山涼亭 → 茶壺山頂（最後一段需攀爬）", nearby: "金瓜石黃金博物館，或到九份老街吃芋圓",
         season: "秋季芒花，晴天景色最好", caution: "最後岩石段需拉繩或鑽岩洞，濕滑時勿上" },
       { name: "基隆山", area: "新北市瑞芳區", region: "北部", level: "mid", km: 2.5, hours: 1.5, climb: 300, shop: true,
-        desc: "九份旁的雞籠山，石階直上，山頂可看九份聚落、海岸與基隆嶼。", tags: ["海景", "老街", "石階"],
+        desc: "九份旁的雞籠山，石階直上，山頂可看九份聚落、海岸與基隆嶼。", tags: ["小百岳", "海景", "老街", "石階"],
         start: "九份與金瓜石之間的基隆山登山口", transport: "台鐵瑞芳站轉乘往九份的公車",
         route: "登山口 → 連續石階 → 山頂觀景平台 → 原路下山", nearby: "九份老街吃芋圓、草仔粿，喝茶看海",
         season: "秋冬天氣晴朗時", caution: "全程石階且無遮蔽，夏天曬、冬天風大" },
       // ---- 中部 ----
+      { name: "紅淡山", area: "基隆市仁愛區", region: "北部", level: "easy", km: 3, hours: 1.5, climb: 200, shop: true,
+        desc: "基隆市區旁的小百岳，林蔭步道好走，山頂可俯瞰基隆港。", tags: ["小百岳", "城市郊山", "港景", "火車可達"],
+        start: "基隆市區的紅淡山登山口（有多個入口）", transport: "台鐵基隆站步行或搭市區公車",
+        route: "登山口 → 林間步道 → 紅淡山頂觀景台 → 原路或另一入口下山", nearby: "下山到基隆廟口夜市吃鼎邊趖、營養三明治",
+        season: "全年皆宜，基隆多雨請帶雨具", caution: "雨天步道濕滑" },
+      { name: "天上山", area: "新北市土城區", region: "北部", level: "easy", km: 4, hours: 2.5, climb: 380, shop: false,
+        desc: "土城的小百岳，春天桐花盛開，山頂可遠眺台北盆地。", tags: ["小百岳", "桐花", "城市郊山"],
+        start: "承天禪寺旁的登山口", transport: "捷運土城線永寧站轉公車到承天禪寺",
+        route: "承天禪寺 → 石階步道 → 天上山頂 → 可接桐花公園下山", nearby: "4–5 月到土城桐花公園賞油桐花",
+        season: "4–5 月桐花季最美", caution: "石階多，雨後濕滑" },
+      { name: "二格山", area: "新北市石碇區", region: "北部", level: "mid", km: 6, hours: 3.5, climb: 400, shop: true,
+        desc: "台北盆地東南邊的展望好山，可遠眺台北101與遠方山巒。", tags: ["小百岳", "展望", "森林"],
+        start: "石碇草湳一帶的登山口", transport: "建議開車；或從深坑搭公車再步行",
+        route: "登山口 → 林間山徑 → 二格山頂 → 原路返回（可接筆架連峰）", nearby: "深坑老街吃豆腐料理、臭豆腐",
+        season: "秋冬天晴視野好", caution: "部分路段陡峭有拉繩，山區岔路多請看清路標" },
+      { name: "五分山", area: "新北市平溪區／瑞芳區", region: "北部", level: "mid", km: 5, hours: 2.5, climb: 350, shop: true,
+        desc: "山頂有白色球狀的氣象雷達站，展望東北角海岸與平溪山谷。", tags: ["小百岳", "展望", "雷達站"],
+        start: "十分或瑞芳側的五分山登山口", transport: "台鐵平溪線十分站轉計程車，或自行開車",
+        route: "登山口 → 步道與產業道路 → 五分山氣象站 → 山頂觀景平台", nearby: "十分老街放天燈、看十分瀑布",
+        season: "秋冬芒花季", caution: "山頂風大，部分路段與車道共用" },
+      { name: "姜子寮山", area: "基隆市七堵區", region: "北部", level: "mid", km: 6, hours: 4, climb: 600, shop: false,
+        desc: "基隆最高峰之一，常從泰安瀑布出發，沿途林相豐富。", tags: ["小百岳", "瀑布", "森林"],
+        start: "泰安瀑布登山口", transport: "台鐵七堵站轉計程車，或自行開車",
+        route: "泰安瀑布 → 林間陡上 → 姜子寮山頂 → 原路返回", nearby: "回到基隆市區吃廟口小吃",
+        season: "秋冬，雨後瀑布水量大", caution: "林間潮濕有螞蝗，建議穿長褲" },
+      { name: "東眼山", area: "桃園市復興區", region: "北部", level: "easy", km: 6, hours: 3, climb: 300, shop: true,
+        desc: "位於東眼山國家森林遊樂區內，柳杉林步道整齊，山頂眺望桃園台地。", tags: ["小百岳", "森林", "需購門票"],
+        start: "東眼山國家森林遊樂區", transport: "需自行開車，入園須購票",
+        route: "遊客中心 → 自導式步道 → 東眼山步道 → 山頂 → 原路返回", nearby: "途經大溪老街買豆干",
+        season: "全年皆宜，森林涼爽", caution: "山區午後易起霧" },
+      { name: "石門山", area: "桃園市龍潭區", region: "北部", level: "easy", km: 3, hours: 2, climb: 250, shop: true,
+        desc: "龍潭的小百岳，春天杜鵑與桐花沿路綻放，山頂可看石門水庫。", tags: ["小百岳", "親子", "水庫景觀"],
+        start: "龍潭三坑一帶的石門山登山口", transport: "自行開車，或搭往石門水庫的公車",
+        route: "登山口 → 石階步道 → 石門山頂 → 原路返回", nearby: "石門水庫吃活魚料理、龍潭買花生糖",
+        season: "3–5 月杜鵑與桐花", caution: "石階較陡，夏天注意防曬" },
+      { name: "飛鳳山", area: "新竹縣芎林鄉", region: "北部", level: "easy", km: 3, hours: 2, climb: 250, shop: false,
+        desc: "從代勸堂出發的客家山城步道，山頂可眺望頭前溪平原。", tags: ["小百岳", "客家", "親子"],
+        start: "代勸堂登山口", transport: "竹北或竹東開車約 20 分鐘",
+        route: "代勸堂 → 石階步道 → 觀日坪 → 飛鳳山頂 → 原路返回", nearby: "芎林、竹東吃客家粄條",
+        season: "全年皆宜", caution: "石階多，雨後濕滑" },
+      { name: "五指山", area: "新竹縣竹東鎮／北埔鄉", region: "北部", level: "mid", km: 5, hours: 3.5, climb: 300, shop: true,
+        desc: "五座山峰像手指並排，一次可走完五個峰頭，岩稜段刺激。", tags: ["小百岳", "岩稜", "拉繩"],
+        start: "五指山產業道路上的登山口", transport: "需自行開車",
+        route: "登山口 → 拇指峰 → 食指峰 → 中指峰 → 無名指峰 → 小指峰 → 下山", nearby: "北埔老街喝擂茶、買東方美人茶",
+        season: "秋冬天晴", caution: "峰與峰之間有拉繩陡坡，雨天濕滑" },
       { name: "日月潭涵碧步道", area: "南投縣魚池鄉", region: "中部", level: "easy", km: 3, hours: 1.5, climb: 50, shop: true,
         desc: "沿日月潭湖岸林間散步，走到涵碧半島欣賞湖景。", tags: ["散步", "湖景", "公車可達"],
         start: "水社碼頭或日月潭遊客中心", transport: "台中高鐵站或台中火車站搭往日月潭的客運到水社",
         route: "水社 → 湖岸步道 → 涵碧半島 → 原路返回（可搭船遊湖）", nearby: "水社商圈吃香菇茶葉蛋、紅茶；搭船到伊達邵老街逛",
         season: "全年皆宜，清晨湖面常有薄霧", caution: "平坦好走；假日遊客多" },
       { name: "火炎山", area: "苗栗縣三義鄉", region: "中部", level: "mid", km: 6, hours: 3.5, climb: 450, shop: true,
-        desc: "礫石崩崖形成的特殊地景，稜線兩側是陡峭的紅土峭壁。", tags: ["特殊地形", "稜線"],
+        desc: "礫石崩崖形成的特殊地景，稜線兩側是陡峭的紅土峭壁。", tags: ["小百岳", "特殊地形", "稜線"],
         start: "火炎山南登山口或北登山口", transport: "台鐵三義站轉計程車到登山口",
         route: "登山口 → 松林步道 → 稜線觀景點 → 火炎山 → 原路或另一側下山", nearby: "三義木雕街逛木雕、吃客家菜",
         season: "秋冬涼爽，夏天稜線無遮蔽", caution: "碎石路面容易滑，崩崖邊勿靠近；部分步道會因崩塌管制" },
@@ -173,6 +219,26 @@
         start: "大雪山林道上的鳶嘴山登山口", transport: "需自行開車，經東勢上大雪山林道",
         route: "登山口 → 林間步道 → 岩稜拉繩段 → 鳶嘴山頂 → 可接稍來山或原路返回", nearby: "下山到東勢吃客家粄條",
         season: "秋冬天晴視野好", caution: "岩稜陡峭，需戴手套；雨天或起霧勿上" },
+      { name: "頭嵙山", area: "臺中市北屯區（大坑）", region: "中部", level: "mid", km: 6, hours: 3.5, climb: 500, shop: false,
+        desc: "大坑風景區最高點，從 1 號步道上山，可眺望台中盆地。", tags: ["小百岳", "城市郊山", "展望"],
+        start: "大坑 1 號步道登山口", transport: "臺中市區搭公車到大坑",
+        route: "1 號步道登山口 → 石階與山徑 → 頭嵙山頂 → 原路或接其他步道下山", nearby: "大坑泡溫泉，或到新社賞花",
+        season: "秋冬涼爽", caution: "石階陡長，夏天悶熱，多帶水" },
+      { name: "馬拉邦山", area: "苗栗縣大湖鄉", region: "中部", level: "mid", km: 7, hours: 4.5, climb: 700, shop: true,
+        desc: "以秋冬楓紅聞名，山頂可看雪山山脈，曾是泰雅族的古戰場。", tags: ["小百岳", "楓紅", "展望"],
+        start: "大湖鄉的馬拉邦山登山口", transport: "需自行開車",
+        route: "登山口 → 林間山徑 → 楓林區 → 馬拉邦山頂 → 原路返回", nearby: "大湖採草莓、吃草莓冰淇淋",
+        season: "11–12 月楓紅", caution: "坡度陡，雨後濕滑" },
+      { name: "獨立山", area: "嘉義縣竹崎鄉", region: "南部", level: "mid", km: 5, hours: 3, climb: 400, shop: false,
+        desc: "阿里山林業鐵路在此以螺旋方式繞山爬升，步道可看鐵道奇景。", tags: ["小百岳", "鐵道", "森林"],
+        start: "樟腦寮車站一帶", transport: "搭阿里山林業鐵路到樟腦寮站，或自行開車",
+        route: "樟腦寮 → 獨立山步道 → 獨立山頂 → 獨立山車站", nearby: "可搭鐵路續往奮起湖吃便當",
+        season: "全年皆宜", caution: "鐵路班次少，請先查好時刻表" },
+      { name: "大尖山", area: "雲林縣古坑鄉", region: "中部", level: "hard", km: 8, hours: 5, climb: 800, shop: true,
+        desc: "雲林最高的小百岳，從華山一路陡上，山頂可看嘉南平原。", tags: ["小百岳", "陡坡", "展望"],
+        start: "古坑華山的大尖山登山口", transport: "需自行開車",
+        route: "華山登山口 → 連續陡上 → 大尖山頂 → 原路返回", nearby: "華山咖啡街喝古坑咖啡",
+        season: "秋冬，夏天悶熱", caution: "坡陡且長，攜帶足量飲水" },
       { name: "合歡山主峰", area: "南投縣仁愛鄉", region: "中部", level: "easy", km: 5, hours: 2, climb: 270, shop: false,
         desc: "沿舊公路緩上，就能抵達海拔 3417 公尺的百岳，適合第一次挑戰高山。", tags: ["百岳", "高山", "入門"],
         start: "合歡山主峰登山口（台14甲線武嶺附近）", transport: "需自行開車或參加旅行團",
@@ -214,11 +280,16 @@
         start: "雙溪熱帶母樹林入口", transport: "美濃市區開車約 20 分鐘",
         route: "入口 → 林間環狀步道 → 返回", nearby: "美濃市區吃粄條、看油紙傘，喝客家擂茶",
         season: "5–6 月黃蝶季", caution: "蚊蟲多，帶防蚊液" },
-      { name: "柴山", area: "高雄市鼓山區", region: "南部", level: "easy", km: 4, hours: 2, climb: 250, shop: true,
-        desc: "珊瑚礁石灰岩地形，林間常見台灣獼猴，可眺望高雄港與西子灣。", tags: ["獼猴", "城市郊山", "海景"],
+      { name: "柴山（壽山）", area: "高雄市鼓山區", region: "南部", level: "easy", km: 4, hours: 2, climb: 250, shop: true,
+        desc: "珊瑚礁石灰岩地形，林間常見台灣獼猴，可眺望高雄港與西子灣。", tags: ["小百岳", "獼猴", "城市郊山", "海景"],
         start: "龍巖冽泉或雅座登山口", transport: "捷運西子灣站或鹽埕埔站轉公車／步行",
         route: "登山口 → 珊瑚礁岩步道 → 柴山觀景點 → 原路下山", nearby: "鹽埕、哈瑪星吃小吃，西子灣看夕陽",
         season: "秋冬較涼爽", caution: "不餵食、不帶塑膠袋吸引獼猴；岩石易刮傷" },
+      { name: "旗尾山", area: "高雄市旗山區", region: "南部", level: "mid", km: 4, hours: 2.5, climb: 300, shop: true,
+        desc: "旗山的小百岳，稜線有岩壁與拉繩段，可俯瞰旗山市區與楠梓仙溪。", tags: ["小百岳", "岩稜", "老街"],
+        start: "旗山區的旗尾山登山口", transport: "高雄搭客運到旗山，再轉計程車",
+        route: "登山口 → 稜線拉繩段 → 旗尾山頂 → 原路返回", nearby: "旗山老街吃香蕉冰、買香蕉蛋糕",
+        season: "秋冬，夏天悶熱", caution: "岩稜段陡峭，請戴手套" },
       { name: "里龍山", area: "屏東縣獅子鄉／車城鄉", region: "南部", level: "hard", km: 8, hours: 6, climb: 950, shop: false,
         desc: "恆春半島最具代表性的山，一路陡上，山頂可同時望見台灣海峽與太平洋。", tags: ["小百岳", "陡坡", "海景"],
         start: "竹坑登山口", transport: "需自行開車",
@@ -254,7 +325,7 @@
 
     const levelText = { all: "全部難度", easy: "輕鬆", mid: "中等", hard: "困難" };
     const regionList = ["全部", "北部", "中部", "南部", "東部"];
-    let level = "all", region = "全部", shopOnly = false;
+    let level = "all", region = "全部", shopOnly = false, smallOnly = false;
 
     const $ = id => document.getElementById(id);
     const list = $("list"), empty = $("empty"), search = $("search"), sort = $("sort"), count = $("count");
@@ -277,6 +348,9 @@
     $("shop-toggle").addEventListener("click", e => {
       shopOnly = !shopOnly; e.currentTarget.setAttribute("aria-pressed", shopOnly); render();
     });
+    $("small-toggle").addEventListener("click", e => {
+      smallOnly = !smallOnly; e.currentTarget.setAttribute("aria-pressed", smallOnly); render();
+    });
 
     function formatHours(h) {
       const hr = Math.floor(h), min = Math.round((h - hr) * 60);
@@ -291,6 +365,7 @@
         (level === "all" || t.level === level) &&
         (region === "全部" || t.region === region) &&
         (!shopOnly || t.shop) &&
+        (!smallOnly || t.tags.includes("小百岳")) &&
         (!q || [t.name, t.area, t.desc, t.nearby, ...t.tags].some(s => s.includes(q))));
       const key = { distance: "km", time: "hours", climb: "climb" }[sort.value];
       if (key) shown = [...shown].sort((a, b) => a[key] - b[key]);
