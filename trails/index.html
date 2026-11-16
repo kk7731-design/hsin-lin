@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2f6b3a">
+  <title>登山步道</title>
+  <style>
+    :root {
+      --bg: #f3f7f1; --card: #ffffff; --text: #1f2a1f; --muted: #607060;
+      --accent: #2f6b3a; --accent-soft: #dcebd8; --line: #d6e2d2;
+      --easy: #2f7d3a; --mid: #b07a12; --hard: #b3261e;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #141a15; --card: #1f2820; --text: #e6efe4; --muted: #a3b3a1;
+              --accent: #7cc48a; --accent-soft: #2a3d2d; --line: #324034;
+              --easy: #7cc48a; --mid: #e0b04a; --hard: #f07a70; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text);
+           font-family: system-ui, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; }
+    main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+    header h1 { margin: 0; font-size: 2rem; }
+    header p { margin: 4px 0 0; color: var(--muted); }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; align-items: center; }
+    .toolbar input, .toolbar select { padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+                     background: var(--card); color: var(--text); font-size: 1rem; }
+    .toolbar input { flex: 1 1 200px; }
+    .chip { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px;
+            padding: 8px 14px; font-size: .95rem; cursor: pointer; }
+    .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 20px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+    .card .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+    .card h2 { margin: 0; font-size: 1.2rem; }
+    .level { font-size: .85rem; font-weight: 700; white-space: nowrap; }
+    .level.easy { color: var(--easy); } .level.mid { color: var(--mid); } .level.hard { color: var(--hard); }
+    .area { color: var(--muted); font-size: .9rem; }
+    .card p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 12px; text-align: center; }
+    .stats div { background: var(--accent-soft); border-radius: 8px; padding: 6px 4px; }
+    .stats b { display: block; font-size: 1rem; }
+    .stats span { font-size: .75rem; color: var(--muted); }
+    .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tags span { border: 1px solid var(--line); border-radius: 6px; padding: 0 8px; font-size: .8rem; color: var(--muted); }
+    .empty { color: var(--muted); text-align: center; padding: 32px 0; }
+    .tips { margin-top: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+    .tips h2 { margin: 0 0 6px; font-size: 1.1rem; }
+    .tips ul { margin: 0; padding-left: 1.2em; color: var(--muted); }
+    footer { margin-top: 24px; color: var(--muted); font-size: .85rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>⛰️ 登山步道</h1>
+      <p>依難度與時間挑一條適合的路線。（步道名稱與地點皆為虛構示範）</p>
+    </header>
+
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="搜尋步道或地區…" aria-label="搜尋步道">
+      <select id="sort" aria-label="排序方式">
+        <option value="default">預設排序</option>
+        <option value="distance">距離：短到長</option>
+        <option value="time">時間：短到長</option>
+        <option value="climb">爬升：少到多</option>
+      </select>
+    </div>
+    <div class="toolbar" id="filters" role="group" aria-label="難度篩選"></div>
+
+    <section class="grid" id="list" aria-live="polite"></section>
+    <p class="empty" id="empty" hidden>找不到符合的步道，換個條件試試看。</p>
+
+    <section class="tips" aria-labelledby="tips-title">
+      <h2 id="tips-title">出發前提醒</h2>
+      <ul>
+        <li>查看天氣預報，午後雷陣雨季節建議早出早歸。</li>
+        <li>攜帶足夠飲水、雨具、頭燈與簡單急救用品。</li>
+        <li>告知家人朋友路線與預計下山時間。</li>
+        <li>垃圾帶下山，不餵食野生動物。</li>
+      </ul>
+    </section>
+
+    <footer>示範頁面・路線資料僅供參考，實際狀況請以現場公告為準</footer>
+  </main>
+
+  <script>
+    const trails = [
+      { name: "晨曦湖畔步道", area: "虛構市・北湖區", level: "easy", km: 2.4, hours: 1, climb: 60, desc: "環湖木棧道，平緩好走，清晨常有薄霧。", tags: ["親子", "環狀", "木棧道"] },
+      { name: "竹影古道", area: "虛構縣・竹溪鄉", level: "easy", km: 3.8, hours: 1.5, climb: 180, desc: "穿越孟宗竹林的石階古道，夏天也涼爽。", tags: ["林蔭", "古道"] },
+      { name: "楓紅稜線", area: "虛構縣・霜嶺村", level: "mid", km: 6.5, hours: 3.5, climb: 520, desc: "秋冬楓葉轉紅，稜線段視野開闊。", tags: ["季節限定", "展望"] },
+      { name: "雲海觀景台", area: "虛構市・高原里", level: "mid", km: 5.2, hours: 3, climb: 430, desc: "登頂可遠眺雲海，日出時段最熱門。", tags: ["日出", "展望"] },
+      { name: "瀑布溪谷線", area: "虛構縣・清水鄉", level: "mid", km: 7.1, hours: 4, climb: 380, desc: "沿溪而行，終點是三段式瀑布，雨後溪石濕滑。", tags: ["溪谷", "瀑布"] },
+      { name: "老鷹岩縱走", area: "虛構縣・鷹峰村", level: "hard", km: 11.3, hours: 7, climb: 1150, desc: "連續陡上並有拉繩攀岩段，需具備經驗。", tags: ["縱走", "拉繩", "體力挑戰"] },
+      { name: "星宿山主峰", area: "虛構縣・星野鄉", level: "hard", km: 14.8, hours: 9, climb: 1480, desc: "百岳級長程路線，建議清晨四點前出發。", tags: ["高山", "長程"] },
+      { name: "茶園小徑", area: "虛構市・南坡區", level: "easy", km: 1.9, hours: 0.8, climb: 90, desc: "繞行茶園的產業道路，終點有涼亭可休息。", tags: ["親子", "茶園"] },
+      { name: "松濤森林線", area: "虛構縣・松林村", level: "mid", km: 8.0, hours: 4.5, climb: 610, desc: "柳杉與松林夾道，芬多精滿滿。", tags: ["森林浴", "林蔭"] }
+    ];
+    const levelText = { all: "全部", easy: "輕鬆", mid: "中等", hard: "困難" };
+    let current = "all";
+
+    const filters = document.getElementById("filters");
+    const list = document.getElementById("list");
+    const empty = document.getElementById("empty");
+    const search = document.getElementById("search");
+    const sort = document.getElementById("sort");
+
+    Object.entries(levelText).forEach(([key, text]) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = text; b.dataset.level = key;
+      b.setAttribute("aria-pressed", key === current);
+      b.addEventListener("click", () => {
+        current = key;
+        filters.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.level === key));
+        render();
+      });
+      filters.appendChild(b);
+    });
+
+    function formatHours(h) {
+      const hr = Math.floor(h), min = Math.round((h - hr) * 60);
+      return (hr ? hr + " 小時" : "") + (min ? " " + min + " 分" : "");
+    }
+
+    function render() {
+      const q = search.value.trim();
+      let shown = trails.filter(t =>
+        (current === "all" || t.level === current) &&
+        (!q || t.name.includes(q) || t.area.includes(q) || t.tags.some(tag => tag.includes(q))));
+      const key = { distance: "km", time: "hours", climb: "climb" }[sort.value];
+      if (key) shown = [...shown].sort((a, b) => a[key] - b[key]);
+
+      list.innerHTML = "";
+      shown.forEach(t => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="top"><h2></h2><span class="level"></span></div>
+          <div class="area"></div>
+          <p class="desc"></p>
+          <div class="stats">
+            <div><b class="km"></b><span>距離</span></div>
+            <div><b class="hours"></b><span>來回時間</span></div>
+            <div><b class="climb"></b><span>爬升</span></div>
+          </div>
+          <div class="tags"></div>`;
+        card.querySelector("h2").textContent = t.name;
+        const lv = card.querySelector(".level");
+        lv.textContent = levelText[t.level]; lv.classList.add(t.level);
+        card.querySelector(".area").textContent = "📍 " + t.area;
+        card.querySelector(".desc").textContent = t.desc;
+        card.querySelector(".km").textContent = t.km + " km";
+        card.querySelector(".hours").textContent = formatHours(t.hours).trim();
+        card.querySelector(".climb").textContent = t.climb + " m";
+        const tags = card.querySelector(".tags");
+        t.tags.forEach(tag => { const s = document.createElement("span"); s.textContent = tag; tags.appendChild(s); });
+        list.appendChild(card);
+      });
+      empty.hidden = shown.length > 0;
+    }
+
+    search.addEventListener("input", render);
+    sort.addEventListener("change", render);
+    render();
+  </script>
+</body>
+</html>
