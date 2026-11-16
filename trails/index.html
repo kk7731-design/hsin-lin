@@ -9,12 +9,12 @@
     :root {
       --bg: #f3f7f1; --card: #ffffff; --text: #1f2a1f; --muted: #607060;
       --accent: #2f6b3a; --accent-soft: #dcebd8; --line: #d6e2d2;
-      --easy: #2f7d3a; --mid: #b07a12; --hard: #b3261e;
+      --easy: #2f7d3a; --mid: #b07a12; --hard: #b3261e; --shop: #a8501f; --shop-soft: #f7e3d4;
     }
     @media (prefers-color-scheme: dark) {
       :root { --bg: #141a15; --card: #1f2820; --text: #e6efe4; --muted: #a3b3a1;
               --accent: #7cc48a; --accent-soft: #2a3d2d; --line: #324034;
-              --easy: #7cc48a; --mid: #e0b04a; --hard: #f07a70; }
+              --easy: #7cc48a; --mid: #e0b04a; --hard: #f07a70; --shop: #f0a374; --shop-soft: #43301f; }
     }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--text);
@@ -22,27 +22,39 @@
     main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
     header h1 { margin: 0; font-size: 2rem; }
     header p { margin: 4px 0 0; color: var(--muted); }
-    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; align-items: center; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; align-items: center; }
     .toolbar input, .toolbar select { padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
                      background: var(--card); color: var(--text); font-size: 1rem; }
     .toolbar input { flex: 1 1 200px; }
     .chip { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px;
             padding: 8px 14px; font-size: .95rem; cursor: pointer; }
     .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 20px; }
+    .chip.shop-toggle[aria-pressed="true"] { background: var(--shop); border-color: var(--shop); }
+    .count { color: var(--muted); font-size: .9rem; margin-top: 14px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-top: 8px; align-items: start; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
     .card .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
     .card h2 { margin: 0; font-size: 1.2rem; }
     .level { font-size: .85rem; font-weight: 700; white-space: nowrap; }
     .level.easy { color: var(--easy); } .level.mid { color: var(--mid); } .level.hard { color: var(--hard); }
     .area { color: var(--muted); font-size: .9rem; }
-    .card p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
+    .card .desc { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 12px; text-align: center; }
     .stats div { background: var(--accent-soft); border-radius: 8px; padding: 6px 4px; }
     .stats b { display: block; font-size: 1rem; }
     .stats span { font-size: .75rem; color: var(--muted); }
     .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
     .tags span { border: 1px solid var(--line); border-radius: 6px; padding: 0 8px; font-size: .8rem; color: var(--muted); }
+    .tags span.shop { border-color: var(--shop); background: var(--shop-soft); color: var(--shop); }
+    details { margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 10px; }
+    summary { cursor: pointer; color: var(--accent); font-weight: 600; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "▸ "; }
+    details[open] summary::before { content: "▾ "; }
+    dl { margin: 8px 0 0; display: grid; grid-template-columns: 4.5em 1fr; gap: 6px 10px; font-size: .92rem; }
+    dt { color: var(--muted); font-weight: 600; }
+    dd { margin: 0; }
+    dd.caution { color: var(--hard); }
     .empty { color: var(--muted); text-align: center; padding: 32px 0; }
     .tips { margin-top: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
     .tips h2 { margin: 0 0 6px; font-size: 1.1rem; }
@@ -54,11 +66,11 @@
   <main>
     <header>
       <h1>⛰️ 台灣一日登山步道</h1>
-      <p>當天來回的熱門路線，從郊山到百岳都有。依地區、難度與時間挑一條適合你的步道。</p>
+      <p>從逛老街順便走的散步路線，到當天來回的百岳都有。點開「詳細資訊」查看登山口、交通、路線與附近吃買。</p>
     </header>
 
     <div class="toolbar">
-      <input id="search" type="search" placeholder="搜尋步道或地區…" aria-label="搜尋步道">
+      <input id="search" type="search" placeholder="搜尋步道、地區、老街或美食…" aria-label="搜尋步道">
       <select id="sort" aria-label="排序方式">
         <option value="default">預設排序</option>
         <option value="distance">距離：短到長</option>
@@ -68,18 +80,23 @@
     </div>
     <div class="toolbar" id="regions" role="group" aria-label="地區篩選"></div>
     <div class="toolbar" id="filters" role="group" aria-label="難度篩選"></div>
+    <div class="toolbar">
+      <button type="button" class="chip shop-toggle" id="shop-toggle" aria-pressed="false">🛍️ 只看可順遊吃買</button>
+    </div>
 
-    <section class="grid" id="list" aria-live="polite"></section>
+    <p class="count" id="count" aria-live="polite"></p>
+    <section class="grid" id="list"></section>
     <p class="empty" id="empty" hidden>找不到符合的步道，換個條件試試看。</p>
 
     <section class="tips" aria-labelledby="tips-title">
       <h2 id="tips-title">出發前提醒</h2>
       <ul>
         <li>查看天氣預報，午後雷陣雨季節建議早出早歸。</li>
-        <li>攜帶足夠飲水、雨具、頭燈與簡單急救用品。</li>
+        <li>攜帶足夠飲水、雨具、頭燈與簡單急救用品；散步路線也建議穿好走的鞋。</li>
         <li>告知家人朋友路線與預計下山時間。</li>
         <li>3000 公尺以上的高山步道可能出現高山症，出發前一晚可先在山區住宿適應。</li>
         <li>雪山東峰須事先申請雪霸國家公園入園；其他步道也可能因颱風、地震或維修而封閉，出發前請查詢管理單位公告。</li>
+        <li>公車路線與班次時常調整，出發前請查詢最新資訊。</li>
         <li>垃圾帶下山，不餵食野生動物（例如柴山獼猴）。</li>
       </ul>
     </section>
@@ -89,71 +106,192 @@
 
   <script>
     const trails = [
-      { name: "象山步道", area: "臺北市信義區", region: "北部", level: "easy", km: 2, hours: 1, climb: 150, desc: "從市區走幾分鐘就到登山口，六巨石俯瞰台北101與信義區夜景。", tags: ["夜景", "城市郊山", "捷運可達"] },
-      { name: "七星山主峰・東峰", area: "臺北市北投區（陽明山）", region: "北部", level: "mid", km: 5, hours: 3.5, climb: 400, desc: "台北市最高峰，海拔 1120 公尺。常見走法是小油坑上、冷水坑下，沿途有硫磺噴氣孔。", tags: ["火山地形", "展望", "公車可達"] },
-      { name: "觀音山硬漢嶺", area: "新北市八里區", region: "北部", level: "easy", km: 3, hours: 1.5, climb: 370, desc: "石階一路向上，登頂可眺望淡水河口與台北盆地。", tags: ["石階", "河口景觀"] },
-      { name: "無耳茶壺山", area: "新北市瑞芳區", region: "北部", level: "mid", km: 3, hours: 2, climb: 300, desc: "從勸濟堂出發，山頂巨岩像一把沒有把手的茶壺，可遠眺陰陽海。", tags: ["海景", "岩石", "金瓜石"] },
-      { name: "加里山", area: "苗栗縣南庄鄉", region: "中部", level: "hard", km: 9, hours: 7, climb: 950, desc: "小百岳中的難關，從鹿場登山口沿舊鐵道與森林上切，最後一段需拉繩。", tags: ["小百岳", "森林", "拉繩"] },
-      { name: "火炎山", area: "苗栗縣三義鄉", region: "中部", level: "mid", km: 6, hours: 3.5, climb: 450, desc: "礫石崩崖形成的特殊地景，稜線兩側是陡峭的紅土峭壁，碎石易滑。", tags: ["特殊地形", "稜線"] },
-      { name: "鳶嘴山", area: "臺中市和平區", region: "中部", level: "mid", km: 4, hours: 3, climb: 400, desc: "沿大雪山林道上山，岩稜連續拉繩攀爬，山頂展望雪山與中央山脈。", tags: ["岩稜", "拉繩", "展望"] },
-      { name: "雪山東峰", area: "臺中市和平區", region: "中部", level: "hard", km: 11, hours: 8, climb: 1100, desc: "從雪山登山口經七卡山莊與「哭坡」，登上海拔 3201 公尺的百岳。", tags: ["百岳", "高山", "需申請入園"] },
-      { name: "合歡山主峰", area: "南投縣仁愛鄉", region: "中部", level: "easy", km: 5, hours: 2, climb: 270, desc: "沿舊公路緩上，就能抵達海拔 3417 公尺的百岳，適合第一次挑戰高山。", tags: ["百岳", "高山", "入門"] },
-      { name: "合歡北峰", area: "南投縣仁愛鄉", region: "中部", level: "mid", km: 4, hours: 3.5, climb: 450, desc: "坡度較陡但路程短，山頂草原遼闊，可欣賞日出與雲海。", tags: ["百岳", "高山", "雲海"] },
-      { name: "麟趾山", area: "南投縣信義鄉（塔塔加）", region: "中部", level: "mid", km: 5, hours: 3, climb: 300, desc: "塔塔加地區的入門路線，山頂可近看玉山主峰與前峰。", tags: ["玉山國家公園", "展望"] },
-      { name: "玉山前峰", area: "南投縣信義鄉（塔塔加）", region: "中部", level: "hard", km: 5.5, hours: 5, climb: 630, desc: "路程不長但非常陡，後段碎石坡需手腳並用，登頂海拔 3239 公尺。", tags: ["高山", "陡坡", "碎石"] },
-      { name: "柴山", area: "高雄市鼓山區", region: "南部", level: "easy", km: 4, hours: 2, climb: 250, desc: "珊瑚礁石灰岩地形，林間常見台灣獼猴，可眺望高雄港與西子灣。", tags: ["獼猴", "城市郊山", "海景"] },
-      { name: "里龍山", area: "屏東縣獅子鄉／車城鄉", region: "南部", level: "hard", km: 8, hours: 6, climb: 950, desc: "恆春半島最具代表性的山，一路陡上，山頂可同時望見台灣海峽與太平洋。", tags: ["小百岳", "陡坡", "海景"] },
-      { name: "太平山見晴懷古步道", area: "宜蘭縣大同鄉", region: "東部", level: "easy", km: 1.8, hours: 1, climb: 50, desc: "沿舊林業鐵道而行，霧氣與苔蘚交織，被稱為最美的森林步道之一。", tags: ["森林", "鐵道", "需購門票"] },
-      { name: "抹茶山（聖母登山步道）", area: "宜蘭縣礁溪鄉", region: "東部", level: "mid", km: 9, hours: 5, climb: 600, desc: "終點聖母山莊後方的山稜長滿箭竹，綠意如抹茶冰淇淋，雨後泥濘。", tags: ["草原稜線", "石階", "熱門"] },
-      { name: "鯉魚山", area: "花蓮縣壽豐鄉", region: "東部", level: "mid", km: 4, hours: 2.5, climb: 470, desc: "從鯉魚潭畔上山，林蔭充足，山頂可俯瞰鯉魚潭與花東縱谷。", tags: ["小百岳", "湖景", "林蔭"] },
-      { name: "都蘭山", area: "臺東縣東河鄉", region: "東部", level: "hard", km: 9, hours: 6, climb: 1000, desc: "阿美族的聖山，海拔 1190 公尺，登頂可遠眺綠島與東海岸。", tags: ["小百岳", "海景", "陡坡"] }
+      // ---- 北部 ----
+      { name: "象山步道", area: "臺北市信義區", region: "北部", level: "easy", km: 2, hours: 1, climb: 150, shop: true,
+        desc: "從市區走幾分鐘就到登山口，六巨石俯瞰台北101與信義區夜景。", tags: ["夜景", "城市郊山", "捷運可達"],
+        start: "永春崗公園旁的象山登山口", transport: "捷運淡水信義線象山站 2 號出口，步行約 10 分鐘",
+        route: "登山口 → 石階 → 一線天 → 六巨石觀景台 → 原路或經拇指山下山", nearby: "下山步行到信義商圈逛百貨，或到吳興街夜市吃小吃",
+        season: "全年皆宜，黃昏上山看夕陽接夜景最熱門", caution: "全程石階，傍晚人潮多，六巨石岩石邊緣請勿攀爬過遠" },
+      { name: "白石湖吊橋・碧山巖", area: "臺北市內湖區", region: "北部", level: "easy", km: 3, hours: 1.5, climb: 150, shop: true,
+        desc: "走過造型像龍骨的白石湖吊橋，沿農路到碧山巖眺望台北盆地。", tags: ["吊橋", "採草莓", "親子"],
+        start: "白石湖吊橋附近（碧山路）", transport: "捷運文湖線大湖公園站或劍南路站轉乘小型公車上山",
+        route: "白石湖吊橋 → 農路與步道 → 碧山巖開漳聖王廟 → 觀景平台", nearby: "冬春到白石湖社區採草莓，農家也有現採蔬果、草莓冰淇淋",
+        season: "12 月到隔年 4 月草莓季最熱鬧", caution: "假日停車位少，建議搭公車；農路有車輛往來" },
+      { name: "淡水金色水岸步道", area: "新北市淡水區", region: "北部", level: "easy", km: 3, hours: 1.5, climb: 0, shop: true,
+        desc: "沿淡水河岸散步，邊吃邊逛老街，傍晚看觀音山後的夕陽。", tags: ["散步", "老街", "夕陽", "捷運可達"],
+        start: "捷運淡水站", transport: "捷運淡水信義線淡水站出站即是",
+        route: "淡水站 → 河岸步道 → 淡水老街 → 紅毛城（可繞行） → 漁人碼頭情人橋（可搭船回）", nearby: "淡水老街的阿給、魚丸湯、魚酥、鐵蛋",
+        season: "全年皆宜，秋冬傍晚夕陽最美", caution: "平坦好走，假日人潮擁擠，注意隨身物品" },
+      { name: "觀音山硬漢嶺", area: "新北市八里區", region: "北部", level: "easy", km: 3, hours: 1.5, climb: 370, shop: true,
+        desc: "石階一路向上，登頂可眺望淡水河口與台北盆地。", tags: ["石階", "河口景觀"],
+        start: "觀音山遊客中心或凌雲寺登山口", transport: "捷運蘆洲站或關渡站轉乘公車到凌雲寺／遊客中心",
+        route: "遊客中心 → 硬漢嶺步道 → 硬漢嶺（觀音山主峰）→ 原路下山", nearby: "下山到八里左岸吃孔雀蛤、雙胞胎，可搭渡輪到淡水",
+        season: "秋冬較涼爽", caution: "石階陡且長，夏季日曬強，多帶水" },
+      { name: "鳶山步道", area: "新北市三峽區", region: "北部", level: "easy", km: 3, hours: 1.5, climb: 250, shop: true,
+        desc: "三峽市區旁的小山，山頂鳶山彩壁可俯瞰三峽、鶯歌與大漢溪。", tags: ["城市郊山", "老街", "展望"],
+        start: "三峽市區的鳶山登山口（福德坑一帶）", transport: "搭公車到三峽老街一帶，再步行到登山口",
+        route: "登山口 → 石階步道 → 鳶山岩 → 鳶山彩壁觀景點 → 原路下山", nearby: "三峽老街的金牛角麵包、藍染體驗、祖師廟",
+        season: "全年皆宜", caution: "彩壁岩場勿靠近邊緣；部分路段濕滑" },
+      { name: "孫龍步道", area: "新北市鶯歌區", region: "北部", level: "easy", km: 2, hours: 1, climb: 80, shop: true,
+        desc: "鶯歌車站旁的短程步道，可看到傳說中的「鶯歌石」。", tags: ["散步", "老街", "火車可達"],
+        start: "鶯歌火車站北側", transport: "台鐵鶯歌站步行約 10–15 分鐘",
+        route: "車站 → 孫龍步道 → 鶯歌石 → 返回市區", nearby: "鶯歌老街逛陶瓷、玩手拉坯，或參觀新北市立鶯歌陶瓷博物館",
+        season: "全年皆宜", caution: "路程短但有坡度與石階" },
+      { name: "孝子山", area: "新北市平溪區", region: "北部", level: "mid", km: 2, hours: 1.5, climb: 200, shop: true,
+        desc: "巨石尖峰上架著鐵梯，爬上頂端可俯瞰平溪山谷，刺激又有趣。", tags: ["鐵梯", "火車可達", "老街"],
+        start: "平溪火車站附近登山口", transport: "台鐵平溪線平溪站步行約 15 分鐘",
+        route: "平溪站 → 登山口 → 慈母峰 → 孝子山（可再接普陀山）→ 下山", nearby: "平溪老街吃香腸、放天燈，可搭平溪線到十分瀑布",
+        season: "全年皆宜，雨天鐵梯濕滑不建議", caution: "頂端鐵梯陡直且只容一人，懼高者請量力" },
+      { name: "七星山主峰・東峰", area: "臺北市北投區（陽明山）", region: "北部", level: "mid", km: 5, hours: 3.5, climb: 400, shop: false,
+        desc: "台北市最高峰，海拔 1120 公尺。常見走法是小油坑上、冷水坑下，沿途有硫磺噴氣孔。", tags: ["火山地形", "展望", "公車可達"],
+        start: "小油坑遊客服務站", transport: "搭陽明山遊園公車（108）到小油坑",
+        route: "小油坑 → 七星山主峰 → 東峰 → 夢幻湖 → 冷水坑", nearby: "冷水坑可泡足湯；春天可到竹子湖賞海芋",
+        season: "秋冬芒花季最美，冬季東北季風強時風大", caution: "山頂風大濕冷，帶防風外套；硫磺區勿離開步道" },
+      { name: "無耳茶壺山", area: "新北市瑞芳區", region: "北部", level: "mid", km: 3, hours: 2, climb: 300, shop: true,
+        desc: "山頂巨岩像一把沒有把手的茶壺，可遠眺陰陽海與基隆山。", tags: ["海景", "岩石", "金瓜石"],
+        start: "金瓜石勸濟堂", transport: "台鐵瑞芳站轉乘往金瓜石的公車",
+        route: "勸濟堂 → 石階 → 茶壺山涼亭 → 茶壺山頂（最後一段需攀爬）", nearby: "金瓜石黃金博物館，或到九份老街吃芋圓",
+        season: "秋季芒花，晴天景色最好", caution: "最後岩石段需拉繩或鑽岩洞，濕滑時勿上" },
+      { name: "基隆山", area: "新北市瑞芳區", region: "北部", level: "mid", km: 2.5, hours: 1.5, climb: 300, shop: true,
+        desc: "九份旁的雞籠山，石階直上，山頂可看九份聚落、海岸與基隆嶼。", tags: ["海景", "老街", "石階"],
+        start: "九份與金瓜石之間的基隆山登山口", transport: "台鐵瑞芳站轉乘往九份的公車",
+        route: "登山口 → 連續石階 → 山頂觀景平台 → 原路下山", nearby: "九份老街吃芋圓、草仔粿，喝茶看海",
+        season: "秋冬天氣晴朗時", caution: "全程石階且無遮蔽，夏天曬、冬天風大" },
+      // ---- 中部 ----
+      { name: "日月潭涵碧步道", area: "南投縣魚池鄉", region: "中部", level: "easy", km: 3, hours: 1.5, climb: 50, shop: true,
+        desc: "沿日月潭湖岸林間散步，走到涵碧半島欣賞湖景。", tags: ["散步", "湖景", "公車可達"],
+        start: "水社碼頭或日月潭遊客中心", transport: "台中高鐵站或台中火車站搭往日月潭的客運到水社",
+        route: "水社 → 湖岸步道 → 涵碧半島 → 原路返回（可搭船遊湖）", nearby: "水社商圈吃香菇茶葉蛋、紅茶；搭船到伊達邵老街逛",
+        season: "全年皆宜，清晨湖面常有薄霧", caution: "平坦好走；假日遊客多" },
+      { name: "火炎山", area: "苗栗縣三義鄉", region: "中部", level: "mid", km: 6, hours: 3.5, climb: 450, shop: true,
+        desc: "礫石崩崖形成的特殊地景，稜線兩側是陡峭的紅土峭壁。", tags: ["特殊地形", "稜線"],
+        start: "火炎山南登山口或北登山口", transport: "台鐵三義站轉計程車到登山口",
+        route: "登山口 → 松林步道 → 稜線觀景點 → 火炎山 → 原路或另一側下山", nearby: "三義木雕街逛木雕、吃客家菜",
+        season: "秋冬涼爽，夏天稜線無遮蔽", caution: "碎石路面容易滑，崩崖邊勿靠近；部分步道會因崩塌管制" },
+      { name: "鳶嘴山", area: "臺中市和平區", region: "中部", level: "mid", km: 4, hours: 3, climb: 400, shop: false,
+        desc: "沿大雪山林道上山，岩稜連續拉繩攀爬，山頂展望雪山與中央山脈。", tags: ["岩稜", "拉繩", "展望"],
+        start: "大雪山林道上的鳶嘴山登山口", transport: "需自行開車，經東勢上大雪山林道",
+        route: "登山口 → 林間步道 → 岩稜拉繩段 → 鳶嘴山頂 → 可接稍來山或原路返回", nearby: "下山到東勢吃客家粄條",
+        season: "秋冬天晴視野好", caution: "岩稜陡峭，需戴手套；雨天或起霧勿上" },
+      { name: "合歡山主峰", area: "南投縣仁愛鄉", region: "中部", level: "easy", km: 5, hours: 2, climb: 270, shop: false,
+        desc: "沿舊公路緩上，就能抵達海拔 3417 公尺的百岳，適合第一次挑戰高山。", tags: ["百岳", "高山", "入門"],
+        start: "合歡山主峰登山口（台14甲線武嶺附近）", transport: "需自行開車或參加旅行團",
+        route: "登山口 → 舊公路緩坡 → 主峰三角點 → 原路返回", nearby: "清境農場看綿羊、吃高山蔬菜",
+        season: "春夏高山杜鵑，冬季可能積雪封路", caution: "高海拔氣溫低，注意高山症與保暖" },
+      { name: "合歡北峰", area: "南投縣仁愛鄉", region: "中部", level: "mid", km: 4, hours: 3.5, climb: 450, shop: false,
+        desc: "坡度較陡但路程短，山頂草原遼闊，可欣賞日出與雲海。", tags: ["百岳", "高山", "雲海"],
+        start: "小風口附近的合歡北峰登山口", transport: "需自行開車",
+        route: "登山口 → 陡上箭竹草坡 → 北峰山頂 → 原路返回", nearby: "清境農場",
+        season: "全年，冬季注意積雪", caution: "陡坡連續且無遮蔽，高山症與失溫風險" },
+      { name: "麟趾山", area: "南投縣信義鄉（塔塔加）", region: "中部", level: "mid", km: 5, hours: 3, climb: 300, shop: false,
+        desc: "塔塔加地區的入門路線，山頂可近看玉山主峰與前峰。", tags: ["玉山國家公園", "展望"],
+        start: "塔塔加遊客中心一帶", transport: "自行開車經台18線，或搭往阿里山的客運",
+        route: "塔塔加 → 麟趾山登山口 → 麟趾山頂 → 可接鹿林山 → 返回", nearby: "阿里山森林遊樂區、奮起湖",
+        season: "秋冬晴朗視野佳", caution: "高海拔早晚溫差大" },
+      { name: "雪山東峰", area: "臺中市和平區", region: "中部", level: "hard", km: 11, hours: 8, climb: 1100, shop: false,
+        desc: "從雪山登山口經七卡山莊與「哭坡」，登上海拔 3201 公尺的百岳。", tags: ["百岳", "高山", "需申請入園"],
+        start: "武陵農場的雪山登山口", transport: "自行開車或搭客運到武陵農場",
+        route: "雪山登山口 → 七卡山莊 → 哭坡觀景台 → 雪山東峰 → 原路返回", nearby: "武陵農場（2 月櫻花季）",
+        season: "春秋最佳，冬季可能積雪", caution: "須事先申請雪霸國家公園入園；行程長，請清晨出發" },
+      { name: "玉山前峰", area: "南投縣信義鄉（塔塔加）", region: "中部", level: "hard", km: 5.5, hours: 5, climb: 630, shop: false,
+        desc: "路程不長但非常陡，後段碎石坡需手腳並用，登頂海拔 3239 公尺。", tags: ["高山", "陡坡", "碎石"],
+        start: "塔塔加玉山登山口", transport: "自行開車經台18線，或搭往阿里山的客運到塔塔加",
+        route: "登山口 → 玉山主峰步道 → 前峰岔路 → 陡上碎石坡 → 前峰山頂", nearby: "阿里山森林遊樂區",
+        season: "秋冬天氣穩定時", caution: "碎石坡易落石，建議戴頭盔；請查詢玉山國家公園是否需申請" },
+      { name: "加里山", area: "苗栗縣南庄鄉", region: "中部", level: "hard", km: 9, hours: 7, climb: 950, shop: false,
+        desc: "小百岳中的難關，沿舊鐵道與森林上切，最後一段需拉繩。", tags: ["小百岳", "森林", "拉繩"],
+        start: "鹿場登山口", transport: "需自行開車，經南庄往鹿場部落",
+        route: "鹿場登山口 → 舊森林鐵道 → 杉林 → 拉繩陡上 → 加里山頂 → 原路返回", nearby: "南庄老街吃客家桂花湯圓",
+        season: "秋冬，雨後樹根濕滑", caution: "陡坡拉繩多，建議有登山經驗者前往" },
+      // ---- 南部 ----
+      { name: "奮起湖步道", area: "嘉義縣竹崎鄉", region: "南部", level: "easy", km: 2.5, hours: 1.5, climb: 100, shop: true,
+        desc: "山城老街旁的杉林棧道，海拔約 1400 公尺，夏天也涼爽。", tags: ["散步", "老街", "森林"],
+        start: "奮起湖車站", transport: "搭阿里山林業鐵路，或從嘉義搭往奮起湖的公車",
+        route: "車站 → 老街 → 杉林棧道 → 神社遺址 → 返回車站", nearby: "奮起湖老街吃鐵路便當、愛玉，買糕餅",
+        season: "全年，下午常起霧", caution: "棧道濕滑，霧大時注意腳步" },
+      { name: "雙溪熱帶母樹林", area: "高雄市美濃區", region: "南部", level: "easy", km: 2, hours: 1, climb: 50, shop: true,
+        desc: "百年熱帶樹種林蔭步道，位於黃蝶翠谷，夏天可見滿天黃蝶。", tags: ["散步", "林蔭", "黃蝶"],
+        start: "雙溪熱帶母樹林入口", transport: "美濃市區開車約 20 分鐘",
+        route: "入口 → 林間環狀步道 → 返回", nearby: "美濃市區吃粄條、看油紙傘，喝客家擂茶",
+        season: "5–6 月黃蝶季", caution: "蚊蟲多，帶防蚊液" },
+      { name: "柴山", area: "高雄市鼓山區", region: "南部", level: "easy", km: 4, hours: 2, climb: 250, shop: true,
+        desc: "珊瑚礁石灰岩地形，林間常見台灣獼猴，可眺望高雄港與西子灣。", tags: ["獼猴", "城市郊山", "海景"],
+        start: "龍巖冽泉或雅座登山口", transport: "捷運西子灣站或鹽埕埔站轉公車／步行",
+        route: "登山口 → 珊瑚礁岩步道 → 柴山觀景點 → 原路下山", nearby: "鹽埕、哈瑪星吃小吃，西子灣看夕陽",
+        season: "秋冬較涼爽", caution: "不餵食、不帶塑膠袋吸引獼猴；岩石易刮傷" },
+      { name: "里龍山", area: "屏東縣獅子鄉／車城鄉", region: "南部", level: "hard", km: 8, hours: 6, climb: 950, shop: false,
+        desc: "恆春半島最具代表性的山，一路陡上，山頂可同時望見台灣海峽與太平洋。", tags: ["小百岳", "陡坡", "海景"],
+        start: "竹坑登山口", transport: "需自行開車",
+        route: "登山口 → 連續陡上 → 里龍山頂 → 原路返回", nearby: "車城吃綠豆蒜，或到恆春古城",
+        season: "秋冬，夏天悶熱", caution: "坡陡且長，攜帶足量飲水" },
+      // ---- 東部 ----
+      { name: "林美石磐步道", area: "宜蘭縣礁溪鄉", region: "東部", level: "easy", km: 3, hours: 1.5, climb: 150, shop: true,
+        desc: "沿溪谷而行的環狀步道，沿途小瀑布與石磐，林蔭清涼。", tags: ["溪谷", "瀑布", "溫泉"],
+        start: "林美石磐步道入口", transport: "礁溪火車站開車約 10 分鐘，或搭公車到林美",
+        route: "入口 → 溪谷棧道 → 瀑布群 → 環狀返回入口", nearby: "礁溪泡溫泉、吃溫泉蔬菜，逛礁溪夜市",
+        season: "夏季消暑", caution: "颱風或豪雨後常封閉維修，出發前查公告" },
+      { name: "太平山見晴懷古步道", area: "宜蘭縣大同鄉", region: "東部", level: "easy", km: 1.8, hours: 1, climb: 50, shop: false,
+        desc: "沿舊林業鐵道而行，霧氣與苔蘚交織，被稱為最美的森林步道之一。", tags: ["森林", "鐵道", "需購門票"],
+        start: "太平山國家森林遊樂區內的見晴步道入口", transport: "自行開車或搭往太平山的客運，入園須購票",
+        route: "入口 → 舊鐵道 → 終點觀景台 → 原路返回", nearby: "下山到鳩之澤溫泉煮溫泉蛋",
+        season: "秋季楓紅，全年常起霧", caution: "入園可能有人數管制，請先查詢；山上溫度低" },
+      { name: "抹茶山（聖母登山步道）", area: "宜蘭縣礁溪鄉", region: "東部", level: "mid", km: 9, hours: 5, climb: 600, shop: true,
+        desc: "終點聖母山莊後方的山稜長滿箭竹，綠意如抹茶冰淇淋。", tags: ["草原稜線", "石階", "熱門"],
+        start: "礁溪五峰旗附近的聖母登山步道入口", transport: "礁溪火車站搭計程車，或自行開車",
+        route: "入口 → 石階山徑 → 聖母山莊 → 後方稜線觀景點 → 原路返回", nearby: "礁溪溫泉、溫泉蔬菜、礁溪夜市",
+        season: "春夏草坡最綠，晴天才看得到抹茶色", caution: "雨後泥濘濕滑，稜線起霧時視線差" },
+      { name: "鯉魚山", area: "花蓮縣壽豐鄉", region: "東部", level: "mid", km: 4, hours: 2.5, climb: 470, shop: false,
+        desc: "從鯉魚潭畔上山，林蔭充足，山頂可俯瞰鯉魚潭與花東縱谷。", tags: ["小百岳", "湖景", "林蔭"],
+        start: "鯉魚潭周邊的鯉魚山登山口", transport: "花蓮市區開車約 30 分鐘",
+        route: "登山口 → 林間步道 → 鯉魚山頂 → 原路或另一條路線下山", nearby: "鯉魚潭划船、騎環潭自行車",
+        season: "全年皆宜", caution: "林間潮濕，注意蚊蟲與蛇" },
+      { name: "都蘭山", area: "臺東縣東河鄉", region: "東部", level: "hard", km: 9, hours: 6, climb: 1000, shop: true,
+        desc: "阿美族的聖山，海拔 1190 公尺，登頂可遠眺綠島與東海岸。", tags: ["小百岳", "海景", "陡坡"],
+        start: "都蘭聚落的都蘭山登山口", transport: "需自行開車，或從台東搭海線客運到都蘭",
+        route: "登山口 → 陡上林道與山徑 → 都蘭山頂 → 原路返回", nearby: "都蘭新東糖廠文創園區喝咖啡、逛手作",
+        season: "秋冬，夏天悶熱", caution: "坡陡路長，建議清晨出發並多帶水" }
     ];
+
     const levelText = { all: "全部難度", easy: "輕鬆", mid: "中等", hard: "困難" };
     const regionList = ["全部", "北部", "中部", "南部", "東部"];
-    let current = "all";
-    let region = "全部";
-    const regions = document.getElementById("regions");
-    regionList.forEach(r => {
-      const b = document.createElement("button");
-      b.type = "button"; b.className = "chip"; b.textContent = r;
-      b.setAttribute("aria-pressed", r === region);
-      b.addEventListener("click", () => {
-        region = r;
-        regions.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.textContent === r));
-        render();
-      });
-      regions.appendChild(b);
-    });
+    let level = "all", region = "全部", shopOnly = false;
 
-    const filters = document.getElementById("filters");
-    const list = document.getElementById("list");
-    const empty = document.getElementById("empty");
-    const search = document.getElementById("search");
-    const sort = document.getElementById("sort");
+    const $ = id => document.getElementById(id);
+    const list = $("list"), empty = $("empty"), search = $("search"), sort = $("sort"), count = $("count");
 
-    Object.entries(levelText).forEach(([key, text]) => {
-      const b = document.createElement("button");
-      b.type = "button"; b.className = "chip"; b.textContent = text; b.dataset.level = key;
-      b.setAttribute("aria-pressed", key === current);
-      b.addEventListener("click", () => {
-        current = key;
-        filters.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.level === key));
-        render();
+    function chipGroup(container, items, getActive, setActive) {
+      items.forEach(([key, text]) => {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "chip"; b.textContent = text; b.dataset.key = key;
+        b.setAttribute("aria-pressed", key === getActive());
+        b.addEventListener("click", () => {
+          setActive(key);
+          container.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.key === key));
+          render();
+        });
+        container.appendChild(b);
       });
-      filters.appendChild(b);
+    }
+    chipGroup($("regions"), regionList.map(r => [r, r]), () => region, v => region = v);
+    chipGroup($("filters"), Object.entries(levelText), () => level, v => level = v);
+    $("shop-toggle").addEventListener("click", e => {
+      shopOnly = !shopOnly; e.currentTarget.setAttribute("aria-pressed", shopOnly); render();
     });
 
     function formatHours(h) {
       const hr = Math.floor(h), min = Math.round((h - hr) * 60);
-      return (hr ? hr + " 小時" : "") + (min ? " " + min + " 分" : "");
+      return ((hr ? hr + " 小時" : "") + (min ? " " + min + " 分" : "")).trim();
     }
+
+    const detailFields = [["start", "登山口"], ["transport", "交通"], ["route", "路線"], ["nearby", "附近吃買"], ["season", "推薦時節"], ["caution", "注意事項"]];
 
     function render() {
       const q = search.value.trim();
       let shown = trails.filter(t =>
-        (current === "all" || t.level === current) &&
+        (level === "all" || t.level === level) &&
         (region === "全部" || t.region === region) &&
-        (!q || t.name.includes(q) || t.area.includes(q) || t.tags.some(tag => tag.includes(q))));
+        (!shopOnly || t.shop) &&
+        (!q || [t.name, t.area, t.desc, t.nearby, ...t.tags].some(s => s.includes(q))));
       const key = { distance: "km", time: "hours", climb: "climb" }[sort.value];
       if (key) shown = [...shown].sort((a, b) => a[key] - b[key]);
 
@@ -170,19 +308,29 @@
             <div><b class="hours"></b><span>來回時間</span></div>
             <div><b class="climb"></b><span>爬升</span></div>
           </div>
-          <div class="tags"></div>`;
+          <div class="tags"></div>
+          <details><summary>詳細資訊</summary><dl></dl></details>`;
         card.querySelector("h2").textContent = t.name;
         const lv = card.querySelector(".level");
         lv.textContent = levelText[t.level]; lv.classList.add(t.level);
         card.querySelector(".area").textContent = "📍 " + t.area;
         card.querySelector(".desc").textContent = t.desc;
         card.querySelector(".km").textContent = t.km + " km";
-        card.querySelector(".hours").textContent = formatHours(t.hours).trim();
+        card.querySelector(".hours").textContent = formatHours(t.hours);
         card.querySelector(".climb").textContent = t.climb + " m";
         const tags = card.querySelector(".tags");
+        if (t.shop) { const s = document.createElement("span"); s.className = "shop"; s.textContent = "🛍️ 可順遊吃買"; tags.appendChild(s); }
         t.tags.forEach(tag => { const s = document.createElement("span"); s.textContent = tag; tags.appendChild(s); });
+        const dl = card.querySelector("dl");
+        detailFields.forEach(([f, label]) => {
+          const dt = document.createElement("dt"); dt.textContent = label;
+          const dd = document.createElement("dd"); dd.textContent = t[f];
+          if (f === "caution") dd.className = "caution";
+          dl.append(dt, dd);
+        });
         list.appendChild(card);
       });
+      count.textContent = `共 ${shown.length} 條步道`;
       empty.hidden = shown.length > 0;
     }
 
