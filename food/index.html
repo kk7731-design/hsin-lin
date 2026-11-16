@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#b4451f">
-  <title>各縣市特色小吃</title>
+  <title>各縣市特色小吃與伴手禮</title>
   <style>
     :root {
       --bg: #fdf6ec; --card: #ffffff; --text: #2b2118; --muted: #7a6a5c;
@@ -47,8 +47,8 @@
 <body>
   <main>
     <header>
-      <h1>🍢 各縣市特色小吃</h1>
-      <p>走訪台灣 22 個縣市，看看每個地方最有名的在地味道。</p>
+      <h1>🍢 各縣市特色小吃與伴手禮</h1>
+      <p>走訪台灣 22 個縣市，看看每個地方最有名的在地味道，順便帶點伴手禮回家。</p>
     </header>
 
     <div class="toolbar">
@@ -142,7 +142,38 @@
       { county: "金門縣", name: "貢糖", emoji: "🥜", type: "伴手禮", desc: "花生與麥芽糖反覆捶打製成，香酥不黏牙。", where: "金城鎮" },
       { county: "金門縣", name: "廣東粥", emoji: "🥣", type: "主食", desc: "米粒熬到化開的綿密粥，加入豬肉、皮蛋與油條，是金門人的早餐。", where: "金城鎮" },
       { county: "連江縣", name: "繼光餅", emoji: "🥯", type: "點心", desc: "中間有洞的烤餅，相傳是戚繼光行軍的乾糧，夾蛋或肉吃。", where: "南竿" },
-      { county: "連江縣", name: "老酒麵線", emoji: "🍜", type: "主食", desc: "用馬祖老酒煮的麵線，加荷包蛋，暖身又香醇。", where: "南竿、北竿" }
+      { county: "連江縣", name: "老酒麵線", emoji: "🍜", type: "主食", desc: "用馬祖老酒煮的麵線，加荷包蛋，暖身又香醇。", where: "南竿、北竿" },
+      // ---- 伴手禮補充 ----
+      { county: "臺北市", name: "牛軋糖", emoji: "🍬", type: "伴手禮", desc: "奶香濃郁的軟糖包著花生或堅果，常和鳳梨酥一起當台灣伴手禮。", where: "迪化街與市區糕餅店" },
+      { county: "新北市", name: "坪林包種茶", emoji: "🍵", type: "伴手禮", desc: "輕發酵的清香烏龍茶，花香明顯，坪林老街還有茶業博物館。", where: "坪林老街" },
+      { county: "基隆市", name: "芋泥球", emoji: "🟣", type: "伴手禮", desc: "綿密芋泥裹上外皮烘烤，是基隆老字號糕餅的人氣品項。", where: "基隆廟口周邊" },
+      { county: "桃園市", name: "拉拉山水蜜桃", emoji: "🍑", type: "伴手禮", desc: "復興區高山種植，果肉多汁香甜，夏季限定。", where: "復興區拉拉山" },
+      { county: "新竹市", name: "竹塹餅", emoji: "🥮", type: "伴手禮", desc: "新竹古名竹塹，傳統大餅包冬瓜、肥肉與油蔥，甜鹹交織。", where: "城隍廟周邊糕餅店" },
+      { county: "新竹縣", name: "東方美人茶", emoji: "🍵", type: "伴手禮", desc: "茶葉被小綠葉蟬叮咬後產生蜜香，是北埔、峨眉的名茶。", where: "北埔、峨眉" },
+      { county: "新竹縣", name: "新埔柿餅", emoji: "🟠", type: "伴手禮", desc: "利用秋冬九降風曬製，外皮帶白霜、內裡軟Q。", where: "新埔鎮（秋冬產季）" },
+      { county: "宜蘭縣", name: "鴨賞", emoji: "🦆", type: "伴手禮", desc: "鴨肉醃漬後用甘蔗煙燻，鹹香有嚼勁，切片配蒜苗最對味。", where: "宜蘭市區、礁溪" },
+      { county: "宜蘭縣", name: "金棗", emoji: "🍊", type: "伴手禮", desc: "宜蘭特產的小柑橘，做成蜜餞或金棗糕，酸甜帶微苦。", where: "宜蘭市區" },
+      { county: "苗栗縣", name: "公館紅棗", emoji: "🔴", type: "伴手禮", desc: "公館是台灣主要紅棗產地，可買紅棗乾、紅棗酥或紅棗雞湯包。", where: "公館鄉" },
+      { county: "臺中市", name: "鳳梨酥", emoji: "🍍", type: "伴手禮", desc: "奶油酥皮包鳳梨餡，台中有許多知名糕餅店，是最受歡迎的台灣伴手禮。", where: "市區各糕餅店" },
+      { county: "臺中市", name: "大甲芋頭酥", emoji: "🟣", type: "伴手禮", desc: "層層酥皮包著芋泥與麻糬，大甲鎮瀾宮周邊的名產。", where: "大甲鎮瀾宮周邊" },
+      { county: "彰化縣", name: "鳳眼糕", emoji: "⬜", type: "伴手禮", desc: "糯米粉與糖做成的傳統糕點，入口即化，是鹿港古早味。", where: "鹿港老街" },
+      { county: "南投縣", name: "凍頂烏龍茶", emoji: "🍵", type: "伴手禮", desc: "鹿谷鄉凍頂山出產，焙火香氣濃郁，回甘明顯。", where: "鹿谷鄉" },
+      { county: "雲林縣", name: "古坑咖啡", emoji: "☕", type: "伴手禮", desc: "台灣咖啡的代表產地之一，可到華山咖啡街邊喝邊買豆。", where: "古坑鄉華山" },
+      { county: "嘉義縣", name: "阿里山高山茶", emoji: "🍵", type: "伴手禮", desc: "海拔千公尺以上種植，茶湯清香甘甜。", where: "阿里山鄉、梅山鄉" },
+      { county: "嘉義縣", name: "新港飴", emoji: "🍬", type: "伴手禮", desc: "麥芽糖加花生做成的軟糖，Q軟不黏牙，是新港老字號名產。", where: "新港奉天宮周邊" },
+      { county: "臺南市", name: "安平蝦餅", emoji: "🦐", type: "伴手禮", desc: "蝦仁與麵粉製成的薄片，酥脆有蝦香，是安平老街必買。", where: "安平老街" },
+      { county: "臺南市", name: "麻豆文旦", emoji: "🍐", type: "伴手禮", desc: "中秋節應景水果，果肉細緻多汁、酸甜適中。", where: "麻豆區（中秋前後）" },
+      { county: "高雄市", name: "旗山香蕉蛋糕", emoji: "🍌", type: "伴手禮", desc: "旗山曾是香蕉王國，香蕉蛋糕、香蕉冰都是在地特色。", where: "旗山老街" },
+      { county: "屏東縣", name: "萬丹紅豆", emoji: "🫘", type: "伴手禮", desc: "台灣紅豆主要產地，紅豆餅、紅豆湯都香甜綿密。", where: "萬丹鄉" },
+      { county: "屏東縣", name: "東港櫻花蝦", emoji: "🦐", type: "伴手禮", desc: "東港近海捕撈，曬乾後鮮香，可炒飯、煮湯。", where: "東港華僑市場" },
+      { county: "花蓮縣", name: "花蓮薯", emoji: "🍠", type: "伴手禮", desc: "外型像番薯但其實是內餡為地瓜泥或奶油的糕點，鬆軟香甜。", where: "花蓮市區" },
+      { county: "臺東縣", name: "池上米", emoji: "🌾", type: "伴手禮", desc: "花東縱谷好山好水孕育的米，米粒飽滿、冷了也好吃。", where: "池上鄉" },
+      { county: "澎湖縣", name: "花生酥", emoji: "🥜", type: "伴手禮", desc: "澎湖小粒花生磨碎壓製，香酥鬆脆。", where: "馬公市區" },
+      { county: "澎湖縣", name: "丁香魚", emoji: "🐟", type: "伴手禮", desc: "小魚乾炒花生或製成魚酥，鹹香下酒。", where: "馬公市區" },
+      { county: "金門縣", name: "金門高粱酒", emoji: "🍶", type: "伴手禮", desc: "金門最具代表性的特產，香氣濃烈。（未成年請勿飲酒）", where: "金城鎮、金寧鄉" },
+      { county: "金門縣", name: "手工麵線", emoji: "🍜", type: "伴手禮", desc: "日曬手工麵線，細長有嚼勁，耐煮不糊。", where: "金城鎮" },
+      { county: "連江縣", name: "馬祖老酒", emoji: "🍶", type: "伴手禮", desc: "糯米釀造的黃酒，可直接喝或用來入菜。（未成年請勿飲酒）", where: "南竿" },
+      { county: "連江縣", name: "魚麵", emoji: "🍜", type: "伴手禮", desc: "魚漿加地瓜粉製成的麵條，帶淡淡海味，煮湯最鮮。", where: "南竿、北竿" }
     ];
 
     const regionList = ["全部", "北部", "中部", "南部", "東部", "離島"];
@@ -216,7 +247,7 @@
         list.appendChild(block);
       });
       const n = new Set(shown.map(f => f.county)).size;
-      count.textContent = `共 ${n} 個縣市・${shown.length} 種小吃`;
+      count.textContent = `共 ${n} 個縣市・${shown.length} 項美食`;
       empty.hidden = shown.length > 0;
     }
 
