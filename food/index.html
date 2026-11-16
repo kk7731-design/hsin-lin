@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#b4451f">
-  <title>美食小吃</title>
+  <title>各縣市特色小吃</title>
   <style>
     :root {
       --bg: #fdf6ec; --card: #ffffff; --text: #2b2118; --muted: #7a6a5c;
@@ -20,22 +20,26 @@
     main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
     header h1 { margin: 0; font-size: 2rem; }
     header p { margin: 4px 0 0; color: var(--muted); }
-    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; align-items: center; }
-    .toolbar input { flex: 1 1 200px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; align-items: center; }
+    .toolbar input, .toolbar select { padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
                      background: var(--card); color: var(--text); font-size: 1rem; }
+    .toolbar input { flex: 1 1 200px; }
     .chip { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px;
             padding: 8px 14px; font-size: .95rem; cursor: pointer; }
     .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-    .card .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-    .card h2 { margin: 0; font-size: 1.2rem; }
-    .emoji { font-size: 2rem; }
+    .count { color: var(--muted); font-size: .9rem; margin-top: 14px; }
+    .county-block { margin-top: 22px; }
+    .county-block h2 { margin: 0 0 8px; font-size: 1.25rem; display: flex; align-items: baseline; gap: 8px; }
+    .county-block h2 small { color: var(--muted); font-weight: 400; font-size: .85rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+    .card .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .card h3 { margin: 0; font-size: 1.1rem; }
+    .emoji { font-size: 1.8rem; }
     .tag { display: inline-block; background: var(--accent-soft); color: var(--accent); border-radius: 6px;
-           padding: 0 8px; font-size: .8rem; margin-top: 6px; }
+           padding: 0 8px; font-size: .8rem; margin-top: 4px; }
     .card p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
-    .meta { display: flex; justify-content: space-between; margin-top: 10px; font-size: .9rem; }
-    .price { color: var(--accent); font-weight: 700; }
+    .where { margin-top: 8px; font-size: .9rem; }
     .empty { color: var(--muted); text-align: center; padding: 32px 0; }
     footer { margin-top: 32px; color: var(--muted); font-size: .85rem; text-align: center; }
   </style>
@@ -43,84 +47,176 @@
 <body>
   <main>
     <header>
-      <h1>🍢 美食小吃</h1>
-      <p>巷口夜市的好味道，一頁看完。（店家名稱與地點皆為虛構示範）</p>
+      <h1>🍢 各縣市特色小吃</h1>
+      <p>走訪台灣 22 個縣市，看看每個地方最有名的在地味道。</p>
     </header>
 
     <div class="toolbar">
-      <input id="search" type="search" placeholder="搜尋小吃名稱…" aria-label="搜尋小吃">
+      <input id="search" type="search" placeholder="搜尋小吃、縣市或地點…" aria-label="搜尋小吃">
+      <select id="county" aria-label="選擇縣市"></select>
     </div>
-    <div class="toolbar" id="filters" role="group" aria-label="分類篩選"></div>
+    <div class="toolbar" id="regions" role="group" aria-label="地區篩選"></div>
+    <div class="toolbar" id="types" role="group" aria-label="類型篩選"></div>
 
-    <section class="grid" id="list" aria-live="polite"></section>
+    <p class="count" id="count" aria-live="polite"></p>
+    <div id="list"></div>
     <p class="empty" id="empty" hidden>找不到符合的小吃，換個關鍵字試試看。</p>
 
-    <footer>示範頁面・價格僅供參考</footer>
+    <footer>資料為各地常見代表小吃的整理，僅供參考；店家營業時間與價格請以現場為準</footer>
   </main>
 
   <script>
+    const counties = [
+      ["臺北市", "北部"], ["新北市", "北部"], ["基隆市", "北部"], ["桃園市", "北部"], ["新竹市", "北部"], ["新竹縣", "北部"], ["宜蘭縣", "北部"],
+      ["苗栗縣", "中部"], ["臺中市", "中部"], ["彰化縣", "中部"], ["南投縣", "中部"], ["雲林縣", "中部"],
+      ["嘉義市", "南部"], ["嘉義縣", "南部"], ["臺南市", "南部"], ["高雄市", "南部"], ["屏東縣", "南部"],
+      ["花蓮縣", "東部"], ["臺東縣", "東部"],
+      ["澎湖縣", "離島"], ["金門縣", "離島"], ["連江縣", "離島"]
+    ];
+    const regionOf = Object.fromEntries(counties);
+
+    // type：主食、點心、甜品、伴手禮
     const foods = [
-      { name: "滷肉飯", emoji: "🍚", type: "飯麵", price: 40, shop: "阿福飯桶", place: "虛構市・東門巷", desc: "肥瘦相間的滷肉淋在白飯上，配黃蘿蔔最對味。" },
-      { name: "牛肉麵", emoji: "🍜", type: "飯麵", price: 160, shop: "老陳麵館", place: "虛構市・河堤路", desc: "紅燒湯頭濃郁，牛腱軟嫩，麵條Q彈。" },
-      { name: "蚵仔煎", emoji: "🍳", type: "鹹食", price: 70, shop: "海口小攤", place: "虛構市・星光夜市", desc: "鮮蚵加蛋與地瓜粉漿煎香，淋上甜辣醬。" },
-      { name: "鹽酥雞", emoji: "🍗", type: "炸物", price: 80, shop: "香脆鋪", place: "虛構市・星光夜市", desc: "外酥內嫩，撒上胡椒鹽和九層塔。" },
-      { name: "臭豆腐", emoji: "🧆", type: "炸物", price: 60, shop: "香飄十里", place: "虛構市・南橋口", desc: "炸得金黃酥脆，配台式泡菜解膩。" },
-      { name: "小籠包", emoji: "🥟", type: "點心", price: 120, shop: "蒸籠坊", place: "虛構市・中央街", desc: "皮薄餡多，一咬就爆出鮮甜湯汁。" },
-      { name: "刈包", emoji: "🥪", type: "點心", price: 55, shop: "包好吃", place: "虛構市・西市場", desc: "滷五花肉夾酸菜與花生粉，又稱虎咬豬。" },
-      { name: "肉圓", emoji: "🟤", type: "鹹食", price: 50, shop: "圓仔伯", place: "虛構市・老街口", desc: "透明Q皮包豬肉筍丁，淋上甜鹹醬汁。" },
-      { name: "大腸包小腸", emoji: "🌭", type: "鹹食", price: 65, shop: "雙腸記", place: "虛構市・星光夜市", desc: "糯米腸夾香腸，加蒜片與酸菜。" },
-      { name: "珍珠奶茶", emoji: "🧋", type: "飲品", price: 55, shop: "黑糖圓圓", place: "虛構市・車站前", desc: "黑糖珍珠熬煮入味，奶茶香濃。" },
-      { name: "豆花", emoji: "🍮", type: "甜品", price: 45, shop: "古早味豆花", place: "虛構市・廟前埕", desc: "綿密豆花配花生、粉圓與薑汁糖水。" },
-      { name: "芒果冰", emoji: "🍧", type: "甜品", price: 130, shop: "夏天冰室", place: "虛構市・河堤路", desc: "整顆芒果鋪滿雪花冰，再加一球冰淇淋。" },
-      { name: "雞蛋糕", emoji: "🧁", type: "甜品", price: 40, shop: "蛋蛋香", place: "虛構市・西市場", desc: "現烤小雞蛋糕，外脆內軟帶奶香。" },
-      { name: "冬瓜茶", emoji: "🥤", type: "飲品", price: 30, shop: "老井茶舖", place: "虛構市・老街口", desc: "古法熬煮的冬瓜糖，清涼退火。" }
+      { county: "臺北市", name: "牛肉麵", emoji: "🍜", type: "主食", desc: "紅燒或清燉湯頭配上大塊牛腱，台北每年都有牛肉麵節。", where: "永康街、桃源街一帶" },
+      { county: "臺北市", name: "胡椒餅", emoji: "🥯", type: "點心", desc: "炭火貼爐烤得酥脆，咬開滿是胡椒豬肉與蔥花。", where: "饒河街夜市入口" },
+      { county: "臺北市", name: "滷肉飯", emoji: "🍚", type: "主食", desc: "肥瘦相間的滷肉淋白飯，配黃蘿蔔與滷蛋，是最日常的台北味。", where: "大街小巷、各夜市" },
+      { county: "新北市", name: "阿給", emoji: "🍢", type: "點心", desc: "油豆腐塞入冬粉、用魚漿封口蒸熟，淋上甜辣醬。", where: "淡水老街" },
+      { county: "新北市", name: "芋圓", emoji: "🍡", type: "甜品", desc: "芋頭與地瓜做成的Q彈圓子，夏天吃冰、冬天吃熱的。", where: "九份老街" },
+      { county: "新北市", name: "金牛角麵包", emoji: "🥐", type: "伴手禮", desc: "牛角造型的奶油麵包，外酥內軟，是三峽代表伴手禮。", where: "三峽老街" },
+      { county: "新北市", name: "臭豆腐", emoji: "🧆", type: "點心", desc: "深坑老街以麻辣臭豆腐、豆腐料理聞名。", where: "深坑老街" },
+      { county: "基隆市", name: "鼎邊趖", emoji: "🥣", type: "主食", desc: "米漿沿著鍋邊燙成片，配上蝦仁、金針、魚漿的羹湯。", where: "基隆廟口夜市" },
+      { county: "基隆市", name: "營養三明治", emoji: "🥪", type: "點心", desc: "油炸麵包夾滷蛋、番茄、小黃瓜與美乃滋，香甜又有飽足感。", where: "基隆廟口夜市" },
+      { county: "基隆市", name: "泡泡冰", emoji: "🍧", type: "甜品", desc: "刨冰與配料用力攪拌到綿密起泡，口感像冰淇淋。", where: "基隆廟口夜市" },
+      { county: "桃園市", name: "大溪豆干", emoji: "🟫", type: "伴手禮", desc: "黑豆干滷得香甜有嚼勁，是大溪老街最有名的伴手禮。", where: "大溪老街" },
+      { county: "桃園市", name: "米干", emoji: "🍲", type: "主食", desc: "滇緬移民帶來的米製麵食，湯頭配上肉醬，帶異國風味。", where: "龍岡忠貞市場一帶" },
+      { county: "新竹市", name: "新竹米粉", emoji: "🍝", type: "主食", desc: "利用九降風曬製，細緻有彈性，炒米粉或湯米粉都好吃。", where: "城隍廟周邊" },
+      { county: "新竹市", name: "貢丸", emoji: "⚪", type: "主食", desc: "用力捶打的豬肉丸，口感紮實彈牙，常配米粉一起吃。", where: "城隍廟周邊" },
+      { county: "新竹縣", name: "擂茶", emoji: "🍵", type: "點心", desc: "把茶葉、芝麻、花生等穀物磨成粉沖泡，可以自己動手擂。", where: "北埔老街" },
+      { county: "新竹縣", name: "客家粄條", emoji: "🍜", type: "主食", desc: "米漿蒸成的寬扁粄條，乾拌或加湯，淋上油蔥最香。", where: "竹東、北埔、關西一帶" },
+      { county: "宜蘭縣", name: "卜肉", emoji: "🍖", type: "點心", desc: "豬里肌裹粉油炸，外酥內嫩，撒胡椒鹽吃。", where: "羅東夜市、宜蘭市區" },
+      { county: "宜蘭縣", name: "三星蔥油餅", emoji: "🫓", type: "點心", desc: "使用三星青蔥，蔥量多又香甜，可加蛋。", where: "三星鄉、羅東夜市" },
+      { county: "宜蘭縣", name: "牛舌餅", emoji: "🍪", type: "伴手禮", desc: "薄脆長條狀的麥芽餅，造型像牛舌，香脆不膩。", where: "宜蘭市區、礁溪" },
+      { county: "宜蘭縣", name: "糕渣", emoji: "🟨", type: "點心", desc: "用雞高湯與肉末製成的傳統宴客菜，炸過後外脆內滑。", where: "宜蘭市區餐館" },
+      { county: "苗栗縣", name: "客家小炒", emoji: "🥘", type: "主食", desc: "豬肉、魷魚、豆干與芹菜大火爆炒，鹹香下飯。", where: "三義、南庄、公館客家餐館" },
+      { county: "苗栗縣", name: "桂花湯圓", emoji: "🍡", type: "甜品", desc: "南庄老街的桂花釀甜湯，湯圓Q軟、香氣清甜。", where: "南庄老街" },
+      { county: "苗栗縣", name: "大湖草莓", emoji: "🍓", type: "伴手禮", desc: "冬春季節可以自己採草莓，也有草莓冰淇淋與果醬。", where: "大湖鄉" },
+      { county: "臺中市", name: "太陽餅", emoji: "🥮", type: "伴手禮", desc: "酥皮包麥芽糖餡，台中最經典的伴手禮。", where: "自由路一帶" },
+      { county: "臺中市", name: "珍珠奶茶", emoji: "🧋", type: "點心", desc: "台中是珍奶的發源地之一，Q彈粉圓配香濃奶茶。", where: "市區各茶飲店" },
+      { county: "臺中市", name: "大麵羹", emoji: "🍜", type: "主食", desc: "加了鹼的粗麵煮成濃稠湯麵，配韭菜與油蔥，是台中獨有的味道。", where: "台中市區老店" },
+      { county: "彰化縣", name: "肉圓", emoji: "🟤", type: "點心", desc: "彰化肉圓以油炸或油泡方式處理，Q皮包著大塊豬肉。", where: "彰化市、北斗" },
+      { county: "彰化縣", name: "爌肉飯", emoji: "🍚", type: "主食", desc: "整塊滷五花肉蓋在白飯上，用竹籤固定，入口即化。", where: "彰化市區" },
+      { county: "彰化縣", name: "蚵仔煎", emoji: "🍳", type: "點心", desc: "王功、鹿港一帶靠海，鮮蚵飽滿，煎得外酥內滑。", where: "鹿港老街、王功漁港" },
+      { county: "南投縣", name: "香菇茶葉蛋", emoji: "🥚", type: "點心", desc: "用香菇與茶葉一起滷製，湯汁滲入蛋白，香氣特別。", where: "日月潭" },
+      { county: "南投縣", name: "日月潭紅茶", emoji: "🍵", type: "伴手禮", desc: "魚池鄉產的紅茶，帶天然肉桂與薄荷香氣。", where: "魚池鄉、日月潭" },
+      { county: "雲林縣", name: "鴨肉飯", emoji: "🦆", type: "主食", desc: "鴨肉片鋪在飯上淋鴨油醬汁，北港人的日常美食。", where: "北港朝天宮周邊" },
+      { county: "雲林縣", name: "煎盤粿", emoji: "🥞", type: "點心", desc: "米漿蒸成的粿切片煎到焦香，淋上醬汁，配蛋或肉片。", where: "北港" },
+      { county: "嘉義市", name: "火雞肉飯", emoji: "🍚", type: "主食", desc: "火雞肉絲鋪在白飯上，淋雞油與油蔥，是嘉義的代表味道。", where: "嘉義市區" },
+      { county: "嘉義市", name: "方塊酥", emoji: "🧇", type: "伴手禮", desc: "層層酥脆的方形餅乾，加入芝麻，是嘉義知名伴手禮。", where: "嘉義市區" },
+      { county: "嘉義縣", name: "奮起湖便當", emoji: "🍱", type: "主食", desc: "鐵路便當配滷排骨、滷蛋與醬菜，搭配山城風景特別有味道。", where: "奮起湖老街" },
+      { county: "嘉義縣", name: "蚵嗲", emoji: "🦪", type: "點心", desc: "鮮蚵加韭菜裹麵糊油炸，外酥內鮮。", where: "東石、布袋漁港" },
+      { county: "臺南市", name: "擔仔麵", emoji: "🍜", type: "主食", desc: "小碗湯麵加肉燥、蝦子與蒜泥，起源於漁民的副業。", where: "中西區" },
+      { county: "臺南市", name: "牛肉湯", emoji: "🥩", type: "主食", desc: "生牛肉片以滾燙清湯沖熟，鮮甜軟嫩，台南人當早餐吃。", where: "安平、中西區" },
+      { county: "臺南市", name: "棺材板", emoji: "🍞", type: "點心", desc: "厚片吐司炸成盒狀，填入濃郁的雞肉海鮮奶油餡。", where: "康樂市場（沙卡里巴）" },
+      { county: "臺南市", name: "碗粿", emoji: "🍮", type: "點心", desc: "米漿加肉燥、蛋黃蒸成，淋上醬油膏與蒜泥。", where: "市區各處" },
+      { county: "臺南市", name: "虱目魚粥", emoji: "🐟", type: "主食", desc: "鮮魚肚與魚肉加入粥中，清爽鮮甜，是府城早餐首選。", where: "市區各處" },
+      { county: "高雄市", name: "木瓜牛奶", emoji: "🥛", type: "點心", desc: "新鮮木瓜與牛奶現打，香濃順口。", where: "六合夜市、市區" },
+      { county: "高雄市", name: "旗津海產", emoji: "🦐", type: "主食", desc: "旗津渡輪過去就是海產街，現挑現煮，烤小卷最受歡迎。", where: "旗津老街" },
+      { county: "高雄市", name: "岡山羊肉", emoji: "🍲", type: "主食", desc: "岡山以羊肉爐、羊肉湯著名，配辣豆瓣醬。", where: "岡山區" },
+      { county: "高雄市", name: "美濃粄條", emoji: "🍜", type: "主食", desc: "客家粄條滑嫩有米香，配上豬肉片與韭菜。", where: "美濃區" },
+      { county: "屏東縣", name: "萬巒豬腳", emoji: "🍖", type: "主食", desc: "滷得Q彈軟嫩、冷吃熱吃都好，沾蒜蓉醬油最對味。", where: "萬巒鄉" },
+      { county: "屏東縣", name: "綠豆蒜", emoji: "🥣", type: "甜品", desc: "去殼綠豆仁煮成甜湯，因外形像蒜頭而得名。", where: "車城、恆春" },
+      { county: "屏東縣", name: "東港黑鮪魚", emoji: "🐟", type: "主食", desc: "每年 5–6 月黑鮪魚季，可吃到新鮮生魚片。", where: "東港華僑市場" },
+      { county: "花蓮縣", name: "扁食", emoji: "🥟", type: "點心", desc: "皮薄餡多的餛飩，湯頭清爽，是花蓮人的家常小吃。", where: "花蓮市區" },
+      { county: "花蓮縣", name: "麻糬", emoji: "🍡", type: "伴手禮", desc: "Q軟的麻糬包紅豆、花生或芝麻，是花蓮最經典伴手禮。", where: "花蓮市區" },
+      { county: "花蓮縣", name: "炸蛋蔥油餅", emoji: "🍳", type: "點心", desc: "整顆蛋下鍋和餅一起油炸，蛋黃半熟流出來最美味。", where: "花蓮市區" },
+      { county: "臺東縣", name: "池上便當", emoji: "🍱", type: "主食", desc: "使用池上米，米粒飽滿Q彈，配菜豐富。", where: "池上鄉" },
+      { county: "臺東縣", name: "釋迦", emoji: "🍏", type: "伴手禮", desc: "台東是釋迦主要產地，香甜綿密，鳳梨釋迦也很受歡迎。", where: "臺東市、卑南鄉" },
+      { county: "澎湖縣", name: "黑糖糕", emoji: "🟫", type: "伴手禮", desc: "黑糖蒸成的鬆軟糕點，撒上芝麻，是澎湖代表伴手禮。", where: "馬公市區" },
+      { county: "澎湖縣", name: "仙人掌冰", emoji: "🌵", type: "甜品", desc: "用仙人掌果實做成的紫紅色冰品，酸甜清爽。", where: "馬公市區、各景點" },
+      { county: "金門縣", name: "貢糖", emoji: "🥜", type: "伴手禮", desc: "花生與麥芽糖反覆捶打製成，香酥不黏牙。", where: "金城鎮" },
+      { county: "金門縣", name: "廣東粥", emoji: "🥣", type: "主食", desc: "米粒熬到化開的綿密粥，加入豬肉、皮蛋與油條，是金門人的早餐。", where: "金城鎮" },
+      { county: "連江縣", name: "繼光餅", emoji: "🥯", type: "點心", desc: "中間有洞的烤餅，相傳是戚繼光行軍的乾糧，夾蛋或肉吃。", where: "南竿" },
+      { county: "連江縣", name: "老酒麵線", emoji: "🍜", type: "主食", desc: "用馬祖老酒煮的麵線，加荷包蛋，暖身又香醇。", where: "南竿、北竿" }
     ];
 
-    const types = ["全部", ...new Set(foods.map(f => f.type))];
-    let current = "全部";
-    const filters = document.getElementById("filters");
-    const list = document.getElementById("list");
-    const empty = document.getElementById("empty");
-    const search = document.getElementById("search");
+    const regionList = ["全部", "北部", "中部", "南部", "東部", "離島"];
+    const typeList = ["全部類型", "主食", "點心", "甜品", "伴手禮"];
+    let region = "全部", type = "全部類型";
 
-    types.forEach(t => {
-      const b = document.createElement("button");
-      b.type = "button"; b.className = "chip"; b.textContent = t;
-      b.setAttribute("aria-pressed", t === current);
-      b.addEventListener("click", () => {
-        current = t;
-        filters.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.textContent === t));
-        render();
+    const $ = id => document.getElementById(id);
+    const list = $("list"), empty = $("empty"), search = $("search"), countySel = $("county"), count = $("count");
+
+    function fillCounties() {
+      const keep = countySel.value;
+      countySel.innerHTML = "";
+      const all = document.createElement("option"); all.value = ""; all.textContent = "全部縣市"; countySel.appendChild(all);
+      counties.filter(([c, r]) => region === "全部" || r === region).forEach(([c]) => {
+        const o = document.createElement("option"); o.value = c; o.textContent = c; countySel.appendChild(o);
       });
-      filters.appendChild(b);
-    });
+      countySel.value = [...countySel.options].some(o => o.value === keep) ? keep : "";
+    }
+
+    function chipGroup(container, items, getActive, setActive) {
+      items.forEach(text => {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "chip"; b.textContent = text;
+        b.setAttribute("aria-pressed", text === getActive());
+        b.addEventListener("click", () => {
+          setActive(text);
+          container.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.textContent === text));
+          render();
+        });
+        container.appendChild(b);
+      });
+    }
+    chipGroup($("regions"), regionList, () => region, v => { region = v; fillCounties(); });
+    chipGroup($("types"), typeList, () => type, v => type = v);
 
     function render() {
       const q = search.value.trim();
       const shown = foods.filter(f =>
-        (current === "全部" || f.type === current) &&
-        (!q || f.name.includes(q) || f.shop.includes(q) || f.desc.includes(q)));
+        (region === "全部" || regionOf[f.county] === region) &&
+        (!countySel.value || f.county === countySel.value) &&
+        (type === "全部類型" || f.type === type) &&
+        (!q || [f.name, f.county, f.desc, f.where].some(s => s.includes(q))));
+
       list.innerHTML = "";
-      shown.forEach(f => {
-        const card = document.createElement("article");
-        card.className = "card";
-        card.innerHTML = `
-          <div class="top"><h2></h2><span class="emoji" aria-hidden="true"></span></div>
-          <span class="tag"></span>
-          <p class="desc"></p>
-          <div class="meta"><span class="shop"></span><span class="price"></span></div>`;
-        card.querySelector("h2").textContent = f.name;
-        card.querySelector(".emoji").textContent = f.emoji;
-        card.querySelector(".tag").textContent = f.type;
-        card.querySelector(".desc").textContent = f.desc;
-        card.querySelector(".shop").textContent = `${f.shop}｜${f.place}`;
-        card.querySelector(".price").textContent = `NT$ ${f.price}`;
-        list.appendChild(card);
+      counties.forEach(([c, r]) => {
+        const items = shown.filter(f => f.county === c);
+        if (!items.length) return;
+        const block = document.createElement("section");
+        block.className = "county-block";
+        const h = document.createElement("h2");
+        h.textContent = c;
+        const small = document.createElement("small"); small.textContent = r;
+        h.appendChild(small);
+        const grid = document.createElement("div"); grid.className = "grid";
+        items.forEach(f => {
+          const card = document.createElement("article");
+          card.className = "card";
+          card.innerHTML = `
+            <div class="top"><h3></h3><span class="emoji" aria-hidden="true"></span></div>
+            <span class="tag"></span>
+            <p></p>
+            <div class="where"></div>`;
+          card.querySelector("h3").textContent = f.name;
+          card.querySelector(".emoji").textContent = f.emoji;
+          card.querySelector(".tag").textContent = f.type;
+          card.querySelector("p").textContent = f.desc;
+          card.querySelector(".where").textContent = "📍 " + f.where;
+          grid.appendChild(card);
+        });
+        block.append(h, grid);
+        list.appendChild(block);
       });
+      const n = new Set(shown.map(f => f.county)).size;
+      count.textContent = `共 ${n} 個縣市・${shown.length} 種小吃`;
       empty.hidden = shown.length > 0;
     }
 
+    fillCounties();
     search.addEventListener("input", render);
+    countySel.addEventListener("change", render);
     render();
   </script>
 </body>
