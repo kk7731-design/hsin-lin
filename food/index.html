@@ -38,6 +38,9 @@
     .emoji { font-size: 1.8rem; }
     .tag { display: inline-block; background: var(--accent-soft); color: var(--accent); border-radius: 6px;
            padding: 0 8px; font-size: .8rem; margin-top: 4px; }
+    .must { display: inline-block; background: var(--accent); color: #fff; border-radius: 6px;
+            padding: 0 8px; font-size: .8rem; margin: 4px 0 0 6px; }
+    .must[hidden] { display: none; }
     .card p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
     .where { margin-top: 8px; font-size: .9rem; }
     .empty { color: var(--muted); text-align: center; padding: 32px 0; }
@@ -48,7 +51,7 @@
   <main>
     <header>
       <h1>🍢 各縣市特色小吃與伴手禮</h1>
-      <p>走訪台灣 22 個縣市，看看每個地方最有名的在地味道，順便帶點伴手禮回家。</p>
+      <p>走訪台灣 22 個縣市，看看每個地方最有名的在地味道，順便帶點伴手禮回家。標示「⭐ 必吃特色」的是各縣市最具代表性的特色小吃。</p>
     </header>
 
     <div class="toolbar">
@@ -57,6 +60,9 @@
     </div>
     <div class="toolbar" id="regions" role="group" aria-label="地區篩選"></div>
     <div class="toolbar" id="types" role="group" aria-label="類型篩選"></div>
+    <div class="toolbar">
+      <button type="button" class="chip" id="must-toggle" aria-pressed="false">⭐ 只看必吃特色小吃</button>
+    </div>
 
     <p class="count" id="count" aria-live="polite"></p>
     <div id="list"></div>
@@ -77,34 +83,34 @@
 
     // type：主食、點心、甜品、伴手禮
     const foods = [
-      { county: "臺北市", name: "牛肉麵", emoji: "🍜", type: "主食", desc: "紅燒或清燉湯頭配上大塊牛腱，台北每年都有牛肉麵節。", where: "永康街、桃源街一帶" },
+      { county: "臺北市", name: "牛肉麵", emoji: "🍜", type: "主食", desc: "紅燒或清燉湯頭配上大塊牛腱，台北每年都有牛肉麵節。", where: "永康街、桃源街一帶", must: true },
       { county: "臺北市", name: "胡椒餅", emoji: "🥯", type: "點心", desc: "炭火貼爐烤得酥脆，咬開滿是胡椒豬肉與蔥花。", where: "饒河街夜市入口" },
       { county: "臺北市", name: "滷肉飯", emoji: "🍚", type: "主食", desc: "肥瘦相間的滷肉淋白飯，配黃蘿蔔與滷蛋，是最日常的台北味。", where: "大街小巷、各夜市" },
-      { county: "新北市", name: "阿給", emoji: "🍢", type: "點心", desc: "油豆腐塞入冬粉、用魚漿封口蒸熟，淋上甜辣醬。", where: "淡水老街" },
+      { county: "新北市", name: "阿給", emoji: "🍢", type: "點心", desc: "油豆腐塞入冬粉、用魚漿封口蒸熟，淋上甜辣醬。", where: "淡水老街", must: true },
       { county: "新北市", name: "芋圓", emoji: "🍡", type: "甜品", desc: "芋頭與地瓜做成的Q彈圓子，夏天吃冰、冬天吃熱的。", where: "九份老街" },
       { county: "新北市", name: "金牛角麵包", emoji: "🥐", type: "伴手禮", desc: "牛角造型的奶油麵包，外酥內軟，是三峽代表伴手禮。", where: "三峽老街" },
       { county: "新北市", name: "臭豆腐", emoji: "🧆", type: "點心", desc: "深坑老街以麻辣臭豆腐、豆腐料理聞名。", where: "深坑老街" },
-      { county: "基隆市", name: "鼎邊趖", emoji: "🥣", type: "主食", desc: "米漿沿著鍋邊燙成片，配上蝦仁、金針、魚漿的羹湯。", where: "基隆廟口夜市" },
+      { county: "基隆市", name: "鼎邊趖", emoji: "🥣", type: "主食", desc: "米漿沿著鍋邊燙成片，配上蝦仁、金針、魚漿的羹湯。", where: "基隆廟口夜市", must: true },
       { county: "基隆市", name: "營養三明治", emoji: "🥪", type: "點心", desc: "油炸麵包夾滷蛋、番茄、小黃瓜與美乃滋，香甜又有飽足感。", where: "基隆廟口夜市" },
       { county: "基隆市", name: "泡泡冰", emoji: "🍧", type: "甜品", desc: "刨冰與配料用力攪拌到綿密起泡，口感像冰淇淋。", where: "基隆廟口夜市" },
       { county: "桃園市", name: "大溪豆干", emoji: "🟫", type: "伴手禮", desc: "黑豆干滷得香甜有嚼勁，是大溪老街最有名的伴手禮。", where: "大溪老街" },
-      { county: "桃園市", name: "米干", emoji: "🍲", type: "主食", desc: "滇緬移民帶來的米製麵食，湯頭配上肉醬，帶異國風味。", where: "龍岡忠貞市場一帶" },
-      { county: "新竹市", name: "新竹米粉", emoji: "🍝", type: "主食", desc: "利用九降風曬製，細緻有彈性，炒米粉或湯米粉都好吃。", where: "城隍廟周邊" },
+      { county: "桃園市", name: "米干", emoji: "🍲", type: "主食", desc: "滇緬移民帶來的米製麵食，湯頭配上肉醬，帶異國風味。", where: "龍岡忠貞市場一帶", must: true },
+      { county: "新竹市", name: "新竹米粉", emoji: "🍝", type: "主食", desc: "利用九降風曬製，細緻有彈性，炒米粉或湯米粉都好吃。", where: "城隍廟周邊", must: true },
       { county: "新竹市", name: "貢丸", emoji: "⚪", type: "主食", desc: "用力捶打的豬肉丸，口感紮實彈牙，常配米粉一起吃。", where: "城隍廟周邊" },
-      { county: "新竹縣", name: "擂茶", emoji: "🍵", type: "點心", desc: "把茶葉、芝麻、花生等穀物磨成粉沖泡，可以自己動手擂。", where: "北埔老街" },
+      { county: "新竹縣", name: "擂茶", emoji: "🍵", type: "點心", desc: "把茶葉、芝麻、花生等穀物磨成粉沖泡，可以自己動手擂。", where: "北埔老街", must: true },
       { county: "新竹縣", name: "客家粄條", emoji: "🍜", type: "主食", desc: "米漿蒸成的寬扁粄條，乾拌或加湯，淋上油蔥最香。", where: "竹東、北埔、關西一帶" },
-      { county: "宜蘭縣", name: "卜肉", emoji: "🍖", type: "點心", desc: "豬里肌裹粉油炸，外酥內嫩，撒胡椒鹽吃。", where: "羅東夜市、宜蘭市區" },
+      { county: "宜蘭縣", name: "卜肉", emoji: "🍖", type: "點心", desc: "豬里肌裹粉油炸，外酥內嫩，撒胡椒鹽吃。", where: "羅東夜市、宜蘭市區", must: true },
       { county: "宜蘭縣", name: "三星蔥油餅", emoji: "🫓", type: "點心", desc: "使用三星青蔥，蔥量多又香甜，可加蛋。", where: "三星鄉、羅東夜市" },
       { county: "宜蘭縣", name: "牛舌餅", emoji: "🍪", type: "伴手禮", desc: "薄脆長條狀的麥芽餅，造型像牛舌，香脆不膩。", where: "宜蘭市區、礁溪" },
       { county: "宜蘭縣", name: "糕渣", emoji: "🟨", type: "點心", desc: "用雞高湯與肉末製成的傳統宴客菜，炸過後外脆內滑。", where: "宜蘭市區餐館" },
-      { county: "苗栗縣", name: "客家小炒", emoji: "🥘", type: "主食", desc: "豬肉、魷魚、豆干與芹菜大火爆炒，鹹香下飯。", where: "三義、南庄、公館客家餐館" },
+      { county: "苗栗縣", name: "客家小炒", emoji: "🥘", type: "主食", desc: "豬肉、魷魚、豆干與芹菜大火爆炒，鹹香下飯。", where: "三義、南庄、公館客家餐館", must: true },
       { county: "苗栗縣", name: "桂花湯圓", emoji: "🍡", type: "甜品", desc: "南庄老街的桂花釀甜湯，湯圓Q軟、香氣清甜。", where: "南庄老街" },
       { county: "苗栗縣", name: "大湖草莓", emoji: "🍓", type: "伴手禮", desc: "冬春季節可以自己採草莓，也有草莓冰淇淋與果醬。", where: "大湖鄉" },
       { county: "臺中市", name: "太陽餅", emoji: "🥮", type: "伴手禮", desc: "酥皮包麥芽糖餡，台中最經典的伴手禮。", where: "自由路一帶" },
       { county: "臺中市", name: "珍珠奶茶", emoji: "🧋", type: "點心", desc: "台中是珍奶的發源地之一，Q彈粉圓配香濃奶茶。", where: "市區各茶飲店" },
-      { county: "臺中市", name: "大麵羹", emoji: "🍜", type: "主食", desc: "加了鹼的粗麵煮成濃稠湯麵，配韭菜與油蔥，是台中獨有的味道。", where: "台中市區老店" },
+      { county: "臺中市", name: "大麵羹", emoji: "🍜", type: "主食", desc: "加了鹼的粗麵煮成濃稠湯麵，配韭菜與油蔥，是台中獨有的味道。", where: "台中市區老店", must: true },
       { county: "臺中市", name: "東海雞腿飯", emoji: "🍗", type: "主食", desc: "東海大學商圈的學生美食，大支炸雞腿或滷雞腿配便當菜，份量十足。", where: "東海別墅商圈" },
-      { county: "彰化縣", name: "肉圓", emoji: "🟤", type: "點心", desc: "彰化肉圓以油炸或油泡方式處理，Q皮包著大塊豬肉。", where: "彰化市、北斗" },
+      { county: "彰化縣", name: "肉圓", emoji: "🟤", type: "點心", desc: "彰化肉圓以油炸或油泡方式處理，Q皮包著大塊豬肉。", where: "彰化市、北斗", must: true },
       { county: "彰化縣", name: "爌肉飯", emoji: "🍚", type: "主食", desc: "整塊滷五花肉蓋在白飯上，用竹籤固定，入口即化。", where: "彰化市區" },
       { county: "彰化縣", name: "蚵仔煎", emoji: "🍳", type: "點心", desc: "王功、鹿港一帶靠海，鮮蚵飽滿，煎得外酥內滑。", where: "鹿港老街、王功漁港" },
       { county: "彰化縣", name: "蝦猴", emoji: "🦐", type: "點心", desc: "鹿港沿海潮間帶特有的甲殼類，多半油炸或酥炸，鹹香下酒。", where: "鹿港老街、天后宮周邊" },
@@ -113,36 +119,47 @@
       { county: "南投縣", name: "日月潭紅茶", emoji: "🍵", type: "伴手禮", desc: "魚池鄉產的紅茶，帶天然肉桂與薄荷香氣。", where: "魚池鄉、日月潭" },
       { county: "南投縣", name: "埔里米粉", emoji: "🍝", type: "伴手禮", desc: "利用埔里好水與山風曬製，米粉細緻，可炒可煮。", where: "埔里鎮" },
       { county: "南投縣", name: "紹興酒冰棒", emoji: "🍦", type: "甜品", desc: "埔里酒廠的招牌冰品，帶淡淡紹興酒香，老少都愛吃。", where: "埔里酒廠" },
-      { county: "雲林縣", name: "鴨肉飯", emoji: "🦆", type: "主食", desc: "鴨肉片鋪在飯上淋鴨油醬汁，北港人的日常美食。", where: "北港朝天宮周邊" },
+      { county: "雲林縣", name: "鴨肉飯", emoji: "🦆", type: "主食", desc: "鴨肉片鋪在飯上淋鴨油醬汁，北港人的日常美食。", where: "北港朝天宮周邊", must: true },
       { county: "雲林縣", name: "煎盤粿", emoji: "🥞", type: "點心", desc: "米漿蒸成的粿切片煎到焦香，淋上醬汁，配蛋或肉片。", where: "北港" },
       { county: "雲林縣", name: "西螺醬油", emoji: "🫙", type: "伴手禮", desc: "西螺以黑豆釀造醬油聞名，老街上有多家百年醬油廠可參觀。", where: "西螺延平老街" },
-      { county: "嘉義市", name: "火雞肉飯", emoji: "🍚", type: "主食", desc: "火雞肉絲鋪在白飯上，淋雞油與油蔥，是嘉義的代表味道。", where: "嘉義市區" },
+      { county: "嘉義市", name: "火雞肉飯", emoji: "🍚", type: "主食", desc: "火雞肉絲鋪在白飯上，淋雞油與油蔥，是嘉義的代表味道。", where: "嘉義市區", must: true },
       { county: "嘉義市", name: "方塊酥", emoji: "🧇", type: "伴手禮", desc: "層層酥脆的方形餅乾，加入芝麻，是嘉義知名伴手禮。", where: "嘉義市區" },
-      { county: "嘉義縣", name: "奮起湖便當", emoji: "🍱", type: "主食", desc: "鐵路便當配滷排骨、滷蛋與醬菜，搭配山城風景特別有味道。", where: "奮起湖老街" },
+      { county: "嘉義縣", name: "奮起湖便當", emoji: "🍱", type: "主食", desc: "鐵路便當配滷排骨、滷蛋與醬菜，搭配山城風景特別有味道。", where: "奮起湖老街", must: true },
       { county: "嘉義縣", name: "蚵嗲", emoji: "🦪", type: "點心", desc: "鮮蚵加韭菜裹麵糊油炸，外酥內鮮。", where: "東石、布袋漁港" },
       { county: "臺南市", name: "擔仔麵", emoji: "🍜", type: "主食", desc: "小碗湯麵加肉燥、蝦子與蒜泥，起源於漁民的副業。", where: "中西區" },
-      { county: "臺南市", name: "牛肉湯", emoji: "🥩", type: "主食", desc: "生牛肉片以滾燙清湯沖熟，鮮甜軟嫩，台南人當早餐吃。", where: "安平、中西區" },
+      { county: "臺南市", name: "牛肉湯", emoji: "🥩", type: "主食", desc: "生牛肉片以滾燙清湯沖熟，鮮甜軟嫩，台南人當早餐吃。", where: "安平、中西區", must: true },
       { county: "臺南市", name: "棺材板", emoji: "🍞", type: "點心", desc: "厚片吐司炸成盒狀，填入濃郁的雞肉海鮮奶油餡。", where: "康樂市場（沙卡里巴）" },
       { county: "臺南市", name: "碗粿", emoji: "🍮", type: "點心", desc: "米漿加肉燥、蛋黃蒸成，淋上醬油膏與蒜泥。", where: "市區各處" },
       { county: "臺南市", name: "虱目魚粥", emoji: "🐟", type: "主食", desc: "鮮魚肚與魚肉加入粥中，清爽鮮甜，是府城早餐首選。", where: "市區各處" },
       { county: "高雄市", name: "木瓜牛奶", emoji: "🥛", type: "點心", desc: "新鮮木瓜與牛奶現打，香濃順口。", where: "六合夜市、市區" },
       { county: "高雄市", name: "旗津海產", emoji: "🦐", type: "主食", desc: "旗津渡輪過去就是海產街，現挑現煮，烤小卷最受歡迎。", where: "旗津老街" },
-      { county: "高雄市", name: "岡山羊肉", emoji: "🍲", type: "主食", desc: "岡山以羊肉爐、羊肉湯著名，配辣豆瓣醬。", where: "岡山區" },
+      { county: "高雄市", name: "岡山羊肉", emoji: "🍲", type: "主食", desc: "岡山以羊肉爐、羊肉湯著名，配辣豆瓣醬。", where: "岡山區", must: true },
       { county: "高雄市", name: "美濃粄條", emoji: "🍜", type: "主食", desc: "客家粄條滑嫩有米香，配上豬肉片與韭菜。", where: "美濃區" },
-      { county: "屏東縣", name: "萬巒豬腳", emoji: "🍖", type: "主食", desc: "滷得Q彈軟嫩、冷吃熱吃都好，沾蒜蓉醬油最對味。", where: "萬巒鄉" },
+      { county: "屏東縣", name: "萬巒豬腳", emoji: "🍖", type: "主食", desc: "滷得Q彈軟嫩、冷吃熱吃都好，沾蒜蓉醬油最對味。", where: "萬巒鄉", must: true },
       { county: "屏東縣", name: "綠豆蒜", emoji: "🥣", type: "甜品", desc: "去殼綠豆仁煮成甜湯，因外形像蒜頭而得名。", where: "車城、恆春" },
       { county: "屏東縣", name: "東港黑鮪魚", emoji: "🐟", type: "主食", desc: "每年 5–6 月黑鮪魚季，可吃到新鮮生魚片。", where: "東港華僑市場" },
-      { county: "花蓮縣", name: "扁食", emoji: "🥟", type: "點心", desc: "皮薄餡多的餛飩，湯頭清爽，是花蓮人的家常小吃。", where: "花蓮市區" },
+      { county: "花蓮縣", name: "扁食", emoji: "🥟", type: "點心", desc: "皮薄餡多的餛飩，湯頭清爽，是花蓮人的家常小吃。", where: "花蓮市區", must: true },
       { county: "花蓮縣", name: "麻糬", emoji: "🍡", type: "伴手禮", desc: "Q軟的麻糬包紅豆、花生或芝麻，是花蓮最經典伴手禮。", where: "花蓮市區" },
       { county: "花蓮縣", name: "炸蛋蔥油餅", emoji: "🍳", type: "點心", desc: "整顆蛋下鍋和餅一起油炸，蛋黃半熟流出來最美味。", where: "花蓮市區" },
-      { county: "臺東縣", name: "池上便當", emoji: "🍱", type: "主食", desc: "使用池上米，米粒飽滿Q彈，配菜豐富。", where: "池上鄉" },
+      { county: "臺東縣", name: "池上便當", emoji: "🍱", type: "主食", desc: "使用池上米，米粒飽滿Q彈，配菜豐富。", where: "池上鄉", must: true },
       { county: "臺東縣", name: "釋迦", emoji: "🍏", type: "伴手禮", desc: "台東是釋迦主要產地，香甜綿密，鳳梨釋迦也很受歡迎。", where: "臺東市、卑南鄉" },
       { county: "澎湖縣", name: "黑糖糕", emoji: "🟫", type: "伴手禮", desc: "黑糖蒸成的鬆軟糕點，撒上芝麻，是澎湖代表伴手禮。", where: "馬公市區" },
       { county: "澎湖縣", name: "仙人掌冰", emoji: "🌵", type: "甜品", desc: "用仙人掌果實做成的紫紅色冰品，酸甜清爽。", where: "馬公市區、各景點" },
       { county: "金門縣", name: "貢糖", emoji: "🥜", type: "伴手禮", desc: "花生與麥芽糖反覆捶打製成，香酥不黏牙。", where: "金城鎮" },
-      { county: "金門縣", name: "廣東粥", emoji: "🥣", type: "主食", desc: "米粒熬到化開的綿密粥，加入豬肉、皮蛋與油條，是金門人的早餐。", where: "金城鎮" },
-      { county: "連江縣", name: "繼光餅", emoji: "🥯", type: "點心", desc: "中間有洞的烤餅，相傳是戚繼光行軍的乾糧，夾蛋或肉吃。", where: "南竿" },
+      { county: "金門縣", name: "廣東粥", emoji: "🥣", type: "主食", desc: "米粒熬到化開的綿密粥，加入豬肉、皮蛋與油條，是金門人的早餐。", where: "金城鎮", must: true },
+      { county: "連江縣", name: "繼光餅", emoji: "🥯", type: "點心", desc: "中間有洞的烤餅，相傳是戚繼光行軍的乾糧，夾蛋或肉吃。", where: "南竿", must: true },
       { county: "連江縣", name: "老酒麵線", emoji: "🍜", type: "主食", desc: "用馬祖老酒煮的麵線，加荷包蛋，暖身又香醇。", where: "南竿、北竿" },
+      // ---- 特色小吃補充 ----
+      { county: "桃園市", name: "石門活魚", emoji: "🐠", type: "主食", desc: "石門水庫周邊的活魚料理，一條魚可做成生魚片、糖醋、魚湯等多種吃法。", where: "石門水庫周邊" },
+      { county: "桃園市", name: "客家菜包", emoji: "🥟", type: "點心", desc: "糯米皮包菜脯、蘿蔔絲與豬肉，墊月桃葉蒸熟，帶淡淡葉香。", where: "中壢、龍潭、楊梅一帶" },
+      { county: "南投縣", name: "南投意麵", emoji: "🍝", type: "主食", desc: "雞蛋製作的意麵，乾拌豬油與肉燥，口感爽脆，是南投市的在地味道。", where: "南投市區", must: true },
+      { county: "嘉義市", name: "砂鍋魚頭", emoji: "🍲", type: "主食", desc: "炸過的鰱魚頭與白菜、豆腐、香菇放進砂鍋燉煮，湯頭濃郁帶沙茶香。", where: "文化路夜市一帶" },
+      { county: "嘉義市", name: "嘉義涼麵", emoji: "🍜", type: "主食", desc: "油麵淋上芝麻醬，再擠一道美乃滋，是嘉義人獨特的吃法。", where: "嘉義市區" },
+      { county: "臺東縣", name: "米苔目", emoji: "🍜", type: "主食", desc: "米漿做成的粗短條，臺東的米苔目湯頭清甜，常配油蔥與韭菜。", where: "臺東市區" },
+      { county: "臺東縣", name: "卑南豬血湯", emoji: "🥣", type: "點心", desc: "豬血嫩滑、湯頭加酸菜與韭菜，是往來南迴公路時的人氣小吃。", where: "卑南鄉" },
+      { county: "澎湖縣", name: "小管麵線", emoji: "🦑", type: "主食", desc: "新鮮小卷與麵線一起煮，湯頭鮮甜，是澎湖最具海味的一碗。", where: "馬公市區", must: true },
+      { county: "金門縣", name: "石蚵麵線", emoji: "🦪", type: "主食", desc: "金門潮間帶石頭上養殖的石蚵個頭小、味道鮮，和麵線一起煮最常見。", where: "金城鎮、金寧鄉" },
+      { county: "連江縣", name: "魚麵", emoji: "🐟", type: "主食", desc: "魚漿和麵粉揉製再曬乾的麵條，帶魚鮮味，煮湯或炒都好吃。", where: "南竿、北竿" },
       // ---- 伴手禮補充 ----
       { county: "臺北市", name: "牛軋糖", emoji: "🍬", type: "伴手禮", desc: "奶香濃郁的軟糖包著花生或堅果，常和鳳梨酥一起當台灣伴手禮。", where: "迪化街與市區糕餅店" },
       { county: "新北市", name: "坪林包種茶", emoji: "🍵", type: "伴手禮", desc: "輕發酵的清香烏龍茶，花香明顯，坪林老街還有茶業博物館。", where: "坪林老街" },
@@ -178,7 +195,7 @@
 
     const regionList = ["全部", "北部", "中部", "南部", "東部", "離島"];
     const typeList = ["全部類型", "主食", "點心", "甜品", "伴手禮"];
-    let region = "全部", type = "全部類型";
+    let region = "全部", type = "全部類型", mustOnly = false;
 
     const $ = id => document.getElementById(id);
     const list = $("list"), empty = $("empty"), search = $("search"), countySel = $("county"), count = $("count");
@@ -208,6 +225,12 @@
     }
     chipGroup($("regions"), regionList, () => region, v => { region = v; fillCounties(); });
     chipGroup($("types"), typeList, () => type, v => type = v);
+    const mustToggle = $("must-toggle");
+    mustToggle.addEventListener("click", () => {
+      mustOnly = !mustOnly;
+      mustToggle.setAttribute("aria-pressed", mustOnly);
+      render();
+    });
 
     function render() {
       const q = search.value.trim();
@@ -215,6 +238,7 @@
         (region === "全部" || regionOf[f.county] === region) &&
         (!countySel.value || f.county === countySel.value) &&
         (type === "全部類型" || f.type === type) &&
+        (!mustOnly || f.must) &&
         (!q || [f.name, f.county, f.desc, f.where].some(s => s.includes(q))));
 
       list.innerHTML = "";
@@ -233,12 +257,13 @@
           card.className = "card";
           card.innerHTML = `
             <div class="top"><h3></h3><span class="emoji" aria-hidden="true"></span></div>
-            <span class="tag"></span>
+            <span class="tag"></span><span class="must" hidden>⭐ 必吃特色</span>
             <p></p>
             <div class="where"></div>`;
           card.querySelector("h3").textContent = f.name;
           card.querySelector(".emoji").textContent = f.emoji;
           card.querySelector(".tag").textContent = f.type;
+          card.querySelector(".must").hidden = !f.must;
           card.querySelector("p").textContent = f.desc;
           card.querySelector(".where").textContent = "📍 " + f.where;
           grid.appendChild(card);
