@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-18-1">
+  <meta name="page-version" content="2026-11-18-2">
   <meta name="theme-color" content="#2f6b3a">
   <title>台灣一日登山步道</title>
   <style>
@@ -21,13 +21,24 @@
     body { margin: 0; background: var(--bg); color: var(--text);
            font-family: system-ui, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; }
     main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
-    header { position: relative; overflow: hidden; border-radius: 20px; padding: 28px 22px 26px;
-             background: linear-gradient(135deg, #1f7a4d 0%, #2f9e6e 45%, #3a8fc7 100%); color: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.15); }
-    header::after { content: "⛰️🌲🥾"; position: absolute; right: 10px; bottom: -8px; font-size: 4.5rem;
-                    opacity: .28; letter-spacing: 4px; pointer-events: none; }
-    header h1 { position: relative; margin: 0; font-size: 2rem; text-shadow: 0 2px 6px rgba(0,0,0,.25); }
-    header p { position: relative; margin: 6px 0 0; color: rgba(255,255,255,.95); max-width: 34em; }
-    @media (max-width: 720px) { header { padding-bottom: 64px; } header::after { font-size: 2.6rem; bottom: 4px; } header h1 { font-size: 1.6rem; } }
+    .page-bg { position: fixed; inset: 0; z-index: -2; background: center / cover no-repeat;
+                transition: background-image .8s; }
+    .page-bg::after { content: ""; position: absolute; inset: 0; background: var(--bg); opacity: .86; }
+    header { position: relative; overflow: hidden; border-radius: 20px; padding: 34px 22px 52px; min-height: 230px;
+             background: #333; color: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.2); isolation: isolate; }
+    .hero-img { position: absolute; inset: 0; z-index: -2; background: center / cover no-repeat;
+                opacity: 0; transition: opacity 1.4s ease; }
+    .hero-img.show { opacity: 1; }
+    header::before { content: ""; position: absolute; inset: 0; z-index: -1;
+                     background: linear-gradient(100deg, rgba(20,90,60,.78) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.05) 100%); }
+    header h1 { position: relative; margin: 0; font-size: 2rem; text-shadow: 0 2px 8px rgba(0,0,0,.45); }
+    header p { position: relative; margin: 6px 0 0; color: rgba(255,255,255,.96); max-width: 34em;
+               text-shadow: 0 1px 4px rgba(0,0,0,.5); }
+    .credit { position: absolute; left: 22px; right: 22px; bottom: 12px; font-size: .78rem; color: rgba(255,255,255,.9);
+              text-shadow: 0 1px 3px rgba(0,0,0,.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .credit a { color: inherit; }
+    @media (max-width: 720px) { header { padding: 26px 18px 52px; } header h1 { font-size: 1.6rem; }
+      header::before { background: linear-gradient(180deg, rgba(20,90,60,.78) 0%, rgba(0,0,0,.45) 100%); } .credit { left: 18px; right: 18px; } }
     .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; align-items: center; }
     .toolbar input, .toolbar select { padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
                      background: var(--card); color: var(--text); font-size: 1rem; }
@@ -70,10 +81,13 @@
   </style>
 </head>
 <body>
+  <div class="page-bg" id="page-bg" aria-hidden="true"></div>
   <main>
     <header>
+      <div class="hero-img" aria-hidden="true"></div><div class="hero-img" aria-hidden="true"></div>
       <h1>⛰️ 台灣一日登山步道</h1>
       <p>從逛老街順便走的散步路線、各地小百岳，到當天來回的百岳都有。點開「詳細資訊」查看登山口、交通、路線與附近吃買。</p>
+      <div class="credit" id="credit"></div>
     </header>
 
     <div class="toolbar">
@@ -589,6 +603,97 @@
     search.addEventListener("input", render);
     sort.addEventListener("change", render);
     render();
+  </script>
+  <script>
+    // 世界各地風景：照片來自 Wikimedia Commons，依各自授權使用（作者與授權顯示在封面左下角）。
+    (() => {
+      const scenes = [
+        {
+                "file": "scenery/matterhorn.jpg",
+                "place": "瑞士 馬特洪峰",
+                "artist": "Roy Egloff",
+                "license": "CC BY-SA 4.0",
+                "page": "https://commons.wikimedia.org/wiki/File:CH.VS.Zermatt_2021-10-17_Matterhorn_8726.jpg"
+        },
+        {
+                "file": "scenery/fuji.jpg",
+                "place": "日本 富士山",
+                "artist": "Romain Guy from San Francisco, USA",
+                "license": "CC0",
+                "page": "https://commons.wikimedia.org/wiki/File:Mount_Fuji_at_sunset,_March_2025.jpg"
+        },
+        {
+                "file": "scenery/machupicchu.jpg",
+                "place": "秘魯 馬丘比丘",
+                "artist": "Diego Delso",
+                "license": "CC BY-SA 4.0",
+                "page": "https://commons.wikimedia.org/wiki/File:Machu_Picchu,_Per%C3%BA,_2015-07-30,_DD_47.JPG"
+        },
+        {
+                "file": "scenery/lofoten.jpg",
+                "place": "挪威 羅弗敦群島的極光",
+                "artist": "Johannes Groll followhansi",
+                "license": "CC0",
+                "page": "https://commons.wikimedia.org/wiki/File:Lofoten,_Norway_(Unsplash).jpg"
+        },
+        {
+                "file": "scenery/santorini.jpg",
+                "place": "希臘 聖托里尼",
+                "artist": "Giles Laurent",
+                "license": "CC BY-SA 4.0",
+                "page": "https://commons.wikimedia.org/wiki/File:1000_Three_domes_of_Oia_in_Santorini_Photo_by_Giles_Laurent.jpg"
+        },
+        {
+                "file": "scenery/sossusvlei.jpg",
+                "place": "納米比亞 索蘇斯維雷沙丘",
+                "artist": "Giles Laurent",
+                "license": "CC BY-SA 4.0",
+                "page": "https://commons.wikimedia.org/wiki/File:006_Dune_45_in_Sossusvlei_at_sunrise_Photo_by_Giles_Laurent.jpg"
+        },
+        {
+                "file": "scenery/grandcanyon.jpg",
+                "place": "美國 大峽谷",
+                "artist": "Tuxyso",
+                "license": "CC BY-SA 3.0",
+                "page": "https://commons.wikimedia.org/wiki/File:Grand_Canyon_Powell_Point_Evening_Light_02_2013.jpg"
+        },
+        {
+                "file": "scenery/skaftafell.jpg",
+                "place": "冰島 斯卡夫塔山",
+                "artist": "Martin Falbisoner",
+                "license": "CC BY-SA 4.0",
+                "page": "https://commons.wikimedia.org/wiki/File:View_from_Skaftafell_National_Park_July_2014_-2.JPG"
+        },
+        {
+                "file": "scenery/moraine.jpg",
+                "place": "加拿大 夢蓮湖",
+                "artist": "Gorgo",
+                "license": "Public domain",
+                "page": "https://commons.wikimedia.org/wiki/File:Moraine_Lake_17092005.jpg"
+        }
+      ];
+      const layers = document.querySelectorAll(".hero-img"), pageBg = document.getElementById("page-bg"), credit = document.getElementById("credit");
+      let i = Math.floor(Math.random() * scenes.length), front = 0;
+      function show(n) {
+        const sc = scenes[n], url = `url("${sc.file}")`;
+        const next = layers[1 - front];
+        next.style.backgroundImage = url;
+        next.classList.add("show"); layers[front].classList.remove("show"); front = 1 - front;
+        pageBg.style.backgroundImage = url;
+        credit.textContent = "";
+        const a = document.createElement("a"); a.href = sc.page; a.target = "_blank"; a.rel = "noopener";
+        a.textContent = `攝影：${sc.artist}（${sc.license}）`;
+        credit.append(`📍 ${sc.place}・`, a);
+      }
+      show(i);
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      setInterval(() => {
+        if (document.hidden) return;
+        const n = (i + 1) % scenes.length, img = new Image();
+        img.onload = () => { i = n; show(i); };
+        img.src = scenes[n].file;
+      }, 9000);
+    })();
   </script>
   <script>
     // 自動更新：手機瀏覽器可能顯示暫存的舊頁面，這裡向伺服器確認最新版本，有新版就重新載入。
