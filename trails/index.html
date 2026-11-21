@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-21-2">
+  <meta name="page-version" content="2026-11-21-3">
   <meta name="theme-color" content="#2f6b3a">
   <title>台灣一日登山步道</title>
   <style>
@@ -62,6 +62,8 @@
     .stats span { font-size: .75rem; color: var(--muted); }
     .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
     .tags span { border: 1px solid var(--line); border-radius: 6px; padding: 0 8px; font-size: .8rem; color: var(--muted); }
+    .tags span.hid { border-color: #5b3fa0; background: #ece6f7; color: #5b3fa0; }
+    @media (prefers-color-scheme: dark) { .tags span.hid { background: #2e2445; color: #c9b8f0; border-color: #8a72c9; } }
     .tags span.shop { border-color: var(--shop); background: var(--shop-soft); color: var(--shop); }
     details { margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 10px; }
     summary { cursor: pointer; color: var(--accent); font-weight: 600; list-style: none; }
@@ -105,6 +107,7 @@
     <div class="toolbar">
       <button type="button" class="chip shop-toggle" id="shop-toggle" aria-pressed="false">🛍️ 只看可順遊吃買</button>
       <button type="button" class="chip" id="small-toggle" aria-pressed="false">⛰️ 只看小百岳</button>
+      <button type="button" class="chip" id="hid-toggle" aria-pressed="false">🔍 只看隱藏步道</button>
     </div>
 
     <p class="count" id="count" aria-live="polite"></p>
@@ -288,7 +291,7 @@
         season: "秋冬，夏天悶熱", caution: "階梯陡、部分路段需拉繩；網路上各路線時間差異大", source: "https://vocus.cc/article/640dc505fd897800014a3bc8" },
       // ---- 中部・臺中市 ----
       { name: "竹坑南寮登山步道", area: "臺中市龍井區", region: "中部", level: "easy", km: 5.5, hours: 2.5, climb: 150, shop: false,
-        desc: "大肚山西側的環狀步道，竹林與相思林交錯，可組合多種走法不走回頭路。", tags: ["環狀", "大肚山", "親子"],
+        desc: "大肚山西側的環狀步道，竹林與相思林交錯，可組合多種走法不走回頭路。", tags: ["隱藏步道", "環狀", "大肚山", "親子"],
         start: "國道 3 號高架橋下的竹坑南寮登山古道停車場（龍井區中沙路南寮巷）", transport: "台鐵龍井站轉市區公車到「深水」或「村內入口」站，步行約 10 分鐘",
         route: "主步道（2.4 公里）→ A 步道（0.3 公里）→ C 步道（2 公里）繞回停車場，形成 O 型環狀", nearby: "龍井、沙鹿市區吃在地小吃",
         season: "秋冬到春天", caution: "部分路段缺少遮蔭，夏天注意防曬", source: "https://gofunit.com/%E7%AB%B9%E5%9D%91%E5%8D%97%E5%AF%AE%E6%AD%A5%E9%81%93/" },
@@ -298,7 +301,7 @@
         route: "4 號步道登山口 → 原木階梯 → 稜線 → 原路或接其他號步道下山", nearby: "大坑泡溫泉",
         season: "春夏蝴蝶多", caution: "原木階梯連續陡上，雨後濕滑", source: "https://taichung.travel/file/1599" },
       { name: "咬人狗坑步道・三汀山", area: "臺中市太平區", region: "中部", level: "easy", km: 3.3, hours: 1.5, climb: 300, shop: false,
-        desc: "三汀山又稱望高寮，海拔約 486 公尺，步道完善、視野遼闊，適合新手。", tags: ["城市郊山", "展望", "公車可達"],
+        desc: "三汀山又稱望高寮，海拔約 486 公尺，步道完善、視野遼闊，適合新手。", tags: ["隱藏步道", "城市郊山", "展望", "公車可達"],
         start: "東平路 2 巷的咬人狗坑登山口", transport: "臺中火車站搭 75 或 280 號公車到「一江橋」站",
         route: "登山口 → 咬人狗坑步道 → 三汀山頂 → 原路返回", nearby: "太平市區、坪林森林公園",
         season: "全年皆宜", caution: "步道支線多（5+1 條），建議先看地圖以免迷路", source: "https://travel.yam.com/article/124097" },
@@ -329,13 +332,13 @@
         route: "清水岩 → 十八彎古道 → 中央嶺造林步道 → 可續接田中森林步道", nearby: "社頭清水岩生態展示中心看昆蟲標本；社頭以芭樂聞名",
         season: "全年皆宜", caution: "古道彎多坡陡，雨後濕滑", source: "https://travel.yam.com/article/127554" },
       { name: "田中森林登山步道", area: "彰化縣田中鎮", region: "中部", level: "mid", km: 3, hours: 2, climb: 250, shop: false,
-        desc: "鼓山寺旁出發的環狀步道，頂端早覺亭天氣好時可看濁水溪與台灣海峽。", tags: ["環狀", "八卦山脈", "展望"],
+        desc: "鼓山寺旁出發的環狀步道，頂端早覺亭天氣好時可看濁水溪與台灣海峽。", tags: ["隱藏步道", "環狀", "八卦山脈", "展望"],
         start: "鼓山寺旁步道入口", transport: "台鐵田中站轉計程車，或自行開車",
         route: "鼓山寺 → 環狀步道 → 早覺亭 → 繞回入口", nearby: "田中市區；可接社頭清水岩",
         season: "秋冬天晴", caution: "石階較多，請量力而行", source: "https://travel.yam.com/article/127554" },
       // ---- 中部・南投縣 ----
       { name: "猴探井步道", area: "南投縣南投市", region: "中部", level: "easy", km: 3.9, hours: 1.5, climb: 200, shop: false,
-        desc: "林蔭多的步道，山頂觀景台與遊憩區眺望塔可俯瞰彰化平原，黃昏又稱「夕陽谷」。", tags: ["夕陽", "展望", "親子"],
+        desc: "林蔭多的步道，山頂觀景台與遊憩區眺望塔可俯瞰彰化平原，黃昏又稱「夕陽谷」。", tags: ["隱藏步道", "夕陽", "展望", "親子"],
         start: "猴探井遊憩區", transport: "需自行開車",
         route: "遊憩區 → 花園步道 → 林間步道 → 觀景台 → 返回", nearby: "遊憩區另有「微笑天梯」吊橋（與竹山天梯不同）",
         season: "傍晚看夕陽", caution: "傍晚下山請帶頭燈", source: "https://edh.tw/articles/VCoiIoD/2" },
@@ -361,7 +364,7 @@
         route: "勸化堂 → 獅頭段 → 沿途古廟 → 獅尾段（可原路返回或請人接駁）", nearby: "南庄老街吃桂花湯圓、客家菜",
         season: "4–5 月桐花", caution: "古廟周邊石階多", source: "https://travel.yam.com/article/132886" },
       { name: "鳴鳳古道", area: "苗栗縣頭屋鄉", region: "中部", level: "easy", km: 3, hours: 1.5, climb: 200, shop: false,
-        desc: "單程約 1.5 公里，沿途有木吊橋與茂密蕨類，輕鬆好走。", tags: ["古道", "吊橋", "親子"],
+        desc: "單程約 1.5 公里，沿途有木吊橋與茂密蕨類，輕鬆好走。", tags: ["隱藏步道", "古道", "吊橋", "親子"],
         start: "鳴鳳古道登山口", transport: "需自行開車",
         route: "登山口 → 木吊橋 → 蕨類步道 → 終點 → 原路返回", nearby: "可順遊明德水庫",
         season: "全年皆宜", caution: "雨後木棧道濕滑", source: "https://travel.yam.com/article/132886" },
@@ -428,7 +431,7 @@
         route: "仙祖廟 → 雞籠山步道 → 雞籠山頂 → 原路返回（來回約 3 小時 20 分）", nearby: "關子嶺泡泥漿溫泉、吃甕缸雞",
         season: "秋冬涼爽", caution: "山區無遮蔽段注意防曬", source: "https://smiletaiwan.cw.com.tw/article/4497" },
       { name: "梅峰古道", area: "臺南市楠西區", region: "南部", level: "easy", km: 4.4, hours: 2, climb: 200, shop: true,
-        desc: "位於嘉南平原與山脈交界的梅嶺地區，單程約 2.2 公里，難度低。", tags: ["古道", "賞梅", "新手"],
+        desc: "位於嘉南平原與山脈交界的梅嶺地區，單程約 2.2 公里，難度低。", tags: ["隱藏步道", "古道", "賞梅", "新手"],
         start: "梅嶺風景區的梅峰古道入口", transport: "需自行開車",
         route: "入口 → 古道（單程約 2.2 公里）→ 終點觀景點 → 原路返回", nearby: "梅嶺吃梅子雞、買梅子；楠西也以楊桃聞名",
         season: "12–1 月賞梅", caution: "部分路段石階濕滑", source: "https://smiletaiwan.cw.com.tw/article/4497" },
@@ -504,7 +507,7 @@
         route: "活動中心停車場 → 沿桃 11 號單側步道 → 環保公園 → 繞回；體力好可再接生態步道到三角點、忠烈祠", nearby: "下山到桃園市區逛夜市、吃小吃",
         season: "全年皆宜，傍晚看市區夜景", caution: "環保公園與忠烈祠之間常有流浪狗，怕狗建議結伴同行", source: "https://smiletaiwan.cw.com.tw/article/3554" },
       { name: "龍過脈森林步道", area: "雲林縣林內鄉", region: "中部", level: "easy", km: 4.3, hours: 1.5, climb: 200, shop: false,
-        desc: "串連林中、林南與坪頂的森林步道，從林內車站附近就能走，搭火車即可抵達；坪頂觀景台可眺望濁水溪。", tags: ["火車可達",  "森林",  "展望"],
+        desc: "串連林中、林南與坪頂的森林步道，從林內車站附近就能走，搭火車即可抵達；坪頂觀景台可眺望濁水溪。", tags: ["隱藏步道", "火車可達",  "森林",  "展望"],
         start: "林內公園、成功國小、鐵管坑或濟公廟等入口", transport: "台鐵林內站步行可達",
         route: "林內公園 → C 線森林步道 → 坪頂觀景台 → 原路或接其他入口下山", nearby: "林內、斗六市區吃小吃",
         season: "春季可能遇到八色鳥", caution: "遇到八色鳥請勿驚擾；部分路段曾封閉整修，出發前請查山林悠遊網最新開放資訊", source: "https://udn.com/news/story/7326/9216982" },
@@ -579,12 +582,12 @@
         route: "入口 → 下切森林步道 → 合歡溪谷 → 原路上切返回（來回約 7 公里）", nearby: "清境吃雲南擺夷料理",
         season: "秋季楓紅、夏季避暑", caution: "去程下坡、回程上坡較累；高山溫差大，注意高山症", source: "https://smiletaiwan.cw.com.tw/article/4101" },
       { name: "萬年峽谷步道", area: "雲林縣古坑鄉", region: "中部", level: "easy", km: 1.4, hours: 0.7, climb: 50, shop: false,
-        desc: "草嶺附近的短程峽谷步道，溪床岩層層疊疊，像千層派一樣。", tags: ["特殊地形",  "溪谷",  "親子"],
+        desc: "草嶺附近的短程峽谷步道，溪床岩層層疊疊，像千層派一樣。", tags: ["隱藏步道", "特殊地形",  "溪谷",  "親子"],
         start: "草嶺石壁一帶的萬年峽谷入口", transport: "需自行開車",
         route: "入口 → 峽谷步道 → 溪床觀景 → 原路返回（單程約 0.7 公里）", nearby: "順遊草嶺石壁、華山咖啡",
         season: "秋冬枯水期", caution: "大雨後溪水暴漲勿下溪床", source: "https://smiletaiwan.cw.com.tw/article/1637" },
       { name: "二延平步道", area: "嘉義縣番路鄉", region: "南部", level: "easy", km: 2, hours: 1, climb: 100, shop: true,
-        desc: "阿里山公路旁視野開闊的茶園步道，是看雲海、日出與夕陽的好地點。", tags: ["展望",  "雲海",  "茶園"],
+        desc: "阿里山公路旁視野開闊的茶園步道，是看雲海、日出與夕陽的好地點。", tags: ["隱藏步道", "展望",  "雲海",  "茶園"],
         start: "台 18 線旁的二延平步道入口", transport: "需自行開車，或搭往阿里山的台灣好行在隙頂附近下車",
         route: "入口 → 茶園步道 → 觀景台（單程約 1 公里）→ 原路返回", nearby: "隙頂喝高山茶、吃茶葉料理",
         season: "秋冬雲海機率高", caution: "清晨或傍晚前往請帶頭燈與保暖衣物", source: "https://smiletaiwan.cw.com.tw/article/3519" },
@@ -593,11 +596,71 @@
         start: "伍龍殿或梅峰古道登山口", transport: "需自行開車",
         route: "伍龍步道 → 獵鷹尖 → 一線天岩縫 → 返回；也可走 O 型路線，從梅峰登山口上、伍龍步道下（約 4–5 小時）", nearby: "楠西吃梅子料理、玉井吃芒果冰",
         season: "秋冬，夏天悶熱", caution: "岩縫狹窄、部分路段濕滑，背包不要太大", source: "https://smiletaiwan.cw.com.tw/article/4497" },
+      { name: "烏塗溪步道", area: "新北市石碇區", region: "北部", level: "easy", km: 4, hours: 2, climb: 100, shop: false,
+        desc: "親山又親水的溪畔步道，沿途有溪流、竹林，還藏著百年大板根。", tags: ["隱藏步道",  "溪谷",  "森林"],
+        start: "石碇烏塗窟一帶的烏塗溪步道入口", transport: "捷運木柵站或新店站轉公車到石碇，再步行或計程車",
+        route: "入口 → 溪畔步道 → 百年大板根 → 原路返回（單程約 2 公里）", nearby: "石碇老街吃豆腐",
+        season: "夏季溪邊消暑", caution: "大雨後溪水上漲勿靠近溪床", source: "https://travel.yam.com/article/136270" },
+      { name: "銀河洞步道", area: "新北市新店區", region: "北部", level: "easy", km: 2.5, hours: 1.5, climb: 200, shop: false,
+        desc: "峭壁上嵌著一座呂洞賓廟，旁邊有瀑布從洞頂落下，起登約 15 分鐘就能看到這個打卡點。", tags: ["隱藏步道",  "瀑布",  "寺廟"],
+        start: "新店北宜路旁的銀河洞越嶺步道入口", transport: "捷運新店站轉公車到銀河洞站",
+        route: "入口 → 石階步道（約 15 分鐘）→ 銀河洞（呂洞賓廟與瀑布）→ 原路返回（來回約 2–2.5 公里）", nearby: "新店碧潭吃小吃",
+        season: "雨季後瀑布水量大，但避開下雨當天", caution: "下雨天石階濕滑，不建議雨天前往", source: "https://travel.yam.com/article/136270" },
+      { name: "百吉林蔭步道", area: "桃園市大溪區", region: "北部", level: "easy", km: 3, hours: 1, climb: 50, shop: true,
+        desc: "慈湖附近、北橫公路旁的平緩林蔭步道，又叫大北坑步道，綠樹成蔭好走。", tags: ["隱藏步道",  "森林",  "親子"],
+        start: "台 7 線約 5 公里處（過慈湖）的百吉隧道旁入口", transport: "桃園客運往慈湖、復興方向，在百吉站下車",
+        route: "入口 → 林蔭步道 → 百吉隧道 → 原路返回（全長約 3 公里）", nearby: "大溪老街吃豆干、豆花",
+        season: "全年皆宜", caution: "步道銜接公路段注意來車", source: "https://travel.yam.com/article/111045" },
+      { name: "角板山公園後步道", area: "桃園市復興區", region: "北部", level: "easy", km: 0.6, hours: 0.3, climb: 30, shop: true,
+        desc: "角板山公園後方的短程散步道，林蔭涼爽，可順看大漢溪谷。", tags: ["隱藏步道",  "散步",  "親子"],
+        start: "角板山公園（復興區中正路）", transport: "桃園客運到角板山站",
+        route: "角板山公園 → 後步道 → 繞回（約 0.6 公里）", nearby: "角板山商圈吃香菇、泰雅風味餐",
+        season: "冬季賞梅", caution: "假日停車位有限", source: "https://travel.yam.com/article/111045" },
+      { name: "羊稠森林步道", area: "桃園市蘆竹區", region: "北部", level: "easy", km: 3.3, hours: 1.5, climb: 150, shop: false,
+        desc: "遮蔭率約八成的森林步道，山頂「陸海空眺望台」可同時看到高鐵與飛機起降。", tags: ["隱藏步道",  "森林",  "展望"],
+        start: "蘆竹羊稠森林步道入口", transport: "需自行開車或騎車",
+        route: "入口 → 林蔭步道 → 陸海空眺望台 → 繞回（約 3.3 公里）", nearby: "南崁一帶吃小吃",
+        season: "全年皆宜，夏天也涼爽", caution: "部分路段為階梯", source: "https://travel.yam.com/article/111045" },
+      { name: "大坑 5 號步道", area: "臺中市北屯區（大坑）", region: "中部", level: "mid", km: 1.4, hours: 1.5, climb: 200, shop: true,
+        desc: "大坑的山稜縱走步道，沿途多處觀景平台與涼亭，可眺望台中盆地。", tags: ["隱藏步道",  "稜線",  "展望"],
+        start: "大坑 5 號步道登山口", transport: "台中市區搭公車到大坑風景區",
+        route: "登山口 → 稜線步道 → 觀景平台 → 原路或接其他號步道下山（全長約 1.4 公里，建議預留 2–3 小時）", nearby: "下山吃老芋仔芋圓、東山棧甕缸雞",
+        season: "秋冬", caution: "陡坡與木階梯多", source: "https://bunnyann.tw/taichung-trail/" },
+      { name: "桂花泉登山步道", area: "臺中市大甲區", region: "中部", level: "easy", km: 1.45, hours: 1, climb: 80, shop: true,
+        desc: "大甲在地人散步的郊山，全長約 1.45 公里，親子都能輕鬆走完。", tags: ["隱藏步道",  "親子",  "城市郊山"],
+        start: "大甲桂花泉步道入口", transport: "台鐵大甲站轉計程車，或自行開車",
+        route: "入口 → 環山步道 → 繞回（約 1.45 公里）", nearby: "大甲鎮瀾宮吃康家粉腸、買芋頭酥",
+        season: "全年皆宜", caution: "夏天午後注意雷雨", source: "https://bunnyann.tw/taichung-trail/" },
+      { name: "知高圳步道", area: "臺中市烏日區", region: "中部", level: "easy", km: 6, hours: 2, climb: 50, shop: false,
+        desc: "沿著灌溉圳溝修建的步道，環境清幽，坡度平緩。", tags: ["隱藏步道",  "水圳",  "散步"],
+        start: "烏日知高圳步道入口", transport: "需自行開車或騎車",
+        route: "入口 → 沿圳溝步道 → 原路返回（往返約 6 公里）", nearby: "烏日、大里吃小吃",
+        season: "全年皆宜", caution: "圳溝旁請注意孩童安全", source: "https://bunnyann.tw/taichung-trail/" },
+      { name: "埋伏坪步道", area: "臺中市和平區", region: "中部", level: "easy", km: 2.6, hours: 1.5, climb: 150, shop: false,
+        desc: "雙崎部落附近的步道，結合泰雅族人文歷史與自然景觀。", tags: ["隱藏步道",  "部落",  "森林"],
+        start: "和平區雙崎部落附近的埋伏坪步道入口", transport: "需自行開車，往谷關方向",
+        route: "入口 → 部落與山林步道 → 繞回（總長約 2.6 公里）", nearby: "谷關泡溫泉、東勢吃客家菜",
+        season: "秋冬", caution: "山區道路注意落石", source: "https://smiletaiwan.cw.com.tw/index.php/article/3080" },
+      { name: "合歡山石門山", area: "南投縣仁愛鄉", region: "中部", level: "easy", km: 1.6, hours: 1, climb: 187, shop: false,
+        desc: "合歡山區最容易登頂的百岳，單程不到 1 公里，不用申請入山，夏天有高山杜鵑。", tags: ["百岳",  "高山",  "新手"],
+        start: "台 14 甲線上的石門山登山口", transport: "需自行開車上合歡山",
+        route: "登山口 → 箭竹步道（單程約 0.8 公里）→ 石門山頂 → 原路返回", nearby: "清境吃雲南擺夷料理",
+        season: "6 月高山杜鵑、冬季可能積雪", caution: "海拔超過 3000 公尺，注意高山症與保暖", source: "https://travel.yam.com/article/127181" },
+      { name: "竹坑溪步道", area: "嘉義縣梅山鄉", region: "南部", level: "mid", km: 3.3, hours: 2.5, climb: 300, shop: false,
+        desc: "瑞峰一帶曾經人跡罕至的林間秘境，陡峭的山道被暱稱為「汗路」，沿途有涼亭、吊橋與瀑布。", tags: ["隱藏步道",  "瀑布",  "吊橋"],
+        start: "梅山瑞峰村的竹坑溪步道入口", transport: "需自行開車",
+        route: "入口 → 竹林與溪谷步道 → 吊橋、瀑布 → 繞回（全長約 3.3 公里）", nearby: "太平老街、瑞里喝高山茶",
+        season: "秋冬", caution: "陡坡多，雨後濕滑", source: "https://smiletaiwan.cw.com.tw/article/1169" },
+      { name: "月世界五里坑步道", area: "高雄市田寮區", region: "南部", level: "easy", km: 1.4, hours: 1, climb: 150, shop: false,
+        desc: "田寮月世界後山的秘境步道，約 700 公尺、650 多階，惡地地形與山水綠意並存。", tags: ["隱藏步道",  "特殊地形",  "階梯"],
+        start: "田寮月世界地景公園後山", transport: "國道 3 號田寮交流道下，沿指標前往",
+        route: "月世界地景公園 → 五里坑步道（約 700 公尺）→ 原路返回；可順走月世界環狀步道", nearby: "田寮吃土雞",
+        season: "秋冬，夏天日曬強", caution: "泥岩惡地雨後濕滑、沒有遮蔭，記得防曬", source: "https://smiletaiwan.cw.com.tw/article/4603" },
     ];
 
     const levelText = { all: "全部難度", easy: "輕鬆", mid: "中等", hard: "困難" };
     const regionList = ["全部", "北部", "中部", "南部", "東部"];
-    let level = "all", region = "全部", shopOnly = false, smallOnly = false;
+    let level = "all", region = "全部", shopOnly = false, smallOnly = false, hidOnly = false;
 
     const $ = id => document.getElementById(id);
     const list = $("list"), empty = $("empty"), search = $("search"), sort = $("sort"), count = $("count");
@@ -632,6 +695,9 @@
     $("shop-toggle").addEventListener("click", e => {
       shopOnly = !shopOnly; e.currentTarget.setAttribute("aria-pressed", shopOnly); render();
     });
+    $("hid-toggle").addEventListener("click", e => {
+      hidOnly = !hidOnly; e.currentTarget.setAttribute("aria-pressed", hidOnly); render();
+    });
     $("small-toggle").addEventListener("click", e => {
       smallOnly = !smallOnly; e.currentTarget.setAttribute("aria-pressed", smallOnly); render();
     });
@@ -651,6 +717,7 @@
         (!countySel.value || countyOf(t) === countySel.value) &&
         (!shopOnly || t.shop) &&
         (!smallOnly || t.tags.includes("小百岳")) &&
+        (!hidOnly || t.tags.includes("隱藏步道")) &&
         (!q || [t.name, t.area, t.desc, t.nearby, ...t.tags].some(s => s.includes(q))));
       const key = { distance: "km", time: "hours", climb: "climb" }[sort.value];
       if (key) shown = [...shown].sort((a, b) => a[key] - b[key]);
@@ -680,7 +747,7 @@
         card.querySelector(".climb").textContent = t.climb + " m";
         const tags = card.querySelector(".tags");
         if (t.shop) { const s = document.createElement("span"); s.className = "shop"; s.textContent = "🛍️ 可順遊吃買"; tags.appendChild(s); }
-        t.tags.forEach(tag => { const s = document.createElement("span"); s.textContent = tag; tags.appendChild(s); });
+        t.tags.forEach(tag => { const s = document.createElement("span"); s.textContent = tag === "隱藏步道" ? "🔍 隱藏步道" : tag; if (tag === "隱藏步道") s.className = "hid"; tags.appendChild(s); });
         const dl = card.querySelector("dl");
         detailFields.forEach(([f, label]) => {
           const dt = document.createElement("dt"); dt.textContent = label;
