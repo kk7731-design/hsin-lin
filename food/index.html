@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-21-8">
+  <meta name="page-version" content="2026-11-21-9">
   <meta name="theme-color" content="#b4451f">
   <title>各縣市特色小吃與伴手禮</title>
   <style>
@@ -470,6 +470,25 @@
       { county: "澎湖縣", name: "愛婷蚵仔麵線", emoji: "🦪", type: "點心", hidden: true, stall: true, desc: "北辰市場、文康商圈一帶的蚵仔麵線。", where: "馬公市北辰市場一帶" },
       { county: "金門縣", name: "葉氏酒釀蛋", emoji: "🥚", type: "甜品", shop: true, desc: "被認為是金門第一家酒釀蛋店，用金門高粱酒釀做成甜湯。", where: "金城鎮" },
       { county: "金門縣", name: "集成小吃部", emoji: "🥟", type: "點心", desc: "金城的小吃店，以黃金鍋貼和炸酥蚵聞名。", where: "金城鎮" },
+      // ---- 鄉鎮特色小吃 ----
+      { county: "苗栗縣", name: "通霄炸蚵粿（蚵嗲）", emoji: "🦪", type: "點心", must: true, stall: true, desc: "苗栗海線的古早味：米漿包鮮蚵與韭菜下鍋油炸，外酥內鮮；通霄市場、漁港邊與白沙屯廟口一帶的攤販都吃得到，錢媽媽肉粽假日也賣蚵嗲。", where: "通霄菜市場、通霄漁港、白沙屯拱天宮一帶" },
+      { county: "苗栗縣", name: "外埔無名炸粿", emoji: "🦪", type: "點心", hidden: true, stall: true, desc: "後龍外埔營業超過 80 年的無招牌老攤，古早味蚵嗲和炸粿現點現炸。", where: "後龍鎮外埔" },
+      { county: "苗栗縣", name: "後龍古早味蚵嗲炸粿", emoji: "🦪", type: "點心", hidden: true, stall: true, desc: "傳承二代的蚵嗲炸粿，以前是廟口的藍色餐車，現在改在住家販售，一樣現點現炸。", where: "後龍鎮" },
+      { county: "苗栗縣", name: "通霄廟口阿嬤臭豆腐", emoji: "🧆", type: "點心", shop: true, stall: true, desc: "通霄車站附近開了約 50 年的臭豆腐老攤。", where: "通霄車站附近（廟口）" },
+      { county: "苗栗縣", name: "上客炸雞", emoji: "🍗", type: "點心", hidden: true, stall: true, desc: "通霄菜市場裡只在週六、日早上營業的炸雞攤，招牌是客家古早味「花生酸菜炸」。", where: "通霄菜市場" },
+      { county: "苗栗縣", name: "豬尾仔肉圓", emoji: "🟤", type: "點心", hidden: true, desc: "通霄 30 年老店，肉羹乾麵、餛飩粄條也很受歡迎。", where: "通霄鎮" },
+      { county: "苗栗縣", name: "栗園米食", emoji: "🍜", type: "主食", desc: "後龍的客家粄條店，有 12 種口味可以選。", where: "後龍鎮" },
+      { county: "新北市", name: "金包里鴨肉", emoji: "🦆", type: "主食", must: true, desc: "金山老街廣安宮旁開賣超過 60 年的鴨肉老店，自助端菜、現切鴨肉；店裡不賣白飯。", where: "金山區金包里街（廣安宮旁）" },
+      { county: "臺中市", name: "王塔米糕", emoji: "🍚", type: "主食", shop: true, desc: "清水筒仔米糕的始祖，祖傳三代、70 多年。", where: "清水區中興街" },
+      { county: "臺中市", name: "阿財米糕", emoji: "🍚", type: "主食", shop: true, desc: "王塔徒弟自立門戶的清水 50 年老店，老顧客說它保留了原本的味道；週一公休。", where: "清水區西寧路" },
+      { county: "彰化縣", name: "北斗肉圓生", emoji: "🟤", type: "點心", must: true, desc: "北斗肉圓的代表店，相傳 1898 年大水災時范家祖先做出第一顆鹹肉圓賑災；北斗肉圓形狀偏尖、有指壓痕。", where: "北斗鎮中華路" },
+      { county: "彰化縣", name: "北斗肉圓詹", emoji: "🟤", type: "點心", hidden: true, desc: "北斗鎮公所附近路邊小平房裡的肉圓店。", where: "北斗鎮中正路" },
+      { county: "彰化縣", name: "春芳燒烤羊肉爐", emoji: "🍲", type: "主食", shop: true, desc: "溪湖羊肉爐最常被推薦的老店，超過 50 年，中藥羊肉爐可點鴛鴦鍋，有窗口式肉櫃可以先看羊肉。", where: "溪湖鎮" },
+      { county: "彰化縣", name: "阿清羊肉爐", emoji: "🍲", type: "主食", desc: "溪湖羊肉爐名店之一，獨門醃料烤羊肉可以配羊肉爐吃。", where: "溪湖鎮忠工路" },
+      { county: "屏東縣", name: "林記肉粿", emoji: "🟫", type: "點心", shop: true, stall: true, desc: "東港小三寶之一的肉粿，配香腸與櫻花蝦，和葉家是最常被提到的兩家。", where: "東港鎮" },
+      { county: "屏東縣", name: "葉家肉粿", emoji: "🟫", type: "點心", shop: true, stall: true, desc: "東港肉粿名攤，和林記並列。", where: "東港鎮" },
+      { county: "屏東縣", name: "東港堤防無名肉粿飯湯", emoji: "🍲", type: "主食", hidden: true, stall: true, desc: "堤防旁沒有店名、招牌只寫「肉粿」「飯湯」的老攤，開了二、三十年。", where: "東港鎮堤防旁" },
+      { county: "屏東縣", name: "佳吉碳烤饅頭", emoji: "🍞", type: "點心", stall: true, desc: "東港三十多年的碳烤饅頭老攤，在地人的早餐，有鹹甜兩種吃法。", where: "東港鎮" },
       // ---- 隱藏美食 ----
       { county: "臺北市", name: "三六食粑", emoji: "🥜", type: "甜品", hidden: true, desc: "萬華巷弄裡的老甜湯店，招牌是綿密的花生湯配紅白小湯圓。", where: "萬華區三水街" },
       { county: "新北市", name: "阿北北古早味切仔麵", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "三重沒有招牌的小麵店，便宜又大碗，主要靠在地人口耳相傳。", where: "三重區仁愛街" },
