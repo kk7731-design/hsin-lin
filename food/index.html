@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-21-9">
+  <meta name="page-version" content="2026-11-21-10">
   <meta name="theme-color" content="#b4451f">
   <title>各縣市特色小吃與伴手禮</title>
   <style>
@@ -84,6 +84,7 @@
       <input id="search" type="search" placeholder="搜尋小吃、縣市或地點…" aria-label="搜尋小吃">
       <select id="county" aria-label="選擇縣市"></select>
     </div>
+    <div class="toolbar" id="quick" role="group" aria-label="熱門搜尋"></div>
     <div class="toolbar" id="regions" role="group" aria-label="地區篩選"></div>
     <div class="toolbar" id="types" role="group" aria-label="類型篩選"></div>
     <div class="toolbar">
@@ -489,6 +490,40 @@
       { county: "屏東縣", name: "葉家肉粿", emoji: "🟫", type: "點心", shop: true, stall: true, desc: "東港肉粿名攤，和林記並列。", where: "東港鎮" },
       { county: "屏東縣", name: "東港堤防無名肉粿飯湯", emoji: "🍲", type: "主食", hidden: true, stall: true, desc: "堤防旁沒有店名、招牌只寫「肉粿」「飯湯」的老攤，開了二、三十年。", where: "東港鎮堤防旁" },
       { county: "屏東縣", name: "佳吉碳烤饅頭", emoji: "🍞", type: "點心", stall: true, desc: "東港三十多年的碳烤饅頭老攤，在地人的早餐，有鹹甜兩種吃法。", where: "東港鎮" },
+      // ---- 蚵嗲、水煎包、蛋餅、漢堡與早餐 ----
+      { county: "彰化縣", name: "巷仔內蚵仔炸", emoji: "🦪", type: "點心", hidden: true, stall: true, desc: "王功仁愛巷弄裡的指標性蚵嗲店，皮薄酥脆，招牌是綜合嗲。", where: "芳苑鄉王功（仁愛巷弄）" },
+      { county: "彰化縣", name: "芳苑大樹下蚵嗲", emoji: "🦪", type: "點心", hidden: true, stall: true, desc: "芳新路上大樹下的露天蚵嗲攤，坐在樹蔭下吃現炸蚵嗲。", where: "芳苑鄉芳新路" },
+      { county: "彰化縣", name: "吳益興蚵仔煎", emoji: "🍳", type: "點心", shop: true, stall: true, desc: "鹿港天后宮廟埕前的蚵仔煎老店。", where: "鹿港天后宮廟埕前" },
+      { county: "彰化縣", name: "阿道蚵仔煎", emoji: "🍳", type: "點心", shop: true, stall: true, desc: "1960 年創立的鹿港蚵仔煎，就在天后宮廣場。", where: "鹿港天后宮廣場" },
+      { county: "彰化縣", name: "三番錦魯麵（光華亭）", emoji: "🍜", type: "主食", shop: true, desc: "鹿港中山路上的百年老店，錦魯麵和蛋煎蚵仔是招牌。", where: "鹿港鎮中山路" },
+      { county: "嘉義縣", name: "阿春小吃", emoji: "🦪", type: "點心", hidden: true, desc: "東石路邊鐵皮屋小店，蚵仔包用蛋和高麗菜包蚵仔，做法和蚵嗲很像。", where: "東石鄉" },
+      { county: "嘉義縣", name: "玉花烤鮮蚵", emoji: "🦪", type: "主食", desc: "東石的烤蚵名店，蚵仔一盤盤上桌現烤。", where: "東石鄉" },
+      { county: "嘉義縣", name: "阿淑的店", emoji: "🍳", type: "點心", desc: "布袋港最為人知的蚵仔煎。", where: "布袋港" },
+      { county: "臺中市", name: "西屯無名水煎包", emoji: "🥟", type: "點心", hidden: true, stall: true, desc: "傍晚就排滿人的無名水煎包，韭菜與高麗菜兩種口味，桌上有甜辣醬和特製辣醬。", where: "西屯區" },
+      { county: "臺中市", name: "江媽媽水煎包", emoji: "🥟", type: "點心", hidden: true, stall: true, desc: "水湳郵局附近的水煎包攤，高麗菜餡加冬粉、香菇與腐竹，傍晚常排隊。", where: "北屯區水湳郵局附近" },
+      { county: "臺南市", name: "棠口水煎包", emoji: "🥟", type: "點心", desc: "中西區以純素口味著稱的水煎包。", where: "中西區民生路一段" },
+      { county: "新北市", name: "老楊黃金脆皮水煎包", emoji: "🥟", type: "點心", shop: true, stall: true, desc: "民國 56 年創立的新店老字號，底部煎得金黃酥脆。", where: "新店區" },
+      { county: "桃園市", name: "老牌曾水煎包", emoji: "🥟", type: "點心", shop: true, stall: true, desc: "中壢開業超過 40 年的水煎包，半煎炸、雙面煎。", where: "中壢區" },
+      { county: "臺北市", name: "山豬蛋餅", emoji: "🍳", type: "點心", desc: "值得早起排隊的蛋餅店。", where: "中山區農安街" },
+      { county: "臺北市", name: "天母豆漿", emoji: "🍳", type: "點心", desc: "天母老店翻新，招牌是手工現擀的千層蛋餅。", where: "士林區德行東路" },
+      { county: "新北市", name: "三重蛋餅大王", emoji: "🍳", type: "點心", desc: "三重的蛋餅店，有麻婆豆腐蛋餅、打拋豬厚切蛋餅等隱藏版口味；週三、四休息。", where: "三重區大榮街" },
+      { county: "新北市", name: "三重無名蛋餅 38 號", emoji: "🍳", type: "點心", hidden: true, stall: true, desc: "三重常被提到的古早味粉漿蛋餅。", where: "三重區" },
+      { county: "新北市", name: "金英古早味蛋餅", emoji: "🍳", type: "點心", hidden: true, stall: true, desc: "三和夜市的古早味粉漿蛋餅攤。", where: "三重區三和夜市" },
+      { county: "新竹縣", name: "阿胖豆漿", emoji: "🍳", type: "點心", hidden: true, desc: "竹東民國 82 年開業的早餐店，招牌是客家味的粄條韭菜蛋餅。", where: "竹東鎮" },
+      { county: "臺中市", name: "阿婆早點", emoji: "🍳", type: "點心", hidden: true, stall: true, desc: "阿婆親手做的古早味粉漿蛋餅，餅皮焦香軟綿，每天限量。", where: "北區太原八街" },
+      { county: "臺中市", name: "北屯蛋餅", emoji: "🍳", type: "點心", desc: "現點現做的粉漿蛋餅，口感紮實，可以自由加料。", where: "北屯區進化北路" },
+      { county: "臺中市", name: "蘇媽媽蛋餅", emoji: "🍳", type: "點心", hidden: true, stall: true, desc: "國華街上的古早味粉漿蛋餅。", where: "國華街" },
+      { county: "臺南市", name: "紅記早點", emoji: "🍳", type: "點心", shop: true, desc: "台南人熟悉的早餐店，招牌是會牽絲的雙起司蛋餅；五妃街本店外還有成大、崇明店。", where: "中西區五妃街" },
+      { county: "臺南市", name: "呂早餐", emoji: "🍳", type: "點心", shop: true, desc: "台南人熟悉的老早餐店，招牌是打拋豬肉蛋餅。", where: "南區健康路一段" },
+      { county: "臺南市", name: "超盛號烘培手做早食", emoji: "🍳", type: "點心", desc: "安平以彩色餅皮蛋餅出名的早餐店。", where: "安平區建平五街" },
+      { county: "高雄市", name: "藍鯨早餐店", emoji: "🍳", type: "點心", shop: true, desc: "開業 50 年，以酥脆蛋餅聞名，有 20 多種蛋餅口味。", where: "三民區嫩江街" },
+      { county: "高雄市", name: "溢香溱古早味蛋餅", emoji: "🍳", type: "點心", hidden: true, desc: "高雄榮總對面的古早味麵糊蛋餅，煎得很脆。", where: "左營區（高雄榮總對面）" },
+      { county: "高雄市", name: "興隆居", emoji: "🥟", type: "點心", must: true, desc: "六合夜市附近飄香超過一甲子的早餐老店，招牌湯包與燒餅，一大清早就排隊。", where: "前金區六合二路" },
+      { county: "高雄市", name: "老江紅茶牛奶", emoji: "🥪", type: "點心", shop: true, desc: "創立 65 年、從創業起就 24 小時營業，招牌火腿蛋吐司配紅茶牛奶。", where: "高雄市" },
+      { county: "高雄市", name: "寬來順早餐店", emoji: "🥟", type: "點心", desc: "左營在地人常點鮮肉包配鹹豆漿。", where: "左營區中華一路" },
+      { county: "嘉義市", name: "蓬萊漢堡", emoji: "🍔", type: "點心", shop: true, desc: "嘉義老牌漢堡店，用自家漢堡麵包夾高麗菜絲和炸雞排或肉排。", where: "東區中山路" },
+      { county: "臺南市", name: "美香吉漢堡店", emoji: "🍔", type: "點心", shop: true, desc: "安平的老派西式早餐店，第二代接手，漢堡口味將近 20 種。", where: "安平區" },
+      { county: "臺南市", name: "丹丹漢堡", emoji: "🍔", type: "點心", must: true, desc: "1984 年創立的南部速食店，只開直營不加盟；招牌是「9 號餐」脆皮雞腿堡配赤肉麵線。", where: "臺南、高雄、屏東各地" },
       // ---- 隱藏美食 ----
       { county: "臺北市", name: "三六食粑", emoji: "🥜", type: "甜品", hidden: true, desc: "萬華巷弄裡的老甜湯店，招牌是綿密的花生湯配紅白小湯圓。", where: "萬華區三水街" },
       { county: "新北市", name: "阿北北古早味切仔麵", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "三重沒有招牌的小麵店，便宜又大碗，主要靠在地人口耳相傳。", where: "三重區仁愛街" },
@@ -652,6 +687,12 @@
       empty.hidden = shown.length > 0;
     }
 
+    ["蚵嗲", "蚵仔煎", "煎包", "蛋餅", "漢堡", "肉圓", "米糕", "雞肉飯", "臭豆腐", "粄條"].forEach(word => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = "🔎 " + word;
+      b.addEventListener("click", () => { search.value = search.value === word ? "" : word; render(); });
+      $("quick").appendChild(b);
+    });
     fillCounties();
     search.addEventListener("input", render);
     countySel.addEventListener("change", render);
