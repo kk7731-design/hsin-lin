@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-21-20">
+  <meta name="page-version" content="2026-11-21-22">
   <meta name="theme-color" content="#b4451f">
   <title>各縣市特色小吃與伴手禮</title>
   <style>
@@ -829,6 +829,49 @@
       { county: "新北市", name: "鳥來伯專業糖葫蘆", emoji: "🍡", type: "點心", stall: true, desc: "府中站附近開了 20 多年的糖葫蘆，番茄糖葫蘆很便宜，買了 1 到 2 小時內吃完最好。", where: "板橋區（府中站附近）" },
       { county: "基隆市", name: "好吃糖葫蘆", emoji: "🍡", type: "點心", stall: true, desc: "廟口夜市的古法炭火煮糖糖葫蘆，現場製作，晚上 7 點開賣常排隊。", where: "廟口夜市（仁一路、愛四路口）" },
       { county: "臺南市", name: "糖伯伯", emoji: "🍡", type: "點心", desc: "台南知名的糖葫蘆業者。", where: "臺南市" },
+      // ---- 中南部補充（台中、高雄） ----
+      { county: "臺中市", name: "東興市魯肉義", emoji: "🍚", type: "主食", desc: "台中人氣滷肉飯，營業到凌晨，Google 評論五千多則；週日公休。", where: "北區漢口路四段" },
+      { county: "臺中市", name: "富鼎旺豬腳", emoji: "🍖", type: "主食", shop: true, desc: "台中知名豬腳店，滷肉飯也用同一鍋獨門醬汁。", where: "中區臺灣大道一段" },
+      { county: "臺中市", name: "老牌滷肉飯", emoji: "🍚", type: "主食", hidden: true, desc: "凌晨 4 點半就營業、傳承三代的滷肉飯，招牌是腿仁。", where: "臺中市" },
+      { county: "臺中市", name: "財神爺滷肉飯", emoji: "🍚", type: "主食", desc: "台中 24 小時宵夜熱門的滷肉飯。", where: "臺中市" },
+      { county: "臺中市", name: "蕭爌肉飯", emoji: "🍚", type: "主食", desc: "24 小時營業的爌肉飯，早餐吃到宵夜都可以，也有滷肉飯。", where: "北屯區中清路" },
+      { county: "臺中市", name: "可口牛肉麵", emoji: "🍜", type: "主食", must: true, desc: "低調簡樸的紅燒牛肉麵，2021 年起連續入選米其林必比登推介。", where: "西屯區大墩路" },
+      { county: "臺中市", name: "牛谷飲食店", emoji: "🍜", type: "主食", desc: "西區的牛肉麵專賣店，也有非牛肉餐點。", where: "西區" },
+      { county: "臺中市", name: "洄味牛肉麵", emoji: "🍜", type: "主食", desc: "一碗吃到牛筋、牛肚、牛腱心「牛三寶」的紅燒牛肉麵。", where: "北區崇德路" },
+      { county: "臺中市", name: "向上水餃", emoji: "🥟", type: "主食", hidden: true, desc: "向上市場裡 40 年的水餃店，一顆只要 3 元，也有滷味和酸辣湯。", where: "西區向上市場" },
+      { county: "臺中市", name: "康康豬豬血湯", emoji: "🥣", type: "點心", desc: "豐原人氣最旺的早餐豬血湯，有自家停車場。", where: "豐原區西勢二街" },
+      { county: "臺中市", name: "后里豬血財", emoji: "🥣", type: "點心", shop: true, desc: "后里阿公阿嬤級的豬血湯老店，后里這類老店動輒五六十年。", where: "后里區" },
+      { county: "高雄市", name: "老余麵店", emoji: "🍜", type: "主食", hidden: true, desc: "楠梓 30 多年的牛肉麵，清燉湯頭，也有牛肉拌麵。", where: "楠梓區" },
+      { county: "高雄市", name: "老宋牛肉麵", emoji: "🍜", type: "主食", desc: "牛肋骨熬 10 多小時的湯頭，桌上有特製牛油可加。", where: "鹽埕區" },
+      { county: "高雄市", name: "西蜀榮昌川味牛肉麵", emoji: "🍜", type: "主食", shop: true, desc: "1971 年創立、傳承三代的川味牛肉麵。", where: "新興區民享街" },
+      { county: "高雄市", name: "鍋呆子鍋燒專賣", emoji: "🍜", type: "主食", desc: "湯頭和小菜都自製的鍋燒意麵，招牌牛奶鍋燒，還有咖哩、泡菜、麻辣湯頭。", where: "左營區辛亥路" },
+      { county: "高雄市", name: "美迪亞漢堡", emoji: "🍜", type: "點心", hidden: true, desc: "西式早餐店卻以鍋燒麵闖出名號，湯頭濃郁、用活蝦。", where: "高雄市" },
+      { county: "高雄市", name: "呷飽飽創意鍋燒", emoji: "🍜", type: "主食", desc: "原味鍋燒（含沙茶）與昆布鍋燒是招牌。", where: "小港區" },
+      { county: "高雄市", name: "胖達鍋燒很燒", emoji: "🍜", type: "主食", desc: "招牌法式卡菲濃湯鍋燒。", where: "三民區建工路、旗山區" },
+      { county: "高雄市", name: "原味輕食早餐", emoji: "🍜", type: "點心", hidden: true, desc: "南部特色的早餐鍋燒意麵，Google 約 4.2 星。", where: "左營區政德路" },
+      { county: "高雄市", name: "李家湯圓", emoji: "🍡", type: "甜品", desc: "高雄冰店專題第一名的湯圓，花生要熬煮六小時。", where: "高雄市" },
+      { county: "高雄市", name: "戴家綠豆湯", emoji: "🥣", type: "甜品", desc: "綠豆薏仁、蓮子紅豆、冷凍芋等古早甜品。", where: "高雄市" },
+      { county: "高雄市", name: "合春圓仔", emoji: "🍡", type: "甜品", shop: true, desc: "高雄老字號湯圓。", where: "高雄市" },
+      { county: "高雄市", name: "武廟湯圓王", emoji: "🍡", type: "甜品", shop: true, desc: "高雄老字號湯圓店。", where: "高雄市" },
+      { county: "高雄市", name: "清溪小吃部", emoji: "🍡", type: "點心", shop: true, desc: "飄香超過一甲子、以鹹湯圓聞名的小吃部。", where: "高雄市" },
+      // ---- 中南部與東部補充（彰化、嘉義、屏東、雲林、花東） ----
+      { county: "彰化縣", name: "阿泉爌肉飯", emoji: "🍚", type: "主食", must: true, desc: "在地經營超過 80 年的彰化爌肉飯代表，早上 7 點開賣，通常中午前賣完。", where: "彰化市" },
+      { county: "嘉義市", name: "楊記水餃", emoji: "🥟", type: "主食", desc: "民宅小店的手工水餃，梅花豬、洋蔥、干貝絲加雞湯做餡，配老闆特製 XO 醬；標榜無味素。", where: "東區民國路" },
+      { county: "屏東縣", name: "紀家牛肉麵", emoji: "🍜", type: "主食", shop: true, desc: "民國 75 年開業的屏東牛肉麵，歇業幾年後重新開張，紅燒湯底鹹香、牛肉大塊。", where: "屏東市延平一街" },
+      { county: "屏東縣", name: "正老李台北泡泡冰", emoji: "🍧", type: "甜品", desc: "屏東在地人激推的泡泡冰。", where: "屏東市" },
+      { county: "屏東縣", name: "東港劉家餛飩", emoji: "🥟", type: "點心", desc: "東港的創意乾餛飩。", where: "東港鎮" },
+      { county: "屏東縣", name: "御木軒冰室", emoji: "🍧", type: "甜品", desc: "勝利星村裡的日系昭和風冰店，自家製果醬每天口味不同。", where: "屏東市勝利路（勝利星村）" },
+      { county: "屏東縣", name: "豆廚子紅豆餅", emoji: "🟤", type: "點心", desc: "萬丹的彩色紅豆餅（車輪餅）。", where: "萬丹鄉中興路二段" },
+      { county: "花蓮縣", name: "水餃控", emoji: "🥟", type: "主食", desc: "用花蓮在地食材做水餃，招牌剝皮辣椒水餃，外皮用火龍果揉製。", where: "花蓮市" },
+      { county: "花蓮縣", name: "飯人小吃店 RICE MAN", emoji: "🍚", type: "主食", hidden: true, desc: "在地人推薦的飯食小店，招牌雞丁滷肉飯，一定要加半熟蛋。", where: "花蓮市" },
+      { county: "臺東縣", name: "林記牛肉麵", emoji: "🍜", type: "主食", desc: "台東的牛肉麵店，聽說水餃比牛肉麵還有名，店內乾淨舒適。", where: "臺東市" },
+      { county: "臺東縣", name: "上味食堂", emoji: "🍚", type: "主食", hidden: true, desc: "連續兩年獲「台灣滷肉飯節嚴選店家」，滷肉肥瘦比例好；營業時間短，週三、四公休。", where: "臺東市新生路" },
+      { county: "臺東縣", name: "大池豆包店", emoji: "🫘", type: "點心", desc: "池上只賣香煎豆包、豆花、豆漿三樣的老店。", where: "池上鄉" },
+      { county: "雲林縣", name: "阿國獅魷魚羹", emoji: "🦑", type: "點心", shop: true, desc: "斗六 70 多年的老店，滷魷魚嘴的創始店，在地人也常點滷肉飯。", where: "斗六市" },
+      { county: "雲林縣", name: "魷魚興魷魚嘴羹", emoji: "🦑", type: "點心", shop: true, desc: "斗六經營 70 多年、專賣魷魚嘴羹的老店。", where: "斗六市" },
+      { county: "雲林縣", name: "大娘羹檜意美食館", emoji: "🥣", type: "點心", desc: "斗六中正路「羹麵一條街」上的羹類小吃。", where: "斗六市中正路" },
+      { county: "雲林縣", name: "肯得利雞排", emoji: "🍗", type: "點心", stall: true, desc: "虎尾人氣雞排。", where: "虎尾鎮林森路一段" },
+      { county: "雲林縣", name: "樂包子", emoji: "🥟", type: "點心", desc: "虎尾人氣包子店。", where: "虎尾鎮" },
       // ---- 隱藏美食 ----
       { county: "臺北市", name: "三六食粑", emoji: "🥜", type: "甜品", hidden: true, desc: "萬華巷弄裡的老甜湯店，招牌是綿密的花生湯配紅白小湯圓。", where: "萬華區三水街" },
       { county: "新北市", name: "阿北北古早味切仔麵", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "三重沒有招牌的小麵店，便宜又大碗，主要靠在地人口耳相傳。", where: "三重區仁愛街" },
