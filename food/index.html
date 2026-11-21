@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-21-11">
+  <meta name="page-version" content="2026-11-21-14">
   <meta name="theme-color" content="#b4451f">
   <title>各縣市特色小吃與伴手禮</title>
   <style>
@@ -559,6 +559,88 @@
       { county: "雲林縣", name: "五億雞排", emoji: "🍗", type: "點心", stall: true, desc: "雲林虎尾起家的雞排。", where: "虎尾鎮" },
       { county: "宜蘭縣", name: "罵子蛋創始店", emoji: "🍗", type: "點心", desc: "冬山知名炸物店，招牌「芋泥金沙起司雞排」，部分餐點每日限量。", where: "冬山鄉" },
       { county: "花蓮縣", name: "國聲沾醬雞排", emoji: "🍗", type: "點心", hidden: true, stall: true, desc: "花蓮開店 25 年的沾醬雞排，醬汁帶烤肉醬甜香，建議加蒜片。", where: "花蓮市林森路" },
+      // ---- 燒餅、肉粽、碗粿、豆花、剉冰、滷味、鍋貼、烤玉米（第一批） ----
+      { county: "臺北市", name: "阜杭豆漿", emoji: "🥯", type: "點心", must: true, desc: "創立超過一甲子、入選米其林必比登推介的豆漿店，招牌厚燒餅用老麵發酵 15 小時以上，配燒餅油條。", where: "中正區忠孝東路（華山市場二樓）" },
+      { county: "臺北市", name: "江蘇老宜記燒餅舖", emoji: "🥯", type: "點心", shop: true, desc: "萬華用老麵製餅的燒餅老舖，蔥燒餅、蟹殼黃和甜酥餅都受好評。", where: "萬華區" },
+      { county: "臺北市", name: "南港張家燒餅店", emoji: "🥯", type: "點心", hidden: true, desc: "南港的排隊燒餅，推薦燒餅油條加蔥蛋。", where: "南港區" },
+      { county: "新北市", name: "熊記燒餅油條專賣店", emoji: "🥯", type: "點心", shop: true, desc: "1932 年創立的新莊老店，一、三、五公休，早上 8 點前常常賣完。", where: "新莊區" },
+      { county: "新北市", name: "老曾碳烤燒餅", emoji: "🥯", type: "點心", hidden: true, stall: true, desc: "三重的碳烤燒餅，口感像炭烤蔥花饅頭，份量大、價格便宜。", where: "三重區" },
+      { county: "臺中市", name: "老張炭烤燒餅", emoji: "🥯", type: "點心", desc: "台中網路評價很高的炭烤燒餅，胡椒餅也用老麵發酵。", where: "臺中市" },
+      { county: "宜蘭縣", name: "羅東碳烤燒餅店", emoji: "🥯", type: "點心", shop: true, desc: "羅東在地人推薦的碳烤燒餅，隨時都有人排隊。", where: "羅東鎮南門路" },
+      { county: "基隆市", name: "西定水煎包", emoji: "🥟", type: "點心", hidden: true, stall: true, desc: "基隆在地人私藏的水煎包。", where: "仁愛區（西定路一帶）" },
+      { county: "臺北市", name: "阿欉大橋頭肉粽", emoji: "🍙", type: "點心", shop: true, stall: true, desc: "延三夜市的北部粽名店。", where: "大同區延三夜市" },
+      { county: "新北市", name: "劉家肉粽", emoji: "🍙", type: "點心", shop: true, desc: "石門的北部粽名店，中央廚房每天生產，口味穩定。", where: "石門區（富基店）" },
+      { county: "新北市", name: "阿瑞官粿店", emoji: "🍙", type: "點心", shop: true, desc: "新莊的百年粿店，紅龜粿等傳統粿品之外，端午前後才賣標準北部粽。", where: "新莊區" },
+      { county: "臺中市", name: "一品肉粽", emoji: "🍙", type: "點心", desc: "台中的北部粽代表，米粒粒分明、用料實在。", where: "臺中市" },
+      { county: "臺中市", name: "永興肉粽", emoji: "🍙", type: "點心", shop: true, desc: "台中 60 年老店，價格親民。", where: "臺中市" },
+      { county: "臺中市", name: "春肉粽", emoji: "🍙", type: "點心", hidden: true, desc: "用片狀五花肉的肉粽，營業到半夜，是宵夜好選擇。", where: "臺中市" },
+      { county: "臺南市", name: "阿娟肉粽魯麵", emoji: "🍙", type: "點心", shop: true, desc: "國華街的排隊名店，南部水煮粽配魯麵。", where: "中西區國華街" },
+      { county: "臺南市", name: "郭家肉粽", emoji: "🍙", type: "點心", hidden: true, stall: true, desc: "友愛市場的古早味肉粽，淋肉燥滷汁不加醬油膏，配一碗味噌湯。", where: "中西區友愛市場" },
+      { county: "臺南市", name: "楊哥楊嫂肉粽", emoji: "🍙", type: "點心", desc: "台南的肉粽店，生瘦肉加炒肥肉的雙口感是特色。", where: "臺南市" },
+      { county: "臺南市", name: "林阿全碗粿", emoji: "🍮", type: "點心", shop: true, desc: "府前路與忠義路口的百年碗粿老店，碗粿、素碗粿、浮水魚羹都有，推薦料多的黑碗粿。", where: "中西區府前路" },
+      { county: "臺南市", name: "一味品碗粿", emoji: "🍮", type: "點心", hidden: true, desc: "國華街永樂市場旁只賣碗粿和魚羹的店，在地人極力推薦。", where: "中西區國華街" },
+      { county: "臺南市", name: "阿蘭碗粿", emoji: "🍮", type: "點心", shop: true, desc: "麻豆創立超過 40 年的碗粿代表店，座位多、外帶也方便。", where: "麻豆區" },
+      { county: "臺中市", name: "忠孝豆花", emoji: "🍮", type: "甜品", shop: true, desc: "1958 年創立的台中豆花老店，也賣碗粿、炒麵，手工客家麻糬很受歡迎。", where: "東區" },
+      { county: "臺中市", name: "謝氏早點豆花", emoji: "🍮", type: "甜品", shop: true, desc: "台中 60 年老字號，在地人的早午餐，還有漢堡配豆花的吃法。", where: "臺中市" },
+      { county: "臺中市", name: "蔡家豆花", emoji: "🍮", type: "甜品", stall: true, desc: "忠孝夜市經營超過 30 年的豆花攤。", where: "南區忠孝夜市" },
+      { county: "嘉義縣", name: "梅山傳統豆花店", emoji: "🍮", type: "甜品", shop: true, desc: "1964 年創立、傳承三代的梅山豆花，假日與大熱天常大排長龍。", where: "梅山鄉" },
+      { county: "臺南市", name: "台南無名豆花", emoji: "🍮", type: "甜品", hidden: true, desc: "第一代挑扁擔沿街叫賣起家，已傳到第三代、70 多年的豆花。", where: "北區" },
+      { county: "彰化縣", name: "文德宮龍泉豆花", emoji: "🍮", type: "甜品", hidden: true, stall: true, desc: "花壇文德宮旁的推車豆花，在地人的下午茶。", where: "花壇鄉文德宮旁" },
+      { county: "宜蘭縣", name: "和平豆花", emoji: "🍮", type: "甜品", desc: "羅東經營二十幾年的古法手工豆花，配料自己煮，人氣是粉圓豆花配黑糖冰沙。", where: "羅東鎮" },
+      { county: "新竹縣", name: "北埔機車豆花", emoji: "🍮", type: "甜品", hidden: true, stall: true, desc: "北埔老街騎機車賣的豆花，只在週六、日和連假下午 2 點開賣，常排隊、沒有座位。", where: "北埔老街" },
+      { county: "臺北市", name: "龍都冰果專業家", emoji: "🍧", type: "甜品", must: true, desc: "1920 年創立、超過百年的冰店，招牌八寶冰。", where: "萬華區" },
+      { county: "臺北市", name: "建中黑砂糖刨冰", emoji: "🍧", type: "甜品", shop: true, desc: "建國中學旁 1941 年開業的冰店，以濃郁黑糖糖漿聞名。", where: "中正區（建國中學旁）" },
+      { county: "臺北市", name: "辛發亭", emoji: "🍧", type: "甜品", shop: true, stall: true, desc: "士林夜市 80 多年的冰店，剉冰顆粒分明，雪片冰很有名。", where: "士林夜市" },
+      { county: "臺北市", name: "楊記冰店", emoji: "🍧", type: "甜品", desc: "萬華以紅豆冰、花生冰起家的冰店，招牌是玉米冰。", where: "萬華區" },
+      { county: "臺北市", name: "呷二嘴", emoji: "🍧", type: "甜品", shop: true, desc: "大稻埕 70 年冰店，以米苔目冰聞名。", where: "大同區大稻埕" },
+      { county: "臺南市", name: "銀鋒冰果室", emoji: "🍧", type: "甜品", shop: true, desc: "鹽水 60 多年的冰果室，招牌紅豆牛奶月見冰。", where: "鹽水區" },
+      { county: "臺南市", name: "江水號", emoji: "🍧", type: "甜品", shop: true, stall: true, desc: "國華街民國 20 年開業、近百年的八寶冰老店。", where: "中西區國華街" },
+      { county: "臺南市", name: "泰成水果店", emoji: "🍧", type: "甜品", shop: true, desc: "70 年老字號水果店，以瓜瓜冰（西瓜冰）出名。", where: "中西區" },
+      { county: "臺中市", name: "美洲冰品・伊の芋圓", emoji: "🍧", type: "甜品", shop: true, desc: "大甲 1972 年創立的冰店，以芋頭與手工芋圓為特色。", where: "大甲區" },
+      { county: "高雄市", name: "枝仔冰城", emoji: "🍧", type: "甜品", shop: true, desc: "旗山將近 90 年的冰店，香蕉船是代表品項。", where: "旗山區" },
+      { county: "花蓮縣", name: "一心泡泡冰", emoji: "🍧", type: "甜品", shop: true, desc: "花蓮 20 多年的泡泡冰老品牌，刨冰和配料攪到綿密起泡。", where: "花蓮市" },
+      { county: "基隆市", name: "遠東泡泡冰", emoji: "🍧", type: "甜品", stall: true, desc: "基隆廟口夜市的泡泡冰攤。", where: "廟口夜市" },
+      { county: "臺北市", name: "老天祿", emoji: "🍢", type: "點心", must: true, desc: "西門町的滷味名店，鴨舌最有名，鹹香帶花椒香；鴨翅、鴨胗、脆腸也推薦。", where: "萬華區西門町" },
+      { county: "臺北市", name: "呷品香滷味", emoji: "🍢", type: "點心", hidden: true, stall: true, desc: "市場裡的滷味攤，每天擺出 40 樣以上滷菜。", where: "臺北市" },
+      { county: "基隆市", name: "三坑菜頭滷", emoji: "🍢", type: "點心", hidden: true, stall: true, desc: "基隆在地人私藏的菜頭滷。", where: "基隆市" },
+      { county: "基隆市", name: "滷都香滷味", emoji: "🍢", type: "點心", hidden: true, stall: true, desc: "基隆隱藏版滷味。", where: "基隆市" },
+      { county: "新竹縣", name: "北埔甘姐胡椒鴨", emoji: "🦆", type: "點心", desc: "北埔的胡椒鴨滷味，店裡有 11 種美食。", where: "北埔鄉埔心街" },
+      { county: "臺北市", name: "珍好鍋貼專賣店", emoji: "🥟", type: "點心", desc: "有「南港最強鍋貼」稱號的鍋貼店，就在後山埤捷運站對面。", where: "南港區（後山埤站）" },
+      { county: "臺北市", name: "及品鍋貼水餃專賣店", emoji: "🥟", type: "點心", desc: "士林的鍋貼水餃店，名人也是常客。", where: "士林區美崙街" },
+      { county: "臺北市", name: "內湖無名鍋貼蔥油餅", emoji: "🥟", type: "點心", hidden: true, stall: true, desc: "文德黃昏市場附近的攤車，Google 地圖找不到的在地人私藏。", where: "內湖區文德黃昏市場附近" },
+      { county: "基隆市", name: "三姐妹鍋貼", emoji: "🥟", type: "點心", stall: true, desc: "基隆廟口夜市的鍋貼攤。", where: "廟口夜市" },
+      { county: "臺南市", name: "幸福鍋貼", emoji: "🥟", type: "點心", desc: "台南脆皮煎餃名單第一名，推薦韭菜內餡。", where: "臺南市" },
+      { county: "臺南市", name: "餃子鮮專賣店", emoji: "🥟", type: "點心", desc: "現點現煎的煎餃店。", where: "東區富農街二段" },
+      { county: "臺北市", name: "水柳伯烤玉米", emoji: "🌽", type: "點心", shop: true, stall: true, desc: "師大夜市附近烤了將近一甲子的炭火烤玉米，醬料只分辣與不辣。", where: "大安區（台電大樓附近）" },
+      { county: "臺北市", name: "玉米家烤玉米", emoji: "🌽", type: "點心", stall: true, desc: "南機場夜市的烤玉米，入選米其林餐盤，有原味、新孜然和地獄勁辣三種。", where: "中正區南機場夜市" },
+      { county: "新北市", name: "碳烤石頭玉米", emoji: "🌽", type: "點心", hidden: true, stall: true, desc: "網友票選泰山在地第一名美食，生意好建議先電話預訂。", where: "泰山區明志路一段" },
+      { county: "臺中市", name: "炳叔叔烤玉米", emoji: "🌽", type: "點心", stall: true, desc: "以口味多出名，除了烤肉醬還有芥末、黑胡椒、咖哩、麻辣。", where: "西屯區福星路" },
+      { county: "嘉義市", name: "石頭鄉燜烤香味玉米", emoji: "🌽", type: "點心", shop: true, stall: true, desc: "嘉義保安路 35 年的燜烤玉米，熟客常先打電話預訂。", where: "西區保安路" },
+      { county: "嘉義市", name: "阿桃烤玉米", emoji: "🌽", type: "點心", hidden: true, stall: true, desc: "嘉義在地的烤玉米攤。", where: "西區興達路" },
+      { county: "嘉義市", name: "下鄉古早味烤香腸烤玉米", emoji: "🌽", type: "點心", hidden: true, stall: true, desc: "便宜的古早味烤玉米和烤香腸，有 5 種醬料，可先電話預訂。", where: "嘉義市" },
+      { county: "苗栗縣", name: "阿蘭姐小吃", emoji: "🥟", type: "點心", shop: true, desc: "苗栗市開店超過一甲子的老攤，招牌油蔥水晶餃，還有小肚湯。", where: "苗栗市新苗街" },
+      { county: "苗栗縣", name: "小木屋水晶餃", emoji: "🥟", type: "點心", shop: true, desc: "60 年歷史的水晶餃，第三代經營。", where: "苗栗市新苗街" },
+      // ---- 燒餅、肉粽、碗粿、豆花、剉冰、滷味、鍋貼、烤玉米（第二批） ----
+      { county: "屏東縣", name: "上好肉粽", emoji: "🍙", type: "點心", must: true, desc: "快滿百年、祖傳四代的屏東名粽，也以碗粿聞名；從夜市攤位起家，現在開在街上店面。", where: "屏東市" },
+      { county: "屏東縣", name: "菜寮豆花", emoji: "🍮", type: "甜品", hidden: true, desc: "屏東市忠孝路上地點隱密的豆花店，在地人常吃，常常提早賣完。", where: "屏東市忠孝路" },
+      { county: "高雄市", name: "甲仙碗粿肉粽", emoji: "🍮", type: "點心", hidden: true, desc: "捷運獅甲站附近，碗粿、肉粽和魚羹是必點三樣；肉粽撒滿花生粉，碗粿裡有整塊肉。", where: "前鎮區（獅甲站附近）" },
+      { county: "高雄市", name: "聰明鴨肉飯", emoji: "🦆", type: "主食", shop: true, desc: "開業 50 年的鴨肉飯老店，滷鴨血也是人氣品項。", where: "新興區" },
+      { county: "高雄市", name: "芳德豬肉冬粉", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "南華市場傳承三代的豬肉冬粉，用碳火熬湯底。", where: "新興區南華市場" },
+      { county: "桃園市", name: "檜溪肉圓", emoji: "🟤", type: "點心", shop: true, desc: "桃園天天排隊的 50 年肉圓老店。", where: "桃園區" },
+      { county: "桃園市", name: "中壢土地公廟豬肝粥", emoji: "🥣", type: "主食", hidden: true, stall: true, desc: "中壢土地公廟旁的傳統小吃攤，在地人常去，早上營業到下午。", where: "中壢區中山路" },
+      { county: "花蓮縣", name: "北昌黃金鍋貼早餐店", emoji: "🥟", type: "點心", shop: true, desc: "吉安鄉的早餐老店，現包現煎的黃金鍋貼是招牌。", where: "吉安鄉" },
+      { county: "連江縣", name: "萬家香飲食店", emoji: "🥟", type: "點心", shop: true, desc: "南竿介壽村的老店，小餛飩皮薄餡細，豬肉來自吃高粱的馬祖豬。", where: "南竿介壽村" },
+      // ---- 新竹市、桃園補充 ----
+      { county: "新竹市", name: "福泉布丁豆花", emoji: "🍮", type: "甜品", shop: true, desc: "城隍廟附近巷弄裡 30 多年的豆花老店，布丁豆花是招牌。", where: "北區平和街" },
+      { county: "新竹市", name: "富美冰菓室", emoji: "🍧", type: "甜品", shop: true, desc: "南寮傳承三代的冰菓室，用活水豆花做出口碑。", where: "北區南寮" },
+      { county: "新竹市", name: "早點四果湯", emoji: "🍧", type: "甜品", hidden: true, desc: "北門街與世界街口的老店，配料幾乎都是老闆夫婦手工製作。", where: "北區北門街" },
+      { county: "新竹市", name: "新芳肉粽", emoji: "🍙", type: "點心", shop: true, desc: "新竹知名的肉粽老店。", where: "東區中央路" },
+      { county: "新竹市", name: "林家冰店", emoji: "🍧", type: "甜品", shop: true, stall: true, desc: "城隍廟前廣場 70 年的冰店，常和廟口小吃一起吃。", where: "城隍廟前廣場" },
+      { county: "桃園市", name: "阿泰豆花", emoji: "🍮", type: "甜品", hidden: true, stall: true, desc: "桃園前後站交接處橋下的老餐車，中午 12 點和傍晚 5 點出現，一大袋豆花很便宜，賣了 30 年；不定時公休。", where: "桃園區（火車站前後站之間橋下）" },
+      { county: "桃園市", name: "朝豆花", emoji: "🍮", type: "甜品", shop: true, desc: "民國 65 年開業、將近 50 年的豆花老店，桃園夜市和中山北路都有店。", where: "桃園區" },
+      { county: "桃園市", name: "王記豆花", emoji: "🍮", type: "甜品", desc: "中壢的古早味老冰店風格豆花，配料大多是老闆娘自己熬煮；週六公休。", where: "中壢區長春路" },
+      { county: "桃園市", name: "南門排骨麵", emoji: "🍜", type: "主食", shop: true, desc: "營業 40 多年的麵店，招牌芋頭排骨麵；週日公休。", where: "桃園區南昌街" },
+      { county: "桃園市", name: "南門好吃肉圓", emoji: "🟤", type: "點心", desc: "南門市場一帶的炸肉圓，淋甜辣醬，也有肉絲滷蛋麵。", where: "桃園區南昌東街" },
       // ---- 隱藏美食 ----
       { county: "臺北市", name: "三六食粑", emoji: "🥜", type: "甜品", hidden: true, desc: "萬華巷弄裡的老甜湯店，招牌是綿密的花生湯配紅白小湯圓。", where: "萬華區三水街" },
       { county: "新北市", name: "阿北北古早味切仔麵", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "三重沒有招牌的小麵店，便宜又大碗，主要靠在地人口耳相傳。", where: "三重區仁愛街" },
@@ -722,8 +804,9 @@
       empty.hidden = shown.length > 0;
     }
 
-    [["蚵嗲"], ["蚵仔煎"], ["煎包"], ["蛋餅"], ["漢堡"], ["地瓜球"], ["紅豆餅", "車輪餅／紅豆餅"], ["酥雞", "鹹酥雞"], ["雞排"],
-     ["肉圓"], ["米糕"], ["雞肉飯"], ["臭豆腐"], ["粄條"], ["芋"]].forEach(([word, label = word]) => {
+    [["蚵嗲"], ["蚵仔煎"], ["煎包"], ["蛋餅"], ["燒餅"], ["漢堡"], ["粽", "肉粽"], ["碗粿"], ["肉圓"], ["米糕"],
+     ["鍋貼"], ["滷味"], ["地瓜球"], ["紅豆餅", "車輪餅／紅豆餅"], ["酥雞", "鹹酥雞"], ["雞排"], ["玉米", "烤玉米"],
+     ["雞肉飯"], ["臭豆腐"], ["粄條"], ["豆花"], ["冰", "剉冰"], ["芋"]].forEach(([word, label = word]) => {
       const b = document.createElement("button");
       b.type = "button"; b.className = "chip"; b.textContent = "🔎 " + (word === "芋" ? "芋頭" : label);
       b.addEventListener("click", () => { search.value = search.value === word ? "" : word; render(); });
