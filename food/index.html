@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-21-23">
+  <meta name="page-version" content="2026-11-21-24">
   <meta name="theme-color" content="#b4451f">
   <title>各縣市特色小吃與伴手禮</title>
   <style>
@@ -883,6 +883,43 @@
       { county: "臺南市", name: "燕喃水餃", emoji: "🥟", type: "主食", shop: true, desc: "台南老字號排隊水餃，水餃大顆飽滿。", where: "東區林森路二段" },
       { county: "臺南市", name: "胖餃子", emoji: "🥟", type: "主食", desc: "東區以水餃為主力的小店。", where: "東區" },
       { county: "臺南市", name: "老李小吃", emoji: "🥟", type: "主食", hidden: true, desc: "永康只賣一種韭菜水餃的小吃店。", where: "永康區復興路" },
+      // ---- 義大利麵與異國料理 ----
+      { county: "臺北市", name: "歐廚義大利麵", emoji: "🍝", type: "異國料理", hidden: true, desc: "龍江路上五星級主廚開的平價義大利麵，一百多元就吃得到；週日公休。", where: "中山區龍江路" },
+      { county: "臺北市", name: "創義麵", emoji: "🍝", type: "異國料理", desc: "台北分店多的平價義大利麵，份量足，部分口味偏辣。", where: "臺北市多家分店" },
+      { county: "臺北市", name: "i'm pasta 松江店", emoji: "🍝", type: "異國料理", hidden: true, desc: "全黑低調外觀的平價義大利麵，上班族和學生常去。", where: "中山區松江路" },
+      { county: "臺中市", name: "CRYSTAL 手工義大利麵", emoji: "🍝", type: "異國料理", desc: "手工現做義大利麵，有細麵、寬麵和鳥巢麵，Google 約 4.7 星。", where: "西屯區黎明路三段" },
+      { county: "臺中市", name: "秋分", emoji: "🍝", type: "異國料理", desc: "老宅改裝的義式餐廳，義大利麵結合台灣食材；位在巷內、不好停車。", where: "臺中市（民權路附近巷弄）" },
+      { county: "高雄市", name: "天使餐坊", emoji: "🍝", type: "異國料理", desc: "燉飯、義大利麵和越南料理都有的異國料理小館。", where: "苓雅區中山二路" },
+      { county: "臺北市", name: "泰 x 攤食 THAI x TIMES", emoji: "🌶️", type: "異國料理", desc: "泰式風情的平價泰式料理，推薦打拋豬肉套餐和涼拌海鮮。", where: "中山區民權東路二段" },
+      { county: "新北市", name: "三攀泰", emoji: "🌶️", type: "異國料理", desc: "食尚玩家推薦的「泰國版海鮮炒泡麵」。", where: "三重區" },
+      { county: "臺北市", name: "椰兄", emoji: "🌶️", type: "異國料理", desc: "中山區平價泰式，主打椒麻雞。", where: "中山區" },
+      { county: "臺中市", name: "泰小葉泰式風味小食", emoji: "🌶️", type: "異國料理", must: true, desc: "台中平價泰式的代表，尖峰時段常客滿，招牌酸辣涼拌海鮮可選紅醬或綠醬。", where: "北屯區" },
+      { county: "臺中市", name: "朝正泰南洋料理", emoji: "🌶️", type: "異國料理", stall: true, desc: "忠孝夜市小資族最愛的南洋料理攤。", where: "南區忠孝夜市" },
+      { county: "高雄市", name: "泰羊屋泰式料理", emoji: "🌶️", type: "異國料理", desc: "小港的平價泰式，品項多、價位百元上下，推薦鳳梨海鮮炒飯和涼拌海鮮。", where: "小港區孔鳳路" },
+      { county: "高雄市", name: "泰常玖泰式餐酒館", emoji: "🌶️", type: "異國料理", desc: "高雄的泰式餐酒館。", where: "高雄市" },
+      { county: "臺南市", name: "Nest de 后院泰式餐廳", emoji: "🌶️", type: "異國料理", desc: "國華街 60 年老房子改建，有南洋風小庭院的泰式餐廳。", where: "中西區國華街" },
+      { county: "臺南市", name: "香茅魚泰式餐廳", emoji: "🌶️", type: "異國料理", shop: true, desc: "台南經營十多年的泰式餐廳，價格比連鎖泰式便宜。", where: "臺南市區（7-11 二樓）" },
+      { county: "臺北市", name: "河內越南河粉", emoji: "🍜", type: "異國料理", desc: "每天現熬大骨湯的生牛肉河粉名店，越南華僑掌廚十多年，午餐常客滿。", where: "松山區" },
+      { county: "臺北市", name: "誠記越南麵食館", emoji: "🍜", type: "異國料理", shop: true, desc: "永康街 30 年的越南麵老店，很多台北人第一個想到的越南河粉。", where: "大安區永康街" },
+      { county: "臺北市", name: "翠林越南餐廳", emoji: "🍜", type: "異國料理", desc: "巷弄裡常客滿的越南餐廳，推薦炒牛肉河粉和金錢蝦肉餅；週一公休。", where: "大安區" },
+      { county: "臺中市", name: "花越香", emoji: "🍜", type: "異國料理", desc: "越南料理，招牌嫩牛肉河粉，店內花草植栽很好拍。", where: "南屯區" },
+      { county: "臺北市", name: "Saffron 番紅花印度餐廳", emoji: "🍛", type: "異國料理", must: true, desc: "北印度料理，入選米其林必比登推介，招牌番紅花烤餅與坦都窯烤雞。", where: "臺北市" },
+      { county: "臺北市", name: "TAJ 泰姬印度餐廳", emoji: "🍛", type: "異國料理", must: true, desc: "曾入選必比登推介的印度餐廳，推薦奶油、蒜泥炭烤餅配坦都烤雞和菠菜羊咖哩。", where: "臺北市" },
+      { county: "臺北市", name: "旁遮普印度料理", emoji: "🍛", type: "異國料理", desc: "東區延吉街一帶的印度料理。", where: "大安區延吉街" },
+      { county: "新北市", name: "阿薇緬甸小吃店", emoji: "🍜", type: "異國料理", must: true, desc: "中和華新街（緬甸街）的代表店，必吃金山麵、魚湯麵、椰子麵；緬甸街多只營業到下午。", where: "中和區華新街" },
+      { county: "新北市", name: "藍天印度烤餅", emoji: "🫓", type: "異國料理", stall: true, desc: "華新街現點現做的印度烤餅，可選甩餅或油煎，推薦咖哩雞肉口味。", where: "中和區華新街" },
+      { county: "新北市", name: "旺旺來亞洲咖哩屋", emoji: "🍛", type: "異國料理", desc: "華新街的傳統印度香米飯、咖哩飯與印度餅，座位少建議避開用餐時間。", where: "中和區華新街" },
+      { county: "新北市", name: "786 李園清真小吃", emoji: "🍜", type: "異國料理", desc: "華新街的清真緬甸小吃。", where: "中和區華新街" },
+      { county: "新北市", name: "滇城雲南美食", emoji: "🍜", type: "異國料理", desc: "華新街評價很好的雲南料理，夏天推薦雲南涼麵。", where: "中和區華新街" },
+      { county: "新北市", name: "沅保奶茶店", emoji: "🧋", type: "異國料理", hidden: true, desc: "華新街的緬甸奶茶店。", where: "中和區華新街" },
+      { county: "臺北市", name: "韓食村", emoji: "🍲", type: "異國料理", hidden: true, desc: "四平商圈巷弄裡的家庭式平價韓國料理，部隊鍋和海鮮煎餅最推。", where: "中山區（四平商圈）" },
+      { county: "臺北市", name: "韓食堂", emoji: "🍲", type: "異國料理", desc: "韓國人也愛的韓式料理，豬腳皮Q份量大、水涼麵彈牙，建議訂位。", where: "臺北市" },
+      { county: "臺北市", name: "三元花園韓式餐廳", emoji: "🍲", type: "異國料理", desc: "口味正宗的韓式烤肉與料理，空間寬敞、價位中高。", where: "臺北市" },
+      { county: "臺中市", name: "初瓦", emoji: "🍲", type: "異國料理", desc: "王品旗下韓式料理旗艦店，約 60 道菜色。", where: "臺中市" },
+      { county: "臺中市", name: "麵本初", emoji: "🍜", type: "異國料理", desc: "純水熬湯與魚貝高湯的職人拉麵，招牌泡系鮭魚白湯拉麵。", where: "北屯區" },
+      { county: "臺中市", name: "MOTONARI 琉球豚骨拉麵", emoji: "🍜", type: "異國料理", desc: "日本職人主理的濃厚豚骨拉麵，湯底加入琉球風味。", where: "北區益民商圈" },
+      { county: "臺北市", name: "吉天元拉麵", emoji: "🍜", type: "異國料理", desc: "週六、日限定的濃雞白湯常造成客滿排隊。", where: "臺北市" },
+      { county: "新北市", name: "熊越岳拉麵", emoji: "🍜", type: "異國料理", desc: "常有人提前一小時排隊的人氣拉麵。", where: "新莊區" },
       // ---- 隱藏美食 ----
       { county: "臺北市", name: "三六食粑", emoji: "🥜", type: "甜品", hidden: true, desc: "萬華巷弄裡的老甜湯店，招牌是綿密的花生湯配紅白小湯圓。", where: "萬華區三水街" },
       { county: "新北市", name: "阿北北古早味切仔麵", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "三重沒有招牌的小麵店，便宜又大碗，主要靠在地人口耳相傳。", where: "三重區仁愛街" },
@@ -940,7 +977,7 @@
     ];
 
     const regionList = ["全部", "北部", "中部", "南部", "東部", "離島"];
-    const typeList = ["全部類型", "主食", "點心", "甜品", "伴手禮"];
+    const typeList = ["全部類型", "主食", "點心", "甜品", "伴手禮", "異國料理"];
     let region = "全部", type = "全部類型", mustOnly = false, shopOnly = false, hidOnly = false, stlOnly = false;
 
     const $ = id => document.getElementById(id);
@@ -1049,7 +1086,7 @@
     [["蚵嗲"], ["蚵仔煎"], ["煎包"], ["蛋餅"], ["燒餅"], ["饅頭"], ["吐司"], ["麵包"], ["漢堡"], ["美式漢堡"], ["蔥抓餅"], ["蔥油餅"], ["割包", "刈包"],
      ["粽", "肉粽"], ["碗粿"], ["肉圓"], ["米糕"], ["滷肉飯"], ["魯肉飯"], ["鍋燒"], ["牛肉麵"], ["水餃"], ["蒸餃"], ["鍋貼"], ["湯包", "小籠包／湯包"], ["鹹粥"], ["羹", "魷魚羹／花枝羹"], ["蝦捲"],
      ["滷味"], ["鹹水雞"], ["鴨頭", "東山鴨頭"], ["天婦羅", "甜不辣"], ["豬血糕"], ["香腸"], ["地瓜球"], ["紅豆餅", "車輪餅／紅豆餅"], ["酥雞", "鹹酥雞"], ["雞排"], ["魷魚"], ["玉米", "烤玉米"],
-     ["雞肉飯"], ["臭豆腐"], ["粄條"], ["蘿蔔糕"], ["煎粿"], ["豆花"], ["仙草"], ["綠豆"], ["杏仁"], ["湯圓"], ["雞蛋糕"], ["糖葫蘆"], ["紅茶"], ["冰", "剉冰"], ["芋"]].forEach(([word, label = word]) => {
+     ["雞肉飯"], ["臭豆腐"], ["粄條"], ["蘿蔔糕"], ["煎粿"], ["豆花"], ["仙草"], ["綠豆"], ["杏仁"], ["湯圓"], ["雞蛋糕"], ["糖葫蘆"], ["紅茶"], ["冰", "剉冰"], ["芋"], ["義大利麵"], ["泰式"], ["越南", "越南河粉"], ["印度"], ["緬甸"], ["韓", "韓式"], ["拉麵"]].forEach(([word, label = word]) => {
       const b = document.createElement("button");
       b.type = "button"; b.className = "chip"; b.textContent = "🔎 " + (word === "芋" ? "芋頭" : label);
       b.addEventListener("click", () => { search.value = search.value === word ? "" : word; render(); });
