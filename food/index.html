@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-21-28">
+  <meta name="page-version" content="2026-11-21-29">
   <meta name="theme-color" content="#b4451f">
   <title>各縣市特色小吃與伴手禮</title>
   <style>
@@ -1000,6 +1000,32 @@
       { county: "臺中市", name: "小漁兒燒酒雞", emoji: "🐔", type: "主食", desc: "篤行路的燒酒雞宵夜，平日晚上 9 點多也常客滿，推薦全酒燒酒雞湯。", where: "北區篤行路" },
       { county: "臺中市", name: "忠孝烤肉", emoji: "🍢", type: "點心", stall: true, desc: "忠孝夜市一帶網友推薦的烤肉攤。", where: "南區忠孝路" },
       { county: "臺中市", name: "丸南生魚片", emoji: "🐟", type: "主食", hidden: true, desc: "原本在台中魚市場、半夜 11 點才開門的生魚片宵夜，凌晨常排隊；週日休息。", where: "西屯區河南路二段" },
+      // ---- 各地羊肉爐、燒烤、小火鍋、宵夜 ----
+      { county: "高雄市", name: "舊市羊肉", emoji: "🍲", type: "主食", must: true, desc: "高雄經營約一甲子的羊肉老店，招牌當歸羊肉爐用中藥和羊大骨慢熬、溫體羊當天現宰，熱炒推酸菜羊肉、蔥爆羊肉。", where: "高雄市" },
+      { county: "高雄市", name: "福昌羊肉", emoji: "🍲", type: "主食", shop: true, desc: "高雄 40 年的羊肉爐老店，招牌紅燒羊肉爐，也有藥膳補氣和大骨鍋；台北信義區松隆路也有分店。", where: "高雄市（台北信義有分店）" },
+      { county: "臺北市", name: "老師好羊肉爐", emoji: "🍲", type: "主食", desc: "紅燒和藥膳清燉兩種湯頭，也有麻辣牛雜、燒酒雞，適合多人聚餐。", where: "大安區光復南路" },
+      { county: "臺北市", name: "一品蔬菜羊肉爐", emoji: "🍲", type: "主食", desc: "招牌「菜心羊」湯底配現燙溫體生羊肉片。", where: "大安區延吉街" },
+      { county: "臺北市", name: "好吃羊肉爐（士林店）", emoji: "🍲", type: "主食", hidden: true, desc: "只在週五、六、日晚上營業的羊肉爐，店內禁酒。", where: "士林區福港街" },
+      { county: "臺北市", name: "車庫羊肉爐", emoji: "🍲", type: "主食", hidden: true, desc: "合江街巷弄裡的羊肉爐；週日休息。", where: "中山區合江街" },
+      { county: "臺北市", name: "新東羊羊肉料理專賣店", emoji: "🍲", type: "主食", desc: "只在晚上營業，近 20 道羊肉熱炒。", where: "中山區龍江路" },
+      { county: "臺南市", name: "咩灣裡羊肉店", emoji: "🍲", type: "主食", hidden: true, desc: "灣裡第三代經營的羊肉店，用國產努比亞山羊，清燉湯底。", where: "南區灣裡" },
+      { county: "臺南市", name: "鑫帝元薑母鴨羊肉爐", emoji: "🍲", type: "主食", desc: "薑母鴨之外也賣羊肉爐，還有紅蟳、雞胇等特殊食材。", where: "永康區中華路" },
+      { county: "桃園市", name: "江家羊肉", emoji: "🍲", type: "主食", shop: true, desc: "中壢的溫體羊肉爐名店，幾乎都要先訂位。", where: "中壢區三芝路" },
+      { county: "桃園市", name: "香掬羊肉爐", emoji: "🍲", type: "主食", desc: "清燉羊肉湯頭的兩小時羊肉爐吃到飽。", where: "桃園區中山路" },
+      { county: "桃園市", name: "一鍋羊肉", emoji: "🍲", type: "主食", desc: "在地社團討論度很高的羊肉爐吃到飽，從中午開到凌晨。", where: "蘆竹區南崁" },
+      { county: "桃園市", name: "大廟生炒羊肉", emoji: "🍲", type: "主食", hidden: true, desc: "從舊永和市場起家的炒羊肉宵夜，下午 5 點開到凌晨 3 點。", where: "桃園區民生路" },
+      { county: "高雄市", name: "鐵皮屋黑輪", emoji: "🍢", type: "點心", must: true, stall: true, desc: "高雄在地人必排的宵夜，飄香 45 年，南部限定的烤黑輪片外酥內軟。", where: "高雄市" },
+      { county: "桃園市", name: "熾燒串烤（大同店）", emoji: "🍢", type: "點心", desc: "桃園站商圈天橋下的深夜串烤，秘製醬汁或鹽燒都可以。", where: "桃園區大同路" },
+      { county: "花蓮縣", name: "路邊烤肉 Wildbbq（奇萊花蓮店）", emoji: "🍢", type: "點心", desc: "宜蘭起家的人氣串烤，先短暫油炸再燒烤，傍晚開到午夜。", where: "花蓮市民國路" },
+      { county: "花蓮縣", name: "老時光燒肉酒肴", emoji: "🍢", type: "點心", desc: "民國路的日式居酒屋宵夜，招牌鹹豬肉和剝皮辣椒串燒，建議訂位。", where: "花蓮市民國路" },
+      { county: "宜蘭縣", name: "日嚐", emoji: "🍢", type: "主食", desc: "羅東巷弄裡的日式小店，生魚片、串燒、丼飯、拉麵都有，熱門時段要訂位。", where: "羅東鎮" },
+      { county: "高雄市", name: "火鍋家", emoji: "🍲", type: "主食", desc: "三信家商對面的平價小火鍋，40 多種鍋物，白飯飲料無限取用。", where: "苓雅區" },
+      { county: "臺南市", name: "囍運麻辣鍋", emoji: "🍲", type: "主食", desc: "台南小有名氣的平價個人麻辣鍋。", where: "臺南市" },
+      { county: "臺北市", name: "三多靚鍋（南港店）", emoji: "🍲", type: "主食", desc: "個人小火鍋很便宜，限時 60 分鐘，熱門時段常排隊。", where: "南港區" },
+      { county: "臺北市", name: "12MINI", emoji: "🍲", type: "主食", desc: "石二鍋延伸品牌的百元個人小火鍋，湯底多。", where: "松山區慶城街" },
+      { county: "臺北市", name: "緒食一鍋小麻辣", emoji: "🍲", type: "主食", desc: "信義區的百元小麻辣鍋。", where: "信義區" },
+      { county: "桃園市", name: "鴨肉榮", emoji: "🦆", type: "主食", shop: true, desc: "桃園大廟口景福宮斜對面超過 50 年的鴨肉老店，24 小時營業。", where: "桃園區（景福宮斜對面）" },
+      { county: "桃園市", name: "大時鐘天香麵", emoji: "🍜", type: "主食", hidden: true, desc: "中壢只在深夜營業的素食麵攤，晚上 10 點半開到凌晨 1 點。", where: "中壢區大同路" },
       // ---- 隱藏美食 ----
       { county: "臺北市", name: "三六食粑", emoji: "🥜", type: "甜品", hidden: true, desc: "萬華巷弄裡的老甜湯店，招牌是綿密的花生湯配紅白小湯圓。", where: "萬華區三水街" },
       { county: "新北市", name: "阿北北古早味切仔麵", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "三重沒有招牌的小麵店，便宜又大碗，主要靠在地人口耳相傳。", where: "三重區仁愛街" },
