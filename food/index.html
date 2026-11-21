@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-21-17">
+  <meta name="page-version" content="2026-11-21-20">
   <meta name="theme-color" content="#b4451f">
   <title>各縣市特色小吃與伴手禮</title>
   <style>
@@ -64,6 +64,7 @@
     .stl { display: inline-block; background: #c0392b; color: #fff; border-radius: 6px;
             padding: 0 8px; font-size: .8rem; margin: 4px 0 0 6px; }
     .must[hidden], .shop[hidden], .hid[hidden], .stl[hidden] { display: none; }
+    .chip[hidden] { display: none; }
     .card p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; }
     .where { margin-top: 8px; font-size: .9rem; }
     .empty { color: var(--muted); text-align: center; padding: 32px 0; }
@@ -712,6 +713,122 @@
       { county: "高雄市", name: "Bite Bistro 小餐館", emoji: "🍔", type: "主食", desc: "大份量手工牛肉美式漢堡，配檸檬霜磅蛋糕。", where: "高雄市" },
       { county: "新竹市", name: "American Grill 美式漢堡", emoji: "🍔", type: "主食", hidden: true, desc: "新光三越後方的美式漢堡，網友稱讚勝過連鎖速食。", where: "東區民權路" },
       { county: "新竹市", name: "豐盛堂美式漢堡", emoji: "🍔", type: "主食", desc: "新竹有名的美式漢堡，花生醬豬肉堡、墨西哥辣肉醬牛肉堡；桃園八德也有分店。", where: "新竹市（桃園八德有分店）" },
+      // ---- 鹹水雞、東山鴨頭、甜不辣、豬血糕、香腸、蔥抓餅、生煎包、刈包 ----
+      { county: "臺北市", name: "紅花麻辣鹽水雞", emoji: "🐔", type: "點心", stall: true, desc: "臨江夜市還沒推出攤就有人卡位的鹹水雞（鹽水雞），米血、豆皮現點現切，還有少見的烏骨雞，淋獨門麻辣醬。", where: "大安區臨江街夜市" },
+      { county: "臺南市", name: "合記東山鴨頭", emoji: "🦆", type: "點心", stall: true, desc: "從碾米廠起家、賣了二十多年的東山鴨頭。", where: "中興路" },
+      { county: "臺中市", name: "東海東山鴨頭", emoji: "🦆", type: "點心", shop: true, stall: true, desc: "東海別墅 1988 年創始的東山鴨頭，從一坪小店起家。", where: "龍井區東海別墅" },
+      { county: "臺中市", name: "大肥鴨東山鴨頭", emoji: "🦆", type: "點心", stall: true, desc: "招牌是滷過再炸的大豆干，八角香明顯。", where: "南屯區" },
+      { county: "宜蘭縣", name: "鴨霸味東山鴨頭", emoji: "🦆", type: "點心", stall: true, desc: "宜蘭東門夜市起家的東山鴨頭，鴨脖子最受推薦。", where: "宜蘭市復興路" },
+      { county: "新竹縣", name: "娘家東山鴨頭", emoji: "🦆", type: "點心", stall: true, desc: "竹北評價很高的東山鴨頭。", where: "竹北市" },
+      { county: "基隆市", name: "兩全天婦羅", emoji: "🍢", type: "點心", shop: true, stall: true, desc: "仁愛市場三、四十年的甜不辣（天婦羅）老攤，加牛蒡的最受推薦，不少台北店家都向這裡批貨；也賣基隆名物吉古拉。", where: "仁愛區仁愛市場（愛二路口）" },
+      { county: "基隆市", name: "一口吃天婦羅", emoji: "🍢", type: "點心", stall: true, desc: "廟口 43 號攤的小巧甜不辣（天婦羅），內餡有花枝塊與貢菜，淋特製醬料。", where: "廟口夜市 43 號攤" },
+      { county: "基隆市", name: "王記天婦羅", emoji: "🍢", type: "點心", shop: true, stall: true, desc: "廟口 16 號攤，經營超過一甲子的甜不辣（天婦羅）。", where: "廟口夜市 16 號攤" },
+      { county: "基隆市", name: "浮基仔香腸", emoji: "🌭", type: "點心", stall: true, desc: "基隆的烤香腸攤，食尚玩家報導過。", where: "中山區德安路" },
+      { county: "臺北市", name: "亞東甜不辣", emoji: "🍢", type: "點心", shop: true, desc: "萬華 1965 年創立的甜不辣老店，豬血糕也軟Q好吃。", where: "萬華區" },
+      { county: "臺北市", name: "行天宮無名豬血糕", emoji: "🟫", type: "點心", hidden: true, stall: true, desc: "行天宮後巷的推車，只賣肉粽和豬血糕，早上 11 點擺攤、晚上 8 點左右就賣完。", where: "中山區行天宮後巷" },
+      { county: "臺北市", name: "陳記豬血糕", emoji: "🟫", type: "點心", stall: true, desc: "南機場夜市飄香近 60 年的豬血糕。", where: "中正區南機場夜市" },
+      { county: "臺北市", name: "小李豬血糕", emoji: "🟫", type: "點心", stall: true, desc: "公館東南亞戲院旁的大塊菱形豬血糕，沾醬裹花生粉。", where: "中正區公館" },
+      { county: "臺北市", name: "黃家香腸", emoji: "🌭", type: "點心", shop: true, stall: true, desc: "一賣 30 年的烤香腸，從絞肉到灌腸都自己做，炭烤後外脆多汁。", where: "中正區泉州街" },
+      { county: "高雄市", name: "新大港大腸香腸", emoji: "🌭", type: "點心", shop: true, stall: true, desc: "高雄飄香約 50 年的大腸包小腸與烤香腸，配大蒜和蘿蔔片；下午開賣、賣完就收，週二休息。", where: "三民區" },
+      { county: "桃園市", name: "大溪幸福小站現烤蜜汁香腸", emoji: "🌭", type: "點心", hidden: true, stall: true, desc: "一天只開 2.5 小時的木炭烤蜜汁香腸，香腸大條、鹹甜好吃。", where: "大溪區" },
+      { county: "臺南市", name: "安中路無名炭烤香腸", emoji: "🌭", type: "點心", hidden: true, stall: true, desc: "沒有店名招牌、飄香 20 多年的炭烤香腸攤，限量供應，只賣大約 5 小時。", where: "安南區安中路一段" },
+      { county: "臺北市", name: "雄記蔥抓餅", emoji: "🫓", type: "點心", must: true, stall: true, desc: "公館的蔥抓餅名攤，入選米其林必比登推介，每天賣出 300 多張。", where: "中正區公館" },
+      { county: "宜蘭縣", name: "柯氏蔥油餅", emoji: "🫓", type: "點心", must: true, stall: true, desc: "宜蘭蔥油餅代表之一，Google 評論將近 1.5 萬則。", where: "宜蘭" },
+      { county: "宜蘭縣", name: "阿嬤蔥油餅", emoji: "🫓", type: "點心", stall: true, desc: "常和柯氏一起比較的宜蘭蔥油餅，麵皮口感和醬料各有特色。", where: "宜蘭" },
+      { county: "臺北市", name: "士林大上海生煎包", emoji: "🥟", type: "點心", shop: true, stall: true, desc: "士林夜市民國 46 年創立的生煎包，每天手工現包，用雞腳豬骨高湯做內餡。", where: "士林夜市" },
+      { county: "臺北市", name: "藍家割包", emoji: "🍔", type: "點心", must: true, desc: "公館近 30 年的排隊刈包（割包），入選米其林必比登推介，五花肉可選肥瘦五種。", where: "中正區公館" },
+      { county: "臺北市", name: "石家割包", emoji: "🍔", type: "點心", shop: true, stall: true, desc: "通化夜市 50 多年的刈包（割包），老滷汁豬肉配甜花生粉，有 9 種口味。", where: "大安區通化夜市" },
+      { county: "臺北市", name: "源芳刈包", emoji: "🍔", type: "點心", must: true, desc: "華西街 1955 年創立的刈包老店，自製刈包皮，連續入選米其林必比登推介；週一公休。", where: "萬華區華西街" },
+      { county: "臺中市", name: "東海刈包大王", emoji: "🍔", type: "點心", desc: "東海商圈的刈包，除了五花肉還有雞腿排、牛腱心口味。", where: "龍井區東海商圈" },
+      // ---- 鍋燒意麵、羹湯、蝦捲、滷肉飯、牛肉麵、水餃、鹹粥 ----
+      { county: "臺南市", name: "民族鍋燒意麵", emoji: "🍜", type: "主食", must: true, desc: "被視為鍋燒意麵的始祖，創辦人在民族路擺攤時誤打誤撞用柴魚高湯煮意麵，麵條不煮爛。", where: "中西區民族路" },
+      { county: "臺南市", name: "醇涎坊鍋燒意麵", emoji: "🍜", type: "主食", shop: true, desc: "台南鍋燒意麵元老之一，配料豐富，湯頭偏甜。", where: "中西區保安路" },
+      { county: "臺南市", name: "閒情茗品屋", emoji: "🍜", type: "主食", hidden: true, desc: "30 多年的老早餐店，鍋燒意麵用小鋼鍋配木底座上桌，湯頭帶胡椒味。", where: "南區金華路二段" },
+      { county: "臺南市", name: "誠實鍋燒", emoji: "🍜", type: "主食", hidden: true, desc: "小巷裡的鍋燒意麵，湯頭清爽，配料以香菇、青菜為主。", where: "中西區西門路一段" },
+      { county: "臺南市", name: "四海鍋燒", emoji: "🍜", type: "主食", desc: "觀光城內經營近 40 年的鍋燒意麵，重新整修後以復古裝潢開幕。", where: "臺南市" },
+      { county: "臺南市", name: "水仙宮古早味鍋燒意麵", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "水仙市場內的古早味鍋燒意麵，每天只賣約 5 小時。", where: "中西區友愛街（水仙市場）" },
+      { county: "臺南市", name: "劉妹鍋燒意麵", emoji: "🍜", type: "主食", desc: "網路聲量排行第一的台南鍋燒意麵。", where: "臺南市" },
+      { county: "臺北市", name: "兩喜號魷魚羹", emoji: "🦑", type: "點心", must: true, desc: "1921 年擺攤起家、傳到第四代的魷魚羹老店。", where: "萬華區廣州街" },
+      { county: "臺北市", name: "正老牌魷魚平", emoji: "🦑", type: "點心", shop: true, desc: "1965 年創立，魷魚羹湯頭微酸帶甜、加大量九層塔，配炒米粉；週二公休。", where: "萬華區康定路" },
+      { county: "臺北市", name: "金好吃純正花枝羹", emoji: "🦑", type: "點心", shop: true, desc: "1964 年從路邊攤起家的花枝羹，用大塊花枝肉而不是魚漿。", where: "萬華區廣州街" },
+      { county: "臺南市", name: "周氏蝦捲", emoji: "🦐", type: "點心", must: true, desc: "1965 年創立，安平運河旁常客滿，招牌炸蝦捲用台南沿海的火燒蝦。", where: "安平區安平路" },
+      { county: "臺南市", name: "府城黃氏蝦卷", emoji: "🦐", type: "點心", shop: true, desc: "從民族路賣到鴨母寮市場、五六十年的蝦捲老店。", where: "中西區西和路" },
+      { county: "臺南市", name: "淺草蝦捲", emoji: "🦐", type: "點心", stall: true, desc: "國華街小卷米粉旁的蝦捲，適合邊走邊吃。", where: "中西區國華街三段" },
+      { county: "臺北市", name: "有有 1969", emoji: "🍚", type: "主食", must: true, desc: "拿過台北滷肉飯大賽冠軍的滷肉飯，入選 2026 米其林必比登推介。", where: "中山區" },
+      { county: "臺北市", name: "黃記魯肉飯", emoji: "🍚", type: "主食", desc: "曾獲米其林指南推薦的滷肉飯，膠質足、滷汁微甜。", where: "中山區" },
+      { county: "臺北市", name: "小王煮瓜", emoji: "🍚", type: "主食", must: true, stall: true, desc: "多年入選必比登推介的黑金滷肉飯，配瓜仔肉湯。", where: "萬華區（華西街夜市）" },
+      { county: "臺北市", name: "阿義魯肉飯", emoji: "🍚", type: "主食", desc: "萬華偏甜、肥肉多的滷肉飯。", where: "萬華區" },
+      { county: "臺北市", name: "司機俱樂部", emoji: "🍚", type: "主食", hidden: true, desc: "適合宵夜的滷肉飯，米飯粒粒分明、滷肉膠質足。", where: "松山區" },
+      { county: "臺北市", name: "施家麻油腰花", emoji: "🍚", type: "主食", shop: true, desc: "50 年老字號，麻油腰花之外，滷肉飯Q彈不鹹。", where: "信義區" },
+      { county: "臺北市", name: "曉迪筒仔米糕", emoji: "🍚", type: "主食", stall: true, desc: "南機場夜市的筒仔米糕，滷肉飯肥肉軟嫩、醬香濃。", where: "中正區南機場夜市" },
+      { county: "臺北市", name: "矮仔財滷肉飯", emoji: "🍚", type: "主食", shop: true, desc: "曾被 CNN 票選為台灣非吃不可的滷肉飯，現搬到北投中繼市場。", where: "北投區" },
+      { county: "新北市", name: "大碗公當歸羊肉", emoji: "🍲", type: "主食", must: true, desc: "入選 2025 米其林必比登推介，當歸羊肉之外，肥肉熬的滷肉飯甜而不膩。", where: "新北市" },
+      { county: "臺北市", name: "劉山東牛肉麵", emoji: "🍜", type: "主食", must: true, desc: "藏在台北車站巷弄、必比登 8 連霸的牛肉麵，清燉、紅燒都有。", where: "中正區" },
+      { county: "臺北市", name: "天下三絕", emoji: "🍜", type: "主食", must: true, desc: "精緻風格的牛肉麵，連續 5 年入選米其林必比登推介。", where: "大安區" },
+      { county: "臺北市", name: "玖五牛肉麵創始店", emoji: "🍜", type: "主食", desc: "1998 年創立，招牌紅燒半筋半肉牛肉麵。", where: "大安區" },
+      { county: "臺北市", name: "粟家牛肉麵總店", emoji: "🍜", type: "主食", shop: true, desc: "北投經營超過 30 年，招牌茄汁牛肉麵。", where: "北投區" },
+      { county: "新北市", name: "皇家傳承牛肉麵", emoji: "🍜", type: "主食", shop: true, desc: "板橋起家的 30 年牛肉麵老字號。", where: "板橋區" },
+      { county: "臺北市", name: "巧之味", emoji: "🥟", type: "主食", must: true, desc: "常被列為台北水餃第一名，招牌綠色外皮的干貝水餃，Google 評價 6000 多則 4.3 星。", where: "臺北市" },
+      { county: "臺北市", name: "東門興記", emoji: "🥟", type: "主食", desc: "明星也愛吃的老牌水餃店。", where: "中正區東門" },
+      { county: "臺北市", name: "阿玉水餃", emoji: "🥟", type: "主食", shop: true, desc: "賣了 30 多年的手工現包水餃，老闆原本在高雄賣豬肉。", where: "臺北市" },
+      { county: "臺北市", name: "阿娥水餃", emoji: "🥟", type: "主食", desc: "韭黃蝦仁水餃餡料超多，午餐時間常排隊。", where: "中山區松江路、南京東路一帶" },
+      { county: "臺北市", name: "雙連高記水餃", emoji: "🥟", type: "主食", hidden: true, desc: "要抓對時間才吃得到的水餃。", where: "大同區雙連" },
+      { county: "新北市", name: "水餃飽", emoji: "🥟", type: "主食", hidden: true, desc: "原是林森北路老店，水餃一顆只要 5 元，只有高麗菜鮮肉一種口味。", where: "板橋區" },
+      { county: "新北市", name: "阿忠牛肉麵", emoji: "🥟", type: "主食", desc: "新莊 1991 年開業的牛肉麵店，水餃包得像口金包一樣可愛。", where: "新莊區" },
+      { county: "臺南市", name: "阿憨鹹粥", emoji: "🐟", type: "主食", shop: true, desc: "開店約 80 年的鹹粥老店，以虱目魚料理為主，還有魚肉香腸。", where: "北區公園南路" },
+      { county: "臺南市", name: "阿星鹹粥", emoji: "🐟", type: "主食", shop: true, desc: "1965 年開業，虱目魚粥湯頭鮮美、魚肉無刺。", where: "中西區" },
+      { county: "臺南市", name: "京華虱目魚", emoji: "🐟", type: "主食", must: true, desc: "店前傳統灶台現場處理虱目魚，曾獲 2022 年米其林推薦，常提早賣完。", where: "中西區金華路、新興路口" },
+      { county: "臺南市", name: "開元路無名虱目魚", emoji: "🐟", type: "主食", hidden: true, desc: "魚肚湯配肉燥飯是在地人吃法，魚肚處理乾淨不腥；清晨 5 點多開賣。", where: "北區開元路" },
+      { county: "臺南市", name: "新興路無名虱目魚湯", emoji: "🐟", type: "主食", hidden: true, desc: "三官大帝廟旁沒有招牌的虱目魚粥，多是在地客人；週日休息。", where: "南區新興路" },
+      // ---- 甜湯、雞蛋糕、紅茶、粿類、魷魚、湯包、糖葫蘆 ----
+      { county: "臺北市", name: "林建發仙草冰燒仙草", emoji: "🍮", type: "甜品", desc: "萬華的仙草冰與燒仙草，買燒仙草會附奶球，也可加鮮乳。", where: "萬華區艋舺大道" },
+      { county: "桃園市", name: "柒美堂", emoji: "🍧", type: "甜品", desc: "大溪老街的仙草冰，招牌「仙草纏綿冰」挖起來會牽絲。", where: "大溪老街" },
+      { county: "高雄市", name: "永昌綠豆湯", emoji: "🥣", type: "甜品", shop: true, desc: "鳳山中華街的甜湯老店，綠豆湯和紅豆薏仁豆花都推。", where: "鳳山區中華街" },
+      { county: "臺北市", name: "顏記杏仁露", emoji: "🥛", type: "甜品", desc: "迪化街的杏仁甜品店，招牌杏仁露、綠豆露。", where: "大同區迪化街" },
+      { county: "臺南市", name: "郭家綠豆湯", emoji: "🥣", type: "甜品", desc: "美食節目介紹過的綠豆湯，可以免費加粉角。", where: "臺南市" },
+      { county: "臺南市", name: "阿卿杏仁茶", emoji: "🥛", type: "甜品", desc: "台南中西區的杏仁茶店，杏仁豆腐冰和綠豆蒜也受歡迎。", where: "中西區" },
+      { county: "臺北市", name: "281 雞蛋糕", emoji: "🧇", type: "點心", desc: "比臉還大的「一片式雞蛋糕」，咬下會爆漿。", where: "臺北市" },
+      { county: "臺北市", name: "Bopomoo 波波畝", emoji: "🧇", type: "點心", desc: "大稻埕附近的注音符號造型雞蛋糕。", where: "大同區大稻埕附近" },
+      { county: "臺中市", name: "消波塊大人", emoji: "🧇", type: "點心", desc: "光復新村附近的消波塊造型雞蛋糕，有原味和卡士達包餡。", where: "霧峰區光復新村附近" },
+      { county: "新北市", name: "蛋願古早味現烤蛋糕", emoji: "🧇", type: "點心", desc: "樹林的古早味雞蛋糕，奶皇流沙等口味多。", where: "樹林區" },
+      { county: "新竹縣", name: "稻町香古早味蛋糕", emoji: "🧇", type: "點心", desc: "竹北的古早味蛋糕，老闆有 40 多年西點經驗。", where: "竹北市" },
+      { county: "高雄市", name: "Mr. Fuji 富士先生雞蛋糕", emoji: "🧇", type: "點心", desc: "IG 上很有人氣的高雄雞蛋糕。", where: "高雄市" },
+      { county: "臺北市", name: "雙連圓仔湯", emoji: "🍡", type: "甜品", must: true, desc: "1951 年創立的湯圓老店，招牌小湯圓可配紅豆湯或花生湯，不加防腐劑。", where: "大同區雙連" },
+      { county: "臺北市", name: "九如商號", emoji: "🍡", type: "甜品", shop: true, desc: "近一甲子的江浙餐館，芝麻、花生、棗泥湯圓有名，可加酒釀。", where: "大安區" },
+      { county: "臺北市", name: "蔡萬興老店", emoji: "🍡", type: "甜品", shop: true, desc: "以桂花酒釀湯圓聞名的老店，也有芝麻湯圓。", where: "中正區" },
+      { county: "臺北市", name: "六順豆花", emoji: "🍮", type: "甜品", desc: "豆花可配酒釀、紅豆湯、花生湯或麵茶等多種甜湯底。", where: "松山區" },
+      { county: "臺中市", name: "希望綠豆湯", emoji: "🥣", type: "甜品", desc: "2005 年創立，紫米紅豆抹茶小湯圓以紅豆湯為底，湯圓現點手作。", where: "南屯區" },
+      { county: "桃園市", name: "皇統冷熱冰", emoji: "🍧", type: "甜品", desc: "大甲芋頭、紅豆、花生配小湯圓的冷熱冰，冬天還有桂圓糯米粥。", where: "桃園市" },
+      { county: "宜蘭縣", name: "羅東紅豆湯圓", emoji: "🍡", type: "甜品", desc: "羅東的紅豆湯圓店。", where: "羅東鎮中山路三段" },
+      { county: "新竹市", name: "榮記客家湯圓", emoji: "🍡", type: "點心", shop: true, desc: "城隍廟附近的客家鹹湯圓，適合想吃鹹口味的人。", where: "北區武昌街" },
+      { county: "臺北市", name: "蔡元益紅茶", emoji: "🧋", type: "點心", shop: true, desc: "1966 年就在北投市場賣紅茶和酸梅汁的古早味紅茶老店。", where: "北投區新市街" },
+      { county: "臺北市", name: "高記茶莊", emoji: "🧋", type: "點心", desc: "北投排隊人氣古早味紅茶店。", where: "北投區" },
+      { county: "臺北市", name: "明泉紅茶", emoji: "🧋", type: "點心", hidden: true, desc: "北投在地人低調推薦的古早味紅茶。", where: "北投區" },
+      { county: "新北市", name: "萬金紅茶冰", emoji: "🧋", type: "點心", desc: "三重的古早味紅茶冰，帶冰沙口感。", where: "三重區" },
+      { county: "臺中市", name: "炎伯紅茶冰", emoji: "🧋", type: "點心", desc: "熟客一次買 5 到 10 杯的紅茶冰。", where: "臺中市" },
+      { county: "高雄市", name: "大麻紅茶冰", emoji: "🧋", type: "點心", desc: "高雄的古早味紅茶冰，凱旋總店最有名。", where: "高雄市（凱旋總店）" },
+      { county: "苗栗縣", name: "穩飲茶府", emoji: "🧋", type: "點心", desc: "苗栗在地自創的手搖飲品牌。", where: "苗栗縣" },
+      { county: "臺中市", name: "雲記蘿蔔糕", emoji: "🟫", type: "點心", shop: true, desc: "菜頭絲熬煮數小時再和米漿蒸製的蘿蔔糕。", where: "北區西屯路二段" },
+      { county: "雲林縣", name: "金捷發煎盤粿", emoji: "🥞", type: "點心", shop: true, desc: "北港煎盤粿名店，綜合口味配自家滷大腸和米腸。", where: "北港鎮中山路" },
+      { county: "雲林縣", name: "曾家莊蘿蔔糕", emoji: "🟫", type: "點心", shop: true, desc: "西螺深耕 50 多年的蘿蔔糕老字號，古法現磨米漿製作。", where: "西螺鎮" },
+      { county: "嘉義市", name: "東門火婆煎粿", emoji: "🥞", type: "點心", shop: true, desc: "經營超過一甲子，粿蒸約 4 小時、放涼才煎，不摻玉米粉。", where: "東區公明路" },
+      { county: "臺東縣", name: "木可蘿蔔糕", emoji: "🟫", type: "點心", shop: true, desc: "台東超過一甲子、傳到第五代的蘿蔔糕，現點現煎。", where: "臺東市寶桑路" },
+      { county: "臺東縣", name: "東粄香傳統米食坊", emoji: "🍡", type: "點心", hidden: true, desc: "成功鎮的傳統米食，有水粄、紅龜粿、包菜脯的草仔粿。", where: "成功鎮中華路" },
+      { county: "南投縣", name: "彩虹蘿蔔糕", emoji: "🟫", type: "點心", hidden: true, desc: "埔里老屋巷弄裡的蘿蔔糕，有炭燒蘿蔔糕等特色品項。", where: "埔里鎮" },
+      { county: "臺北市", name: "阿嬌姨烤魷魚", emoji: "🦑", type: "點心", shop: true, stall: true, desc: "艋舺夜市經營數十年的炭火烤魷魚，秘製醬料，也有烤透抽、香魚片。", where: "萬華區艋舺夜市" },
+      { county: "嘉義市", name: "開心魷碳烤乾魷魚", emoji: "🦑", type: "點心", shop: true, stall: true, desc: "文化路夜市六十年的炭烤乾魷魚，噴水圓環附近。", where: "文化路夜市（噴水圓環附近）" },
+      { county: "新竹市", name: "萬家古早味烤魷魚", emoji: "🦑", type: "點心", stall: true, desc: "中正台商圈擺攤多年的炭烤乾魷魚。", where: "東區中正台商圈" },
+      { county: "臺中市", name: "滬舍餘味", emoji: "🥟", type: "點心", desc: "米其林相關報導介紹的上海點心，小籠包與鮮肉、翡翠生煎都受歡迎。", where: "南屯區" },
+      { county: "臺中市", name: "京華煙雲", emoji: "🥟", type: "主食", desc: "綠園道旁的京滬料理，復古園林宅邸，圓籠小籠包是必點。", where: "西區（綠園道旁）" },
+      { county: "臺中市", name: "三鮮湯包", emoji: "🥟", type: "點心", desc: "鮮肉、鮮瓜、鮮蝦湯包，皮薄餡多、價格平實。", where: "臺中市" },
+      { county: "高雄市", name: "海光俱樂部中餐廳", emoji: "🥟", type: "主食", desc: "前身是軍官俱樂部的江浙菜餐廳，上海湯包、絲瓜湯包都受歡迎。", where: "左營區" },
+      { county: "高雄市", name: "紅陶上海湯包", emoji: "🥟", type: "主食", desc: "漢來飯店裡的滬式餐廳，限量翡翠絲瓜湯包是人氣菜。", where: "前金區（漢來飯店）" },
+      { county: "臺南市", name: "尚禾湯包店", emoji: "🥟", type: "點心", desc: "每日手工小籠湯包，有原味、咖哩、塔香、麻辣口味。", where: "國安街" },
+      { county: "臺南市", name: "豐圓小籠湯包", emoji: "🥟", type: "點心", hidden: true, desc: "一天只賣大約 4 小時的小籠湯包。", where: "臺南市" },
+      { county: "臺南市", name: "泉成點心店", emoji: "⚪", type: "點心", shop: true, desc: "鴨母寮市場裡 70 年以上的老店，現做手工丸子與麵食。", where: "北區鴨母寮市場" },
+      { county: "新北市", name: "鳥來伯專業糖葫蘆", emoji: "🍡", type: "點心", stall: true, desc: "府中站附近開了 20 多年的糖葫蘆，番茄糖葫蘆很便宜，買了 1 到 2 小時內吃完最好。", where: "板橋區（府中站附近）" },
+      { county: "基隆市", name: "好吃糖葫蘆", emoji: "🍡", type: "點心", stall: true, desc: "廟口夜市的古法炭火煮糖糖葫蘆，現場製作，晚上 7 點開賣常排隊。", where: "廟口夜市（仁一路、愛四路口）" },
+      { county: "臺南市", name: "糖伯伯", emoji: "🍡", type: "點心", desc: "台南知名的糖葫蘆業者。", where: "臺南市" },
       // ---- 隱藏美食 ----
       { county: "臺北市", name: "三六食粑", emoji: "🥜", type: "甜品", hidden: true, desc: "萬華巷弄裡的老甜湯店，招牌是綿密的花生湯配紅白小湯圓。", where: "萬華區三水街" },
       { county: "新北市", name: "阿北北古早味切仔麵", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "三重沒有招牌的小麵店，便宜又大碗，主要靠在地人口耳相傳。", where: "三重區仁愛街" },
@@ -875,14 +992,27 @@
       empty.hidden = shown.length > 0;
     }
 
-    [["蚵嗲"], ["蚵仔煎"], ["煎包"], ["蛋餅"], ["燒餅"], ["饅頭"], ["吐司"], ["麵包"], ["漢堡"], ["美式漢堡"], ["粽", "肉粽"], ["碗粿"], ["肉圓"], ["米糕"],
-     ["鍋貼"], ["滷味"], ["地瓜球"], ["紅豆餅", "車輪餅／紅豆餅"], ["酥雞", "鹹酥雞"], ["雞排"], ["玉米", "烤玉米"],
-     ["雞肉飯"], ["臭豆腐"], ["粄條"], ["豆花"], ["冰", "剉冰"], ["芋"]].forEach(([word, label = word]) => {
+    [["蚵嗲"], ["蚵仔煎"], ["煎包"], ["蛋餅"], ["燒餅"], ["饅頭"], ["吐司"], ["麵包"], ["漢堡"], ["美式漢堡"], ["蔥抓餅"], ["蔥油餅"], ["割包", "刈包"],
+     ["粽", "肉粽"], ["碗粿"], ["肉圓"], ["米糕"], ["滷肉飯"], ["魯肉飯"], ["鍋燒"], ["牛肉麵"], ["水餃"], ["鍋貼"], ["湯包", "小籠包／湯包"], ["鹹粥"], ["羹", "魷魚羹／花枝羹"], ["蝦捲"],
+     ["滷味"], ["鹹水雞"], ["鴨頭", "東山鴨頭"], ["天婦羅", "甜不辣"], ["豬血糕"], ["香腸"], ["地瓜球"], ["紅豆餅", "車輪餅／紅豆餅"], ["酥雞", "鹹酥雞"], ["雞排"], ["魷魚"], ["玉米", "烤玉米"],
+     ["雞肉飯"], ["臭豆腐"], ["粄條"], ["蘿蔔糕"], ["煎粿"], ["豆花"], ["仙草"], ["綠豆"], ["杏仁"], ["湯圓"], ["雞蛋糕"], ["糖葫蘆"], ["紅茶"], ["冰", "剉冰"], ["芋"]].forEach(([word, label = word]) => {
       const b = document.createElement("button");
       b.type = "button"; b.className = "chip"; b.textContent = "🔎 " + (word === "芋" ? "芋頭" : label);
       b.addEventListener("click", () => { search.value = search.value === word ? "" : word; render(); });
+      if ($("quick").children.length >= 12) { b.classList.add("more-chip"); b.hidden = true; }
       $("quick").appendChild(b);
     });
+    {
+      const more = document.createElement("button");
+      more.type = "button"; more.className = "chip"; more.textContent = "＋ 更多小吃種類";
+      more.addEventListener("click", () => {
+        const open = more.textContent.startsWith("＋");
+        $("quick").querySelectorAll(".more-chip").forEach(c => c.hidden = !open);
+        more.textContent = open ? "－ 收起" : "＋ 更多小吃種類";
+        $("quick").appendChild(more);
+      });
+      $("quick").appendChild(more);
+    }
     fillCounties();
     search.addEventListener("input", render);
     countySel.addEventListener("change", render);
