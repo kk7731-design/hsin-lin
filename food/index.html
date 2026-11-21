@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="page-version" content="2026-11-21-10">
+  <meta name="page-version" content="2026-11-21-11">
   <meta name="theme-color" content="#b4451f">
   <title>各縣市特色小吃與伴手禮</title>
   <style>
@@ -524,6 +524,41 @@
       { county: "嘉義市", name: "蓬萊漢堡", emoji: "🍔", type: "點心", shop: true, desc: "嘉義老牌漢堡店，用自家漢堡麵包夾高麗菜絲和炸雞排或肉排。", where: "東區中山路" },
       { county: "臺南市", name: "美香吉漢堡店", emoji: "🍔", type: "點心", shop: true, desc: "安平的老派西式早餐店，第二代接手，漢堡口味將近 20 種。", where: "安平區" },
       { county: "臺南市", name: "丹丹漢堡", emoji: "🍔", type: "點心", must: true, desc: "1984 年創立的南部速食店，只開直營不加盟；招牌是「9 號餐」脆皮雞腿堡配赤肉麵線。", where: "臺南、高雄、屏東各地" },
+      // ---- 大甲、地瓜球、車輪餅、鹹酥雞、雞排 ----
+      { county: "臺中市", name: "一品香水煎包", emoji: "🥟", type: "點心", must: true, stall: true, desc: "大甲鎮瀾宮旁育德路的排隊煎包，現包現煎、金黃酥脆會滴汁；早上只賣水煎包，下午才有韭菜包和豬肉餡餅。", where: "大甲區育德路（鎮瀾宮附近）" },
+      { county: "臺中市", name: "大甲黑石頭碳烤玉米", emoji: "🌽", type: "點心", shop: true, stall: true, desc: "大甲在地老店，觀光客逛鎮瀾宮必吃的碳烤玉米。", where: "大甲區育德路" },
+      { county: "臺中市", name: "嘉家樂肉丸", emoji: "🟤", type: "點心", shop: true, desc: "大甲的肉丸老店，鎮瀾宮周邊小吃代表之一。", where: "大甲區蔣公路" },
+      { county: "臺中市", name: "五甲地香酥芋泥球", emoji: "🟣", type: "點心", hidden: true, stall: true, desc: "銅板價芋泥球，外酥內綿、芋泥爆餡。", where: "大甲區（鎮瀾宮周邊）" },
+      { county: "臺中市", name: "大甲芋頭城", emoji: "🍡", type: "甜品", desc: "大甲芋頭甜品店，招牌「芋圓綜合」很受歡迎。", where: "大甲區育德路" },
+      { county: "臺中市", name: "鼎騰牛肉麵", emoji: "🍜", type: "主食", shop: true, desc: "大甲經營多年的老字號，牛肉麵、乾麵、抄手和飯類都有。", where: "大甲區" },
+      { county: "臺中市", name: "紀老爺蚵仔麵線", emoji: "🦪", type: "點心", hidden: true, desc: "大甲國小旁的蚵仔麵線。", where: "大甲區育英路" },
+      { county: "臺中市", name: "大甲城燒餅", emoji: "🥯", type: "點心", hidden: true, stall: true, desc: "大甲第一市場的超人氣早餐燒餅。", where: "大甲第一市場" },
+      { county: "新北市", name: "開心城地瓜球", emoji: "🟡", type: "點心", stall: true, desc: "樂華夜市的彩色地瓜球，8 種顏色都用天然食材調色。", where: "永和區樂華夜市" },
+      { county: "新北市", name: "快樂地瓜球", emoji: "🟡", type: "點心", stall: true, desc: "永和起家的地瓜球，永和店被認為是總店，樂華夜市也有分店。", where: "永和區" },
+      { county: "新北市", name: "阿伯的QQ球", emoji: "🟡", type: "點心", hidden: true, stall: true, desc: "新莊很有名的無名地瓜球攤。", where: "新莊區" },
+      { county: "臺北市", name: "公館素食地瓜球", emoji: "🟡", type: "點心", hidden: true, stall: true, desc: "公館的素食地瓜球，大小是一般的兩倍，仍純手工製作。", where: "中正區公館" },
+      { county: "臺北市", name: "通化夜市無名地瓜球", emoji: "🟡", type: "點心", hidden: true, stall: true, desc: "沒有固定位置和時間，要先跟老闆登記顆數再回來拿的神秘地瓜球。", where: "大安區通化夜市" },
+      { county: "新竹市", name: "吳廟口地瓜球", emoji: "🟡", type: "點心", hidden: true, stall: true, desc: "用紅地瓜做的橢圓形大顆地瓜球。", where: "東區" },
+      { county: "臺中市", name: "玖肆地瓜球", emoji: "🟡", type: "點心", stall: true, desc: "逢甲夜市創始店，以「電線桿」造型和寶可夢配色出名。", where: "西屯區逢甲夜市" },
+      { county: "臺中市", name: "齊心地瓜球", emoji: "🟡", type: "點心", hidden: true, stall: true, desc: "霧峰黃昏市場的巨無霸地瓜球，帶麻糬口感。", where: "霧峰區黃昏市場" },
+      { county: "臺南市", name: "炸蛋工廠", emoji: "🟡", type: "點心", stall: true, desc: "台南的地瓜球攤，推薦超大顆的「浩克蛋」。", where: "臺南市" },
+      { county: "臺南市", name: "坤記地瓜球", emoji: "🟡", type: "點心", hidden: true, stall: true, desc: "一包混搭黃地瓜與紫地瓜的地瓜球。", where: "安南區" },
+      { county: "高雄市", name: "朱爺爺QQ蛋地瓜球", emoji: "🟡", type: "點心", hidden: true, stall: true, desc: "一顆一元起跳的平價地瓜球，很受歡迎。", where: "高雄市" },
+      { county: "臺北市", name: "一分錢一分貨車輪餅", emoji: "🟤", type: "點心", shop: true, stall: true, desc: "北投起家的車輪餅（紅豆餅）名店，後來在松山中崙市場旁開分店。", where: "北投區、松山區中崙市場旁" },
+      { county: "臺北市", name: "桐庵一〇七車輪餅專賣店", emoji: "🟤", type: "點心", desc: "內湖的車輪餅（紅豆餅），餡料飽滿，口味都由主理人自己研發。", where: "內湖區" },
+      { county: "桃園市", name: "喜樂紅豆餅", emoji: "🟤", type: "點心", desc: "從百貨、車站轉型成街邊店的紅豆餅（車輪餅），一顆超過 100 公克。", where: "桃園區大興路" },
+      { county: "臺南市", name: "元紅豆餅", emoji: "🟤", type: "點心", desc: "台南老屋裡的新式紅豆餅（車輪餅），皮薄餡多，餡料堆得像山一樣高。", where: "臨安路、南華街" },
+      { county: "臺北市", name: "師園鹹酥雞", emoji: "🍗", type: "點心", must: true, stall: true, desc: "蒜味鹹酥雞的代表，胡椒粉可以自己加到喜歡的程度。", where: "大安區師大夜市" },
+      { county: "臺北市", name: "台灣鹽酥雞（西門直營店）", emoji: "🍗", type: "點心", stall: true, desc: "以香氣很重的特製胡椒粉聞名的鹽酥雞。", where: "萬華區中華路一段" },
+      { county: "臺北市", name: "肥豬的攤", emoji: "🍗", type: "點心", hidden: true, stall: true, desc: "南機場的炸物攤，用天然紅糟豆乳醃製，推薦配甜粿。", where: "中正區南機場（中華路二段）" },
+      { county: "臺北市", name: "鄭姑媽小吃店", emoji: "🍗", type: "點心", hidden: true, stall: true, desc: "一般認為是雞排的起源地，原本是成功高中附近賣三明治、炒飯的流動餐車；只在平日上午與傍晚營業。", where: "信義區" },
+      { county: "臺北市", name: "好吃雞排", emoji: "🍗", type: "點心", stall: true, desc: "南機場的炸雞排，很多人認為是「台北第一名炸雞排」，先用糖、沙茶與蒜頭醃過。", where: "中正區南機場" },
+      { county: "臺中市", name: "洪家回春堂", emoji: "🍗", type: "點心", shop: true, stall: true, desc: "台中市場起家的鹽酥雞，用中藥材先滷過再炸，已有 36 年歷史。", where: "臺中市" },
+      { county: "臺中市", name: "繼光香香雞", emoji: "🍗", type: "點心", shop: true, desc: "將近半世紀前從台中繼光街起家的鹽酥雞，現在開到全球。", where: "中區繼光街" },
+      { county: "臺中市", name: "大定鹹酥雞", emoji: "🍗", type: "點心", stall: true, desc: "台中中區以創意吃法聞名的鹹酥雞。", where: "中區" },
+      { county: "雲林縣", name: "五億雞排", emoji: "🍗", type: "點心", stall: true, desc: "雲林虎尾起家的雞排。", where: "虎尾鎮" },
+      { county: "宜蘭縣", name: "罵子蛋創始店", emoji: "🍗", type: "點心", desc: "冬山知名炸物店，招牌「芋泥金沙起司雞排」，部分餐點每日限量。", where: "冬山鄉" },
+      { county: "花蓮縣", name: "國聲沾醬雞排", emoji: "🍗", type: "點心", hidden: true, stall: true, desc: "花蓮開店 25 年的沾醬雞排，醬汁帶烤肉醬甜香，建議加蒜片。", where: "花蓮市林森路" },
       // ---- 隱藏美食 ----
       { county: "臺北市", name: "三六食粑", emoji: "🥜", type: "甜品", hidden: true, desc: "萬華巷弄裡的老甜湯店，招牌是綿密的花生湯配紅白小湯圓。", where: "萬華區三水街" },
       { county: "新北市", name: "阿北北古早味切仔麵", emoji: "🍜", type: "主食", hidden: true, stall: true, desc: "三重沒有招牌的小麵店，便宜又大碗，主要靠在地人口耳相傳。", where: "三重區仁愛街" },
@@ -687,9 +722,10 @@
       empty.hidden = shown.length > 0;
     }
 
-    ["蚵嗲", "蚵仔煎", "煎包", "蛋餅", "漢堡", "肉圓", "米糕", "雞肉飯", "臭豆腐", "粄條"].forEach(word => {
+    [["蚵嗲"], ["蚵仔煎"], ["煎包"], ["蛋餅"], ["漢堡"], ["地瓜球"], ["紅豆餅", "車輪餅／紅豆餅"], ["酥雞", "鹹酥雞"], ["雞排"],
+     ["肉圓"], ["米糕"], ["雞肉飯"], ["臭豆腐"], ["粄條"], ["芋"]].forEach(([word, label = word]) => {
       const b = document.createElement("button");
-      b.type = "button"; b.className = "chip"; b.textContent = "🔎 " + word;
+      b.type = "button"; b.className = "chip"; b.textContent = "🔎 " + (word === "芋" ? "芋頭" : label);
       b.addEventListener("click", () => { search.value = search.value === word ? "" : word; render(); });
       $("quick").appendChild(b);
     });
